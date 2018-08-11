@@ -103,9 +103,17 @@ class EventPractice extends Component {
       handleKeyPress = (e) => {
         if(e.key === 'Enter') {
           this.clickVerify();
+         }
+      }
+      handleKeyPress1 = (e) => {
+        if(e.key === 'Enter') {
           this.clickVerify1();
+          }
+      }
+      handleKeyPress2 = (e) => {
+        if(e.key === 'Enter') {
           this.clickVerify2();
-        }
+         }
       }
 
       render() {
@@ -120,11 +128,11 @@ class EventPractice extends Component {
 
           <p>현진이는 버스 정류장에서 16 km 떨어진 학교에 가는 데 처음에는 시속50 km로 일정하게 달리는 버스를 타고 가다가 버스에서 내려 시속 5 km로 걸어 갔더니 총 30분이 걸렸다. 
           현진이가 버스를 타고 간 거리와 걸어간거리를 각각 구하여라.<br/>(단, 버스에서 내리는데 걸린 시간은 무시한다.)</p>
-          <input type='text' name='speed1' value={this.state.speed1} onChange={this.inputType} onKeyPress={this.handleKeyPress} placeholder='버스 거리'
+          <input type='text' name='speed1' value={this.state.speed1} onChange={this.inputType} onKeyPress={this.handleKeyPress1} placeholder='버스 거리'
           className={this.state.speed1 ? 'success' : 'failure'}/>
           <button onClick={this.clickVerify1}>답변제출</button>
         
-          <input type='text' name='speed2' value={this.state.speed2} onChange={this.inputType} onKeyPress={this.handleKeyPress} placeholder='걸어간 거리'
+          <input type='text' name='speed2' value={this.state.speed2} onChange={this.inputType} onKeyPress={this.handleKeyPress2} placeholder='걸어간 거리'
           className={this.state.speed2 ? 'success' : 'failure'}/>
           <button onClick={this.clickVerify2}>답변제출</button>
           </div>
