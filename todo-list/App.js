@@ -17,17 +17,23 @@ class App extends Component {
     })
   }
 
+  
   id=1;
   getId = () => ++this.id;
   
+  
+
   handleNewInput = () => {
     const{input,todos} = this.state;
-    const newTodo  = {id:this.getId(), text: input}
-    this.setState({
-      todos:[...todos,newTodo],
-      input: ''
-    });
-  }
+    const newTodo = {id:this.getId(), text: input}
+    newTodo.text === '' ? alert('Please enter the message') : this.setState({
+     todos:[...todos,newTodo],
+     input: ''
+     });
+    }
+    
+  
+
 
   handleDelete = (id) => {
     const{todos} = this.state;
@@ -40,10 +46,10 @@ class App extends Component {
 
   render() {
     const {input,todos} = this.state;
-    const {handleInput,handleNewInput,handleDelete} = this;
+    const {handleInput,handleNewInput,handleDelete,buttonNotavailable } = this;
     return (
       <PageTemplate>
-        <TodoInput value={input} onChange={handleInput} onClick={handleNewInput}/>
+        <TodoInput value={input} onChange={handleInput} onClick={handleNewInput} disAbled={buttonNotavailable}/>
         <TodoList todos={todos} onRemove={handleDelete}/>
       </PageTemplate>
     )
