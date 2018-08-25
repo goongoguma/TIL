@@ -16,25 +16,19 @@ class App extends Component {
       input: value
     })
   }
-
   
   id=1;
   getId = () => ++this.id;
-  
-  
-
+   
   handleNewInput = () => {
     const{input,todos} = this.state;
-    const newTodo = {id:this.getId(), text: input}
-    newTodo.text === '' ? alert('Please enter the message') : this.setState({
-     todos:[...todos,newTodo],
-     input: ''
-     });
+    const newTodo = {id:this.getId(), text: input};
+    newTodo.text=== '' ? alert('Please enter the message'):
+    (todos.find(todo => todo.text === newTodo.text) ? alert('It is already on the list'):this.setState({todos:[...todos,newTodo], input: ''}));
     }
-    
   
-
-
+  
+    
   handleDelete = (id) => {
     const{todos} = this.state;
     const index = todos.findIndex(todo => todo.id === id);
