@@ -141,18 +141,25 @@ html {
 .textbox h1 {
   position: absolute;
   color: white;
-  z-index: 100;
+  z-index: 600;
   font-size: 40px;
   top: 240px;
+  animation: fade1 9s infinite;
   margin-left: 30px;
+  width: 600px;
 }
 .textbox h2 {
   position: absolute;
   color: white;
-  z-index: 100;
+  z-index: 600;
   font-size: 40px;
   top: 240px;
+  animation: fade2 9s infinite;
   margin-left: 30px;
+  width: 650px;
+}
+#begins {
+  animation: fade3 9s infinite;
 }
 .mainpic {
   clear: both;
@@ -173,10 +180,7 @@ html {
   animation: fade1 9s infinite;
   filter: brightness(50%);
  }
-.mainpic1 h1 {
-  color: #fff;
-  z-index: 500
-}
+
 .mainpic2 {
   background: url('img/univemainpic2.jpg') no-repeat center;
   background-size: cover;
@@ -189,6 +193,7 @@ html {
   animation: fade3 9s infinite;
   filter: brightness(50%);
 }
+
 @keyframes fade1 {
   0% {opacity:1}
   33.333% { opacity: 0}
