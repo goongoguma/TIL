@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+.menu {
+  margin-left: 220px;
+}
+.menu-item-text {
+  display: inline-block;
+  margin-top: 18px;
+  color: black;
+  font-weight: 550;
+}
+.menu-item-text:hover {
+  content: '';
+  color: red;
+}
+.menu-item-text:hover:after {
+  content:'';
+  display: block;
+  border-bottom: 2px solid rgb(15, 1, 1);
+  margin-top: 19px;
+}
+.sub-menu1 {
+  background: yellowgreen;
+  position: absolute;
+  display: block;
+}
+.sub-menu li {
+  white-space: nowrap;
+  display: inline;
+}
+.sub-menu a:before {
+  content: '☆';
+  top: 2px;
+}
+.sub-menu a:hover:before, .sub-menu a:focus:before {
+  content: '★';
+} 
+.navigation .sub-menu {
+  display: none;
+}
+.menu-act .menu-item-text  {
+  color: red;
+}
+.sub-menu1 li, .sub-menu1 a {
+  display: inline-block;
+}
+</style>
+<body>
+    <nav class="navigation">
+        <ul class="menu">
+          <li class='menu-item' tabindex='0'>
+             <span class="menu-item-text menu-act">About HTML</span>
+            <ul class='sub-menu'>
+                <li>
+                 <a href="#">HTML Introduction</a>
+                </li>
+               <li>
+                 <a href="#">Reference Introduction</a>
+                </li>
+               <li>
+                 <a href="#">Examples</a>
+                </li>
+            </ul>
+           </li>
+          </ul>
+      </nav>
+</body>
+</html>
