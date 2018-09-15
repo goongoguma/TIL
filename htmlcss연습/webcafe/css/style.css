@@ -37,17 +37,15 @@ a {
 }
 /*기본 셋팅 */
 body {
-  margin: 0;
-  font-family: 'PT Sans', sans-serif;
+  background: url('images/bg_flower.png') no-repeat 50% 0 , linear-gradient(#aaa, #eee); 
+  background-color: #aaa;
 }
 h1, h2, h3, h4, h5, h6 {
   font-size: 1em;
   font-weight: normal;
   margin: 0;
 }
-.container {
-  background-color: gray;
-}
+
 .header, .visual, .main, .slogan, .footer {
   width: 940px;
   margin: 0 auto;
@@ -160,10 +158,66 @@ h1, h2, h3, h4, h5, h6 {
 
 /********** 비주얼 **********/
 .visual {
-  height: 120px;
-  background: url('/css/images/bg_flower.png');
-  
+  min-height: 120px;
+  position: relative;
 }
+@keyframes flowerAni {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes textAni {
+  0%{
+    font-size:12px;
+    color: rgba(0,0,0,0.2);
+    top:0;
+    left: 0;
+  }
+  100%{
+    font-size: 24px;
+    color: rgba(0,0,0,1);
+    top: 75px;
+    left: 400px;
+  }
+}
+.visaul:before, .visula:after {
+  animation-name: flowerAni;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  content:'';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: no-repeat;
+}
+.visual:before {
+  background-image: url('images/ani_flower_01.png'),
+                    url('images/ani_flower_02.png');
+  background-position: 0 -10px, 670px 0;
+}
+.visual:after {
+  animation-delay: 1s;
+  background-image: url('images/ani_flower_03.png'),
+                    url('images/ani_flower_04.png');
+  background-position: 300px 0, 800px 15px;
+}
+.visual-text {
+  position: absolute;
+  z-index: 100;
+  font-family: 'Courier New', Courier, monospace;
+  animation-name: textAni;
+  animation-duration: 3000ms;
+  animation-fill-mode: forwards;
+  font-weight: 600;
+}
+
 
 /********** 메인 **********/
 .main {
@@ -237,7 +291,7 @@ fieldset {
   border-radius: 0 0 10px 10px;
 }
 .login-extra li {
-  display: inline-block;
+  float: left;
 }
 .login-extra-extra a {
   margin-right: 26px;
@@ -259,13 +313,13 @@ fieldset {
   text-align: center;
   height: 35px;
   line-height: 35px;
+  border: 1px solid whitesmoke;
 }
 .validation-list li a {
   padding: 50px;
 }
 /* 웹 관련 용어 폼 */
 .term {
-  
   background-image: linear-gradient(rgb(212, 209, 209), rgb(194, 189, 189) );
   margin-top: 20px;
   position: relative;
