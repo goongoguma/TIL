@@ -13,7 +13,7 @@ tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, fieldset {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px;
 }
 /* 숨김제목 */
-.readable-hidden {
+.readable-hidden, legend, .validation-hidden {
   background: red;
   position: absolute;
   width: 1px;
@@ -155,28 +155,140 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 }
 .menu-item:hover .sub-menu {
-  display: block;
-}
-.sub-menu li, .sub-menu a {
-  display: inline-block;
+  display: flex;
 }
 
 /********** 비주얼 **********/
 .visual {
-  height: 10vh;
+  height: 120px;
+  background: url('/css/images/bg_flower.png');
+  
 }
 
 /********** 메인 **********/
 .main {
-  background-color: blue;
+  background-color: white;
   display: flex;
   justify-content: space-evenly;
   height: 60vh;
   padding: 30px 0;
 }
+/* 로그인폼 */
 .group1 {
-  background-color: skyblue;
   width: 250px;
+}
+.log-in {
+  background-image: radial-gradient(circle at left top, #666464, #181818);
+  padding: 15px 10px 20px 10px;
+  border-radius: 15px;
+}
+.log-in-text {
+  font-size: 15px;
+  padding-bottom: 10px;
+  text-indent: 5px;
+  color: whitesmoke;
+}
+.login-form {
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px 10px 0 0;
+}
+fieldset {
+  background-color: white;
+  position: relative;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+.user-id {
+  padding: 5px;
+  font-size: 13px;
+}
+.user-id label {
+  padding-right: 8px;
+}
+.user-id input {
+  width: 95px;
+  height: 22px;
+}
+.user-pw {
+  padding-top: 4px;
+  font-size: 13px;
+}
+.user-pw input {
+  width: 95px;
+  height: 22px;
+}
+.btn-login {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 16px;
+  right: 0px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+}
+.login-extra {
+  background-color: #fff;
+  padding: 10px;
+  font-size: 12px;
+  height: 40px;
+  border-radius: 0 0 10px 10px;
+}
+.login-extra li {
+  display: inline-block;
+}
+.login-extra-extra a {
+  margin-right: 26px;
+}
+.login-extra li:before {
+  content: ' >';
+  color: red;
+}
+/* 검색사이트 폼 */
+.validation-list {
+  margin-top: 20px;
+}
+.validation-list li {
+  background-image: url('images/validation_icon.png'), linear-gradient(#aaa, #eee);
+  background-repeat: no-repeat;
+  background-position: 15%;
+  border-radius: 20px;
+  margin-top: 10px;
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+}
+.validation-list li a {
+  padding: 50px;
+}
+/* 웹 관련 용어 폼 */
+.term {
+  
+  background-image: linear-gradient(rgb(212, 209, 209), rgb(194, 189, 189) );
+  margin-top: 20px;
+  position: relative;
+  border: 1px solid whitesmoke;
+  border-radius: 15px;
+}
+.term-word {
+  padding: 10px 0 0 12px;
+  font-weight: 550;
+}
+.term-ques {
+  color: royalblue;
+  font-size: 14px;
+  margin-top: 7px;
+}
+.term img {
+  float: left;
+  margin: 15px 10px 10px 10px;
+}
+.term-text {
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .group2 {
   background-color: skyblue;
