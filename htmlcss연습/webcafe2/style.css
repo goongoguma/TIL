@@ -64,6 +64,7 @@ ul {
   font-weight: 700;
   color: #2b5876;
 }
+/*********************** 반응형 예제 ************************/
 @media all and (min-width: 768px) and (max-width: 1023px) {
   /* 기본 셋팅 */
   .wrapper {
@@ -71,9 +72,7 @@ ul {
     padding: 0;
     margin: 0;
   }
-  .icon {
-    margin-left: -155px;
-  }
+  
   /* 헤더 */
   .header {
     margin-top: 0;
@@ -133,10 +132,16 @@ ul {
     text-align: justify;
     margin-top: 15px;
    }
+   .book-small-icon {
+    margin-left: -130px;
+   }
    /* 메인 뉴스 */
   .main-news p {
     margin-top: 20px;
     line-height: 40px;
+  }
+  .news-small-icon {
+    margin-left: -100px;
   }
   /* 메인 게시판 */
   .main-notice {
@@ -145,6 +150,10 @@ ul {
   .main-notice li {
     margin-top: 40px;
     text-align: left;
+  }
+  .notice-small-icon {
+    margin-left: -100px;
+    top: 5px;
   }
   /* 메인 트위터 */
   .main-twit {
@@ -155,6 +164,10 @@ ul {
   }
   .twit-article {
     text-align: justify;
+  }
+  .twit-small-icon {
+    margin-left: -100px;
+    top: 5px;
   }
   /* 메인 사진 */
   .main-pic {
@@ -168,9 +181,11 @@ ul {
   .favorite-list li {
     text-align: center;
   }
-  .bug {
-    margin-right: 50px;
+  .favorite-small-icon {
+    margin-left: -140px;
+    top: 5px;
   }
+  
   /* 슬로건 */
   .slogan {
     font-size: 1.2em;
