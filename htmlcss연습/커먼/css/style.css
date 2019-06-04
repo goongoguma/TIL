@@ -437,6 +437,7 @@ html {
   margin: 0 auto;
   border: 20px solid black;
   margin-bottom: 61px;
+  border-radius: 50px;
 }
 
 .phone-index {
@@ -466,6 +467,10 @@ html {
   margin-bottom: 39px;
 }
 
+.app-download-link {
+  margin-bottom: 120px;
+}
+
 .app-download-link li {
   display: inline-block;
 }
@@ -486,6 +491,19 @@ html {
   background-image: url('../img/android.png');
   width: 166px;
   height: 159px;
+}
+
+.qr-code-wrapper p {
+  margin-bottom: 39px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.qr-code {
+  width: 148px;
+  height: 148px;
+  background-color: #666666;
+  margin: 0 auto;
 }
 
 .membership {
