@@ -1,0 +1,501 @@
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+html {
+  font-size: 10px;
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.header {
+  background-color:#506A32;
+  height: 90px;
+}
+
+.header-banner {
+  text-align: center;
+}
+
+.navigation {
+  position: relative;
+  height: 6.5rem;
+}
+
+.nav-wrapper {
+  height: 100%;
+  margin: 0 auto;
+}
+
+.header-logo {
+  float: left;
+  transform: translateY(-10);
+  height: 100%;
+  margin-left: 4rem;
+}
+
+.header-logo img {
+  height: 100%;
+  width: 145px;
+}
+
+.nav-list {
+  float: right;
+  position: relative;
+  height: 100%;
+  margin-right: 5rem;
+  font-size: 1.3rem;
+  color: #1f1f1f;
+}
+
+.nav-list li {
+  float: left;
+  position: relative;
+  margin-right: 2rem;
+  line-height: 5;
+  cursor: pointer;
+}
+
+.visual {
+  height: 503px;
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.527)), url('../img/bgimage.png');
+  background-size: cover;
+  margin-bottom: 96px;
+}
+
+.background-video {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  text-align: center;
+}
+
+.background-video h1 {
+  width: 631px;
+  height: 55px;
+  font-family: NotoSansCJKkr;
+  font-size: 48px;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.15;
+  letter-spacing: -2.2px;
+  text-align: center;
+  color: #ffffff;
+  white-space: nowrap;
+  margin-bottom: 2rem;
+}
+
+.background-video span {
+  width: 1121px;
+  height: 503px;
+  opacity: 0.5;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: normal;
+}
+
+.life-title {
+  text-align: center;
+  margin-bottom: 110px; 
+}
+
+.life-title h2 {
+  height: 56px;
+  font-size: 48px;
+  font-family: HelveticaNeue;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 2.9px;
+  color: #1f1f1f;
+  margin-bottom: 20px;
+}
+
+.life-title p {
+  height: 64px;
+  font-family: NotoSansCJKkr;
+  font-size: 18px;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.78;
+  letter-spacing: normal;
+  color: #1f1f1f;
+}
+
+.life-box-1 {
+  position: relative;
+  min-width: 1200px;
+  margin-bottom: 90px;
+}
+
+.life-box-1:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.life-box-2 {
+  position: relative;
+  min-width: 1200px;
+  margin-bottom: 90px;
+}
+
+.life-box-2:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.life-box-3 {
+  position: relative;
+  min-width: 1200px;
+  margin-bottom: 166px;
+}
+
+.life-box-3:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.life-box-article {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+}
+
+.life-box-article-3 {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+}
+
+.article-box {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, 40%);
+}
+
+.article-box-left {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.article-title {
+  margin-bottom: 25px;
+}
+
+.article-intro {
+  margin-bottom: 25px;
+}
+
+.article-common {
+  font-size: 12px;
+}
+
+.article-title {
+  font-size: 29px;
+  font-family: 'Helvetica Neue';
+  font-weight: 300;
+}
+
+.article-intro {
+  font-size: 32px;
+}
+
+.article-description {
+  font-size: 15px;
+  color: #1f1f1f;
+}
+
+.life-image-wrapper {
+  min-width: 50%;
+  float: right;
+  background-size: cover;
+}
+
+.life-image-wrapper-left {
+  min-width: 50%;
+  float: left;
+  background-size: cover;
+}
+
+.life-box-image-1 {
+  background: url('../img/img-life-1.png');
+  padding-top: 58%;
+  background-size: cover;
+}
+
+.life-box-image-2 {
+  background: url('../img/img-life-2.png');
+  padding-top: 58%;
+  background-size: cover;
+}
+
+.life-box-image-3 {
+  background: url('../img/img-life-3.png');
+  padding-top: 58%;
+  background-size: cover;
+}
+
+.co-living-life-end-wrapper {
+  text-align: center;
+  margin-bottom: 110px;
+}
+
+.co-living-life-end {
+  font-size: 22px;
+  color: #1f1f1f;
+  font-family: 'Noto Sans KR','Helvetica Neue','Malgun Gothic','Dotum','Tahoma','AppleGothic','sans-serif'
+}
+
+.devider-wrapper {
+  text-align: center;
+}
+
+.devider {
+  margin: 110px;
+}
+
+.house-title {
+  text-align: center;
+  margin-bottom: 110px; 
+}
+
+.house-title h2 {
+  height: 56px;
+  font-size: 48px;
+  font-family: HelveticaNeue;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 2.9px;
+  color: #1f1f1f;
+  margin-bottom: 19px;
+}
+
+.house-description {
+  text-align: center;
+  height: 64px;
+  font-family: NotoSansCJKkr;
+  font-size: 18px;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 32px;
+  letter-spacing: normal;
+  color: #1f1f1f;
+  margin-bottom: 90px;
+}
+
+.house-boxes {
+  min-width: 1200px;
+  background-color: blue;
+  margin-bottom: 181px;
+}
+
+.house-boxes::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.house-box {
+  float: left;
+  width: 25%;
+  padding-top: 25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.house-box p {
+  text-align: left;
+  padding: 50px 20px 20px;
+  font-size: 32px;
+  font-weight: 200;
+  color: #fff;
+  line-height: 43px;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%)
+}
+
+.box-1 {
+  background-image: url('../img/img-house-2.png');
+}
+
+.box-2 {
+  background-image: url('../img/img-house-1.png');
+}
+
+.box-3 {
+  background-image: url('../img/img-house-3.png');
+}
+
+.box-4 {
+  background-image: url('../img/img-house-4.png');
+}
+
+.co-living-house-end-wrapper {
+  text-align: center;
+  margin-bottom: 110px;
+  position: relative;
+  min-width: 1200px;
+}
+
+.co-living-house-end {
+  font-size: 20px;
+  color: #1f1f1f;
+  font-family: 'Helvetica Neue';
+  font-weight: 300;
+  letter-spacing: 4.4px;
+  margin: 170px 0 120px;
+}
+
+.house-price {
+  text-align: center;
+  font-size: 29px;
+  color: #1f1f1f;
+  font-family: 'Noto Sans KR','Helvetica Neue','Malgun Gothic','Dotum','Tahoma','AppleGothic','sans-serif';
+  margin-left: 150px;
+  font-weight: 300;
+}
+
+.house-price li {
+  display: inline-block;
+  margin-right: 70px;
+}
+
+.house-price li:nth-child(4) {
+  margin-right: 15px;
+}
+
+.house-price li small {
+  display: block;
+}
+
+.plus {
+  line-height: 27px;
+  font-size: 70px;
+  font-weight: 100;
+}
+
+.app-only {
+  text-align: center;
+  position: relative;
+}
+
+.app-only-title {
+  text-align: center;
+}
+
+.app-only-title h2 {
+  margin-bottom: 41px;
+  height: 56px;
+  font-size: 48px;
+  font-family: HelveticaNeue;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 2.9px;
+  color: #1f1f1f;
+  margin-bottom: 20px;
+}
+
+.app-only-title p {
+  height: 64px;
+  font-family: NotoSansCJKkr;
+  font-size: 18px;
+  font-weight: 100;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.78;
+  letter-spacing: normal;
+  color: #1f1f1f;
+  margin-bottom: 75px;
+}
+
+.phone-box {
+  width: 300px;
+  height: 648px;
+  background-color: #fff;
+  margin: 0 auto;
+  border: 20px solid black;
+  margin-bottom: 61px;
+}
+
+.phone-index {
+  color: #666666;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 50px;
+  margin-left: 25px;
+}
+
+.phone-index li {
+  display: inline-block;
+}
+
+.phone-index li:nth-child(1):after, 
+.phone-index li:nth-child(2):after {
+  content: 'ㅣ';
+  margin: 0 15px;
+}
+
+.phone-description {
+  font-size: 15px;
+  line-height: 28px;
+  opacity: 1;
+  color: #666666;
+  margin-left: 20px;
+  margin-bottom: 39px;
+}
+
+.app-download-link li {
+  display: inline-block;
+}
+
+.ios {
+  background-image: url('../img/ios.png');
+  width: 166px;
+  height: 159px;
+}
+
+.cut {
+  background-image: url('../img/ic-down-cutline.png');
+  height: 159px;
+  width: 1px;
+}
+
+.android {
+  background-image: url('../img/android.png');
+  width: 166px;
+  height: 159px;
+}
+
+.membership {
+  background: palegreen;
+}
+
+.space {
+  background: paleturquoise;
+}
+
+.footer {
+  background: peru;
+}
