@@ -650,7 +650,7 @@ html {
 }
 
 .space-box-3 .not-empty {
-  text-indent: -999px;
+  text-indent: -9999999999px;
 }
 
 .empty {
@@ -662,13 +662,15 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: #6666;
+  color: #ffffff;
   background-color: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);;
 }
 
 footer {
   position: relative;
-  padding-bottom: 30px;
+  padding: 30px;
+  border-top: 1px solid #898989;
+  min-width: 1200px;
 }
 
 .footer-title {
