@@ -93,7 +93,9 @@ header p {
 }
 
 .section-wrapper {
-  padding: 100px 200px 100px 200px;
+  margin: 100px 50px 100px 50px;
+  min-width: 1215px;
+  box-sizing: border-box;
 }
 
 /***** 섹션 1 *****/
@@ -196,7 +198,7 @@ header p {
 }
 
 .box-2 {
-  width: 31%;
+  width: calc(33.33333333% - 40px);
   float: left;
 }
 
@@ -251,10 +253,19 @@ header p {
   float: left;
 }
 
-.box-3 img {
-  height: 420px;
+.river-valley {
+  background-image:url('https://s3.ap-northeast-2.amazonaws.com/commontown-directus-sg-dev/public/uploads/_/originals/location1@2x.png');
+}
+
+.tiong-bharu {
+  background-image:url('https://s3.ap-northeast-2.amazonaws.com/commontown-directus-sg-dev/public/uploads/_/originals/location-1@2x-1.png');
+}
+
+.box-3-image {
   width: 637px;
-  margin-bottom: 30px;
+  height: 420px;
+  background-size: cover;
+  float: left;
 }
 
 .box-3 p {
