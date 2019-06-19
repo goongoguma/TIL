@@ -1,3 +1,15 @@
+## Index
+- [1. C# vs .NET](#1)
+- [2. CLR?](#2)
+- [3. .NET의 구조](#3)
+- [4. 변수와 상수](#4)
+- [5. 오버플로우](#5)
+- [6. 스코프](#6)
+- [7. 변수와 상수 실습 & 포맷 스트링](#7)
+- [8. 타입 변환](#8)
+- [9. 연산자](#9)
+- [10. 연산자 실습](#10)
+
 <h2 name="1">1. C# vs .NET</h2>
 
 - C# vs .NET?
@@ -55,7 +67,7 @@
       int // x
       @int // o
     ```
-  - User meaningfule names (recommendation)
+  - User meaningful names (recommendation)
     ```c
       fn // x
       firstName // o
@@ -115,7 +127,7 @@
   ```
 - 각 스코프들은 해당 스코프 안 아니면 자식 스코프로부터 접근이 가능하며 바깥쪽 블록 영역에서는 접근하지 못한다.
 
-<h2 name="7">7. Variables and Constants</h2>
+<h2 name="7">7. Demo: Variables and Constants</h2>
 
   ```c
   using System;
@@ -322,6 +334,534 @@
 
               Console.WriteLine((float)a / (float)b); // 3.333333
           }
+      }
+  }
+  ```
+
+<h2 name="11">11. Class</h2>
+
+- Classes
+  - Combines related variables (fields) and functions (methods)
+- 클래스는 access modifier, class keyword, identifier 순서로 이루어져 있다. 
+  ```c
+  public class Person
+  {
+
+  }
+  ```
+- access modifier는 누가 클래스에 접근 할 수 있는지를 알려주는데 클래스를 생성할 때 public 키워드를 사용함으로써 어플리케이션의 다양한 곳에서 제한없이 접근하게 한다. 
+- 또한 클래스에서는 함수(메소드)를 가질 수 있다. 
+  ```c
+  public class Person
+  {   // 코드블럭이 끝나지 않았으면 세미콜론 붙이기
+      public string Name;
+
+      public void Introduce()
+      {
+          Console.WriteLine("Hi, my name is " + Name);
+      }
+  }
+  ```
+  ```c
+  public class Calculator
+  {
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+  }
+  ```
+- 객체 생성하기
+  ```c
+  // primitive와 달리 new 연산자를 사용함으로써 객체를 메모리에 할당하기
+  Person person = new Person();
+  ```
+- C#에서 클래스는 primitive 타입과 다르게 취급된다. 
+  ```c
+  // var 키워드로 사용 가능
+  var person = new Person();
+  
+  person.Name = "Mosh";
+  person.Introduce();
+  ```
+- Static Modifier
+  ```c
+    public class Calculator
+    {
+      public static int Add(int a, int b)
+      {
+          return a + b;
+      }
+    }
+    ```
+  - static을 사용함으로써 Calculator 클래스가 Add 함수에 직접적으로 접근 할 수 있다. 
+  - 예를들어 클래스 안에 calc2, calc2, calc3의 객체가 있으며 각각의 객체는 Add()를 지니고있다. (즉, 메모리 세군데 각각 Add() 함수가 존재한다.)
+  - 하지만 static 메소드를 사용하면 해당 클래스 하나에 단 하나의 Add() 함수가 존재하게된다. 즉, Add() 메소드가 단 한번만 사용된다.
+
+<h2 name="12">12. Demo: Classes</h2>
+
+  ```c
+  namespace CSharpFundamentals
+  {
+      public class Person
+      {
+          public string FirstName;
+          public string LastName;
+
+          public void Introduce()
+          {
+              Console.WriteLine("My name is " + FirstName + " " + LastName);            
+          }
+      }
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var john = new Person();
+              john.FirstName = "John";
+              john.LastName = "Smith";
+              john.Introduce();
+          }
+      }
+  }
+  ```
+- 이렇게 클래스들을 작성할 수 있지만 클래스가 늘어남에 따라 각 클래스별로 개별 파일을 생성하는게 더 효율적 
+- 하나의 클래스를 다른 클래스에서 사용하기 위해서는 첫번째로 사용할 클래스는 public이여야 하며 불러오고 싶은 클래스가 다른 폴더에 있을경우 using을 사용한다. 
+  ```c
+  // Program.cs
+  using CSharpFundamentals.Math;
+
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var calculator = new Calculator();
+              var result = calculator.Add(1, 2);
+
+              System.Console.WriteLine(result);
+          }
+      }
+  }
+
+  // Person.cs
+  using System;
+
+  namespace CSharpFundamentals
+  {
+      public class Person
+      {
+          public string FirstName;
+          public string LastName;
+
+          public void Introduce()
+          {
+              Console.WriteLine("My name is " + FirstName + " " + LastName);            
+          }
+      }
+  }
+
+  // Math/Calculator.cs
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+
+  namespace CSharpFundamentals.Math   
+  {
+      public class Calculator
+      {
+          public int Add(int a, int b)
+          {
+              return a + b;
+          }
+      }
+  }
+  ```
+
+<h2 name="13">13. Structs</h2>
+
+- C#에는 클래스와 비슷한 structs(구조체)라는 것이 있다.
+- 클래스는 class 키워드로 시작하는 반면에 구조체는 struct 키워드로 시작한다.
+  ```c
+  public struct RgbColor
+  {
+      public int Red;
+      public int Green;
+      public int Blue;
+  }
+  ```
+- 하지만 구조체보다는 클래스가 자주 쓰인다.
+- 강사는 작고 가벼운 객체를 정의할때 구조체 사용을 추천.
+
+<h2 name="14">14. Arrays</h2>
+
+- What is array?
+  - A data structure to store a collection of variables of the same type.
+    ```c
+    int number1;
+    int number2;
+    int number3;
+
+    // 하나하나 선언하는것보다 하나의 배열에 넣고 number로 선언하기 
+    int[] numbers = new int[3];
+    ```
+- Accessing Array Elements
+  ```c
+  int[] numbers = new int[3];
+
+  numbers[0] = 1;
+  numbers[1] = 2;
+  numbers[2] = 3;
+
+  // using object initialization syntax makes it shorter
+  int[] numbers = new int[3] {1, 2, 3};
+  ```
+- 자바스크립트와 다르게 배열에 몇개의 원소가 들어갈 것인지도 정해줘야함. (대괄호 안에있는 숫자)
+
+<h2 name="15">15. Demo: Arrays</h2>
+
+  ```c
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var numbers = new int[3];
+              numbers[0] = 1;
+
+              System.Console.WriteLine(numbers[0]); //1
+              System.Console.WriteLine(numbers[1]); //0
+              System.Console.WriteLine(numbers[2]); //0
+          }
+      }
+  }
+  ```
+- 배열에서 값을 초기화 하지 않은 인덱스의 기본값은 0이다.
+- 마찬가지로 boolean으로 만든 배열의 인덱스의 기본값은 false이다.
+  ```c
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+             var flags = new bool[3];
+              flags[0] = true;
+
+              System.Console.WriteLine(flags[0]); //true
+              System.Console.WriteLine(flags[1]); //false
+              System.Console.WriteLine(flags[2]); //false
+
+          }
+      }
+  }
+  ```
+-  object initialization syntax 사용해보기
+  ```c
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var names = new string[3] { "Jack", "John", "Mary" };
+              System.Console.WriteLine(names[0]); //Jack
+              System.Console.WriteLine(names[1]); //John
+              System.Console.WriteLine(names[2]); //Mary
+          }
+      }
+  }
+  ```
+- 또한 동적으로 재할당 가능
+  ```c
+  var names = new string[3] { "Jack", "John", "Mary" };
+  names[0] = "Jerry";
+  System.Console.WriteLine(names[0]); //Jerry
+  System.Console.WriteLine(names[1]); //John
+  System.Console.WriteLine(names[2]); //Mary
+  ```
+
+<h2 name="16">16. Strings</h2>
+
+- What is String?
+  - String is a sequence of characters.
+- Creating Strings
+  ```c
+  string firstName = "Jay";
+  
+  string name = firstName + " " + lastName;
+
+  string name = string.Format("{0} {1}", firstName, lastName);
+
+  var numbers = new int[3] {1, 2, 3};
+  string list = string.Join(",", numbers); //"1,2,3"
+
+  string name = "Jay"
+  char firstChar = name[0] //J
+  ```
+- Strings are Immutable
+  - Once you create them, you cannot change them. 
+- Escape Characters
+  - \n : New Line
+  - \t : Tab
+  - \\ : Backslash
+  - \' : Single Quatation Mark
+  - \" : Double Quatation Mark
+- Verbatim String
+  ```c
+  // this looks bit messy
+  string path = "c:\\projects\\project1\\folder1";
+
+  // so you can use like this
+  string path = @"c:\projects\project1\folder1";
+
+  ```
+
+<h2 name="17">17. Demo: Strings</h2>
+
+  ```c
+  // object initialization syntax이용해 string 만들기
+  using CSharpFundamentals;
+
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var firstName = "Jay";
+              var lastName = "An";
+
+              var fullName = firstName + " " + lastName;
+
+              System.Console.WriteLine(fullName);
+
+              var myFullName = string.Format("My name is {0} {1}", firstName, lastName);
+
+              System.Console.WriteLine(myFullName); //My name is Jay An
+          }
+      }
+  }
+  ```
+  ```c
+  // array of names
+  using CSharpFundamentals;
+
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var firstName = "Jay";
+              var lastName = "An";
+
+              var fullName = firstName + " " + lastName;
+
+              var myFullName = string.Format("My name is {0} {1}", firstName, lastName);
+
+              var names = new string[3] { "John", "Jack", "Mary" };
+
+              var formattedNames = string.Join(",", names);
+
+              System.Console.WriteLine(formattedNames); //John,Jack,Mary
+          }
+      }
+  }
+  ```
+  ```c
+  // Verbatim String
+  ```c
+  using CSharpFundamentals;
+
+  namespace CSharpFundamentals
+  {
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var firstName = "Jay";
+              var lastName = "An";
+
+              var fullName = firstName + " " + lastName;
+
+              var myFullName = string.Format("My name is {0} {1}", firstName, lastName);
+
+              var names = new string[3] { "John", "Jack", "Mary" };
+
+              var formattedNames = string.Join(",", names);
+
+               /*
+               var text = "Hi Jay\n Look into the following paths\nc:\\folder1\\folder2\nc:\\folder3\\folder4";
+              System.Console.WriteLine(text);
+              */
+
+              // text가 너무 복잡하므로 verbatim 문자열을 사용해보자
+
+              var text = @"Hi Jay
+              Look into the following paths
+              c:\folder1\folder2\nc:\folder3\folder4";
+          }
+      }
+  }
+  ```
+
+<h2 name="18">18. Enums</h2>
+
+- enums을 사용함으로써 서로 연관있는 const 값들을 묶는다.
+  ```c
+  const int RegularAirMail = 1;
+  const int RegisteredAirMain = 2;
+  const int Express = 3;
+
+  public enum ShippingMethod
+  {
+    RegularAirMail = 1,
+    RegisteredAirMain = 2,
+    Express = 3;
+  }
+
+  var method = ShippingMethod.Express;
+  ```
+
+<h2 name="19">19. Demo: Enums</h2>
+
+    ```c
+    // example enum to int, int to enum
+    namespace CSharpFundamentals
+    {
+        public enum ShippingMethod
+        {
+          // 만일 enum안의 요소들에 값을 초기화 시켜주지 않는다면 첫번째 요소의 값은 자동적으로 0이되고 다른 요소로 넘어가면서 +1 씩 값이 증가한다
+          // Enums are internally integers
+          // 그러므로 초기값을 설정해 주는것이 best practice이다 
+            RegularAirMail = 1,
+            RegisteredAirMail = 2,
+            Express = 3
+        }
+
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                var method = ShippingMethod.Express;
+                System.Console.WriteLine((int)method); // 3
+
+                // suppose we get the value of 3 in somewhere else
+                var methodId = 3;
+                // and we want to convert that as a shipping method.
+                System.Console.WriteLine((ShippingMethod)methodId); // Express
+
+                // Console.WiteLine은 항상 디폴트 값으로 ToString 메소드를 사용한다. 
+                Console.WriteLine(method.ToString()); // Express
+
+                // string값을 enum으로 바꾸고 싶을 경우
+                var methodName = "Express";
+
+                var shippingMethod = (ShippingMethod)Enum.Parse(typeof(ShippingMethod), methodName);
+            }
+        }
+    }
+  ```
+  ```c
+  // convert enum to string, string to enum
+  // parsing means getting a string and converting that to a different type
+  ```
+
+<h2 name="20">20. Reference Types and Value Types</h2>
+
+- Types
+  - Structure
+    - Primitive types
+    - Custom structures
+  - Classes 
+    - Arrays
+    - Strings
+    - Custom classes
+- Structure은 Value types
+  - Allocated on stack
+  - Memory allocation done automatically
+  - Immediately removed when out of scope by CLR
+- 클래스는 Reference types
+  - You need to allocate memory
+  - Memory allocated on heap
+  - Out of scope, but stay in heap a little while
+  - Garbage collected by CLR
+- 변수에 객체를 복사했을때 그 객체의 값이 Value 타입인지 Reference 타입인지에 따라서 결과가 다르게 나올것 
+
+<h2 name="21">21. Demo: Reference Types and Value Types 1</h2>
+
+  ```c
+  namespace CSharpFundamentals
+  {
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var a = 10;
+              var b = a;
+              b++; 
+              Console.WriteLine(string.Format("a: {0}, b: {1}", a, b)); // a: 10, b: 11
+              // when you copy a value type in different variable, the copy of that value is taken and stored in the target variable
+
+              // reference type
+              // img 폴더에 Reference Types and Value Types 이미지 참조 
+              var array1 = new int[3] { 1, 2, 3 };
+              var array2 = array1;
+              array2[0] = 0; // 0
+              Console.WriteLine(string.Format("array1[0]: {0}, array2[0]: {1}", array1[0], array2[0])); //array1[0]: 0, array2[0]: 0
+          }
+      }
+  }
+  ```
+
+<h2 name="22">22. Demo: Reference Types and Value Types 2</h2>
+
+  ```c
+  using System;
+
+  namespace CSharpFundamentals
+  {
+      public class Person
+      {
+          public int Age;
+      }
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              // Increment 함수의 인수로 전달되었지만 값이 바뀌지 않는다.
+              var number = 1;
+              Increment(number);
+              Console.WriteLine(number); // 1
+
+              // MakeOld 함수의 인수로 전달되어서 값이 바뀌었다. 
+              var person = new Person() { Age = 20 };
+              MakeOld(person);
+              Console.WriteLine(person.Age); // 30
+          }
+
+          public static void Increment(int number)
+          {
+              number += 10;
+          }
+
+          public static void MakeOld(Person person)
+          {
+              person.Age += 10;
+          }
+
       }
   }
   ```
