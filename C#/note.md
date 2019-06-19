@@ -9,6 +9,17 @@
 - [8. 타입 변환](#8)
 - [9. 연산자](#9)
 - [10. 연산자 실습](#10)
+- [11. 클래스](#11)
+- [12. 클래스 실습](#12)
+- [13. 구조체](#13)
+- [14. 배열](#14)
+- [15. 배열 실습](#15)
+- [16. 문자열](#16)
+- [17. 문자열 실습](#17)
+- [18. Enums](#18)
+- [19. Enums 실습](#19)
+- [20. 참조타입 vs 값타입](#20)
+- [21. 참조타입 vs 값타입 실습](#21)
 
 <h2 name="1">1. C# vs .NET</h2>
 
@@ -788,12 +799,12 @@
     - Arrays
     - Strings
     - Custom classes
-- Structure은 Value types
+- Structure은 Value types (값타입)
   - Allocated on stack
   - Memory allocation done automatically
   - Immediately removed when out of scope by CLR
-- 클래스는 Reference types
-  - You need to allocate memory
+- 클래스는 Reference types (참조타입)
+  - You need to allocate memory 
   - Memory allocated on heap
   - Out of scope, but stay in heap a little while
   - Garbage collected by CLR
