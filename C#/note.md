@@ -458,23 +458,6 @@
       }
   }
 
-  // Person.cs
-  using System;
-
-  namespace CSharpFundamentals
-  {
-      public class Person
-      {
-          public string FirstName;
-          public string LastName;
-
-          public void Introduce()
-          {
-              Console.WriteLine("My name is " + FirstName + " " + LastName);            
-          }
-      }
-  }
-
   // Math/Calculator.cs
   using System;
   using System.Collections.Generic;
@@ -872,7 +855,47 @@
           {
               person.Age += 10;
           }
+      }
+  }
+  ```
 
+<h2 name="23">23. Random Class</h2>
+
+- Random 클래스를 사용해 무작위 숫자를 만들어낸다. 
+  ```c
+  using System;
+
+  namespace CSharpFundamentals
+  {
+      public class Person
+      {
+          public int Age;
+      }
+
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              // 랜덤 클래스 인스턴스 생성 
+              var random = new Random(); 
+              const int passwordLength = 10;
+
+              for (var i = 0; i < 10; i++)
+              {   
+                // creating random number between 1 and 10
+                  Console.WriteLine(random.Next(1, 10));
+              }
+
+              // 랜덤 알파벳으로 이루어진 배열만들기
+              var buffer = new char[passwordLength];
+
+              for (var i = 0; i < passwordLength; i++)
+                  buffer[i] = ((char)('a' + random.Next(0, 26)));
+
+              var password = new string(buffer);
+
+              Console.WriteLine(password);
+          }
       }
   }
   ```
