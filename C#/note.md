@@ -19,7 +19,9 @@
 - [18. Enums](#18)
 - [19. Enums 실습](#19)
 - [20. 참조타입 vs 값타입](#20)
-- [21. 참조타입 vs 값타입 실습](#21)
+- [21. 참조타입 vs 값타입 실습 1](#21)
+- [22. 참조타입 vs 값타입 실습 2](#22)
+- [23. 랜덤 클래스](#23)
 
 <h2 name="1">1. C# vs .NET</h2>
 
@@ -895,6 +897,154 @@
               var password = new string(buffer);
 
               Console.WriteLine(password);
+          }
+      }
+  }
+  ```
+
+<h2 name="24">24. Arrays</h2>
+
+- Array
+  - Represents a fixed number of variables of a particular type.
+- Types of Arrays
+  - Single Dimension
+  ```c
+   var numbers = new int[5]{1, 2, 3, 4, 5};
+  ```
+  - Multi Dimension
+    - Rectangular
+    - Jagged 
+    - img폴더 Multi Dimension Arrays 이미지 참조
+    
+- .NET에서는 CLR은 Single Dimension에 최적화 되어있다. 
+- 매트릭스를 모델은 Jagged가 좋다.
+- 2차원 배열 만들기
+  ```c
+  var matrix = new int[3, 5];
+
+  var matrix = new int[3, 5]
+  {
+    {1, 2, 3, 4, 5},
+    {6, 7, 8, 9, 10},
+    {11, 12, 13, 14, 15}
+  };
+
+  // accessing element
+  var element = matrix[0, 0];
+  ```
+- 3차원 배열 만들기
+  ```c
+  var colors = new int[3, 4, 5];
+  ```
+- Jagged 배열 만드는법
+  - img 폴더 Jagged Array 이미지 참조
+
+- Array 타입은 클래스이며 Length 속성을 가질 수 있고 Clear(), Copy(), IndexOf(), Reverse(), Sort()와 같은 메소드를 가지고 있다. 
+
+<h2 name="25">25. Demo: Arrays</h2>
+
+  ```c
+  using System;
+
+  namespace array
+  {
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var numbers = new[] { 3, 7, 9, 2, 14, 6};
+
+              // Length
+              Console.WriteLine("Length: " + numbers.Length);
+
+              // IndexOf()
+              var index = Array.IndexOf(numbers, 9);
+              Console.WriteLine(index);
+
+              // Clear
+              Array.Clear(numbers, 0, 2);
+
+              Console.WriteLine("Effect of Clear()");
+              foreach (var n in numbers)
+                  Console.WriteLine(n);
+
+              // Copy()
+              int[] another = new int[3];
+              Array.Copy(numbers, another, 3);
+
+              Console.WriteLine("Effect of Copy()");
+              foreach (var n in another)
+                  Console.WriteLine(n);
+
+              // Sort()
+              Array.Sort(numbers);
+
+              Console.WriteLine("Effect of Sort()");
+              foreach (var n in numbers)
+                  Console.WriteLine(n);
+
+              // Reverse()
+              Array.Reverse(numbers);
+
+              Console.WriteLine("Effect of Reverse()");
+              foreach (var n in numbers)
+                  Console.WriteLine(n);
+          }
+      }
+  }
+  ```
+
+<h2 name="26">26. Lists</h2>
+
+- Array 
+  - fixed size
+- List
+  - dynamic size
+- 리스트는 객체와 비슷하나 저장되는 객체의 갯수를 예측하기 힘들때 사용한다. 
+- Creating Lists
+  ```c
+  // <>안에 리스트 타입이 들어간다 
+  var numbers = new List<int>();
+  
+  var numbers = new List<int>() {1, 2, 3, 4};
+  ```
+- Usefule Methods in Lists
+  - Add()
+  - AddRange()
+  - Remove()
+  - RemoveAt()
+  - IndexOf()
+  - Contains()
+  - Count
+
+<h2 name="27">27. Demo: Lists</h2>
+  ```c
+  using System.Collections.Generic;
+
+  namespace Lists
+  {
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              var numbers = new List<int>() { 1, 2, 3, 4};
+              numbers.Add(1);
+              numbers.AddRange(new int[3] { 5, 6, 7 });
+              foreach(var number in numbers)
+                  System.Console.WriteLine(number); // 1 2 3 4 1 5 6 7
+
+              System.Console.WriteLine("Index of 1: " + numbers.IndexOf(1)); // Index of 1: 0
+              System.Console.WriteLine("Last Index of 1: " + numbers.LastIndexOf(1)); // Last Index of 1: 4
+
+              System.Console.WriteLine("Count: " + numbers.Count); // Count: 8
+
+              numbers.Remove(1);
+              foreach (var number in numbers)
+                  System.Console.WriteLine(number); // 2 3 4 1 5 6 7
+              // C#에서 foreach 루프안에 있는 요소들을 수정할 수 없다 하지만 일반적인 for 루프에서는 가능하다
+
+              numbers.Clear();
+              System.Console.WriteLine("Count: " + numbers.Count); // Count: 0
           }
       }
   }
