@@ -26,6 +26,11 @@
 - [25. 배열 실습](#25)
 - [26. 리스트](#26)
 - [27. 리스트 실습](#27)
+- [28. 날짜 및 시간](#28)
+- [29. 시간 간격](#29)
+- [30. 문자열](#30)
+- [31. 문자열 실습](#31)
+- [32. 텍스트 길이 줄이기 실습](#32)
 
 
 <h2 name="1">1. C# vs .NET</h2>
@@ -1051,3 +1056,210 @@
     }
   ```
 
+<h2 name="28">28. DateTime</h2>
+
+- New 키워드를 이용해 DateTime 생성가능
+- Please note that DateTime objects are immutable. 
+  ```c
+  var dateTime = new DateTime(2015, 1, 1);
+
+  // 지금 시간
+  var now = DateTime.Now;
+
+  // 오늘 날짜
+  var today = DateTime.Today;
+
+  // 몇 시
+  Console.WriteLine(now.Hour);
+
+  // 몇 분
+  Console.WriteLine(now.Minute);
+
+  // 내일 지금 이 시간
+  var tomorrow = now.AddDays(1);
+
+  // 어제 지금 이 시간
+  var yesterday = now.AddDays(-1);
+
+  // monday, 24 June 2019
+  Console.WriteLine(now.ToLongDateString()); 
+
+  // 24/06/2019
+  Console.WriteLine(now.ToShortDateString());
+
+  // 13:09:38 PM
+   Console.WriteLine(now.ToLongTimeString());
+
+   // 13:09 PM
+   Console.WriteLine(now.ToShortTimeString());
+
+   // current date and time
+   Console.WriteLine(now.ToString());
+
+   // 2019-06-24 13:13
+   Console.WriteLine(now.ToString("yyyy-MM-dd HH:mm"));
+  ```
+
+<h2 name="29">29. TimeSpan</h2>
+
+- TimeSpan은 시간의 길이를 나타낸다. 
+  ```c
+  // TimeSpan(시, 분, 초)
+  var timeSpan = new TimeSpan(1, 2, 3);
+
+  // var timeSpan1 = new TimeSpan(1, 0, 0)보다는
+  var timeSpan1 = TimeSpan.FromHours(1);
+
+  // 시간 계산
+  var start = DateTime.Now;
+  var end = DateTime.Now.AddMinutes(2);
+  var duration = end - start;
+  Console.WriteLine(duration);  // 00:02:00.0007237
+  
+  // timeSpan의 Properties
+  Console.WriteLine("Minutes: " + timeSpan.Minutes); // Minutes: 2
+  
+  Console.WriteLine("Total Minutes: " + timeSpan.TotalMinutes); // // Total Minutes: 62.05 (Total Minutes converts timeSpan object to a minutes)
+
+  // 시간 더하기
+  // 기존 사간에서 +8분 해주기 
+  Console.WriteLine(timeSpan.Add(TimeSpan.FromMinutes(8)));
+   
+  // 시간 빼기
+  // 기존 사간에서 -2분 해주기 
+  Console.WriteLine(timeSpan.Subtract(TimeSpan.FromMinutes(2))); // 01:00:03
+
+  // 시간을 문자열로 바꾸기 
+  Console.WriteLine("ToString" + timeSpan.ToString());
+
+  // 문자열을 시간으로 바꾸기
+  Console.WriteLine("Parse: " + TimeSpan.Parse("01:02:03"));
+  ```
+
+<h2 name="30">30. Strings</h2>
+
+  ```c
+  // 소문자
+  ToLower()
+
+  // 대문자
+  ToUpper()
+
+  // 공백 제거
+  Trim()
+
+  // 캐릭터나 문자열 찾기
+  IndexOf('a')
+
+  LastIndexOf("Hello")
+
+  // Substrings
+  Substring(startIndex)
+
+  Substring(startIndex, length)
+
+  // 바꾸기
+  Replace('a', '!')
+
+  Replace("mosh", "moshfegh")
+
+  // null 체크
+  String.IsNullOrEmpty(str)
+
+  String.IsNullOrWhiteSpace(str)
+
+  // 문자열 나누기
+  str.Split(' ')
+
+  // 문자열을 숫자로 변환
+  string s = "1234";
+  int i = int.Parse(s);
+  // 문자열이 비어있을 경우를 대비하여 강사는 Convert.ToInt32를 추천 
+  int j = Convert.ToInt32(s);
+
+  // 숫자를 문자열로 변환
+  int i = 1234;
+  string s = i.ToString(); // "1234"
+  // C is a format string
+  string t = i.ToString("C"); // "$1,234.00"
+  string t = i.ToString("C0"); // "$1,234"
+  // img 폴더의 Format Strings 이미지 참조
+  ```
+
+<h2 name="31">31. Strings 실습</h2>
+  ```c
+  // trim 메소드
+  var fullName = "Jae Hyun  ";
+  Console.WriteLine("'{0}'", fullName.Trim()); // 'Jae Hyun'
+
+  // 대문자
+  Console.WriteLine("'{0}'", fullName.Trim().ToUpper()); // 'JAE HYUN'
+
+  // 이름 나누기 1
+  var index = fullName.IndexOf(' ');
+  var firstName = fullName.Substring(0, index);
+  var lastName = fullName.Substring(index + 1);
+  Console.WriteLine(firstName); // Jae 
+  Console.WriteLine(lastName); // Hyun
+
+  // 이름 나누기 2
+  var names = fullName.Split(' ');
+  Console.WriteLine(names[0] + names[1]);
+
+  // replace 메소드
+  var replaceName = fullName.Replace("Jae", "An");
+  Console.WriteLine(replaceName); // 'An Hyun'
+
+  // 문자열에서 숫자열로 변환
+  var str = "25";
+  var age = Convert.ToByte(str);
+  Console.WriteLine(age); // 25
+
+  float price = 29.95f;
+  Console.WriteLine(price.ToString("C")); // $29.95
+  ```
+
+<h2 name="32">32. Live Coding: Summarising Text</h2>
+
+- 텍스트 길이 줄이기
+  ```c
+  // Programs.cs
+
+  class Program
+    {
+      static void Main(string[] args)
+        {
+          var sentence = "This is going to be a really really really long text.";
+
+          var summary = StringUtility.SummarizeText(sentence, 5);
+          Console.WriteLine(summary);
+        }
+    }
+
+  // StringUtility.cs
+
+  public class StringUtility
+    {
+      public static string SummarizeText(string text, int maxLength = 20)
+      {
+          if (text.Length < maxLength)
+          {
+              return text;
+          }
+          var words = text.Split(' ');
+          var totalCharacters = 0;
+          var summaryWords = new List<string>();
+
+          foreach (var word in words)
+          {
+              summaryWords.Add(word);
+
+              totalCharacters = word.Length + 1; // 빈칸까지 포함해서 +1
+
+              if (totalCharacters > maxLength)
+                  break;
+          }
+          return String.Join(' ', summaryWords) + "...";
+      }
+    }
+  ```
