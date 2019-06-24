@@ -22,6 +22,11 @@
 - [21. 참조타입 vs 값타입 실습 1](#21)
 - [22. 참조타입 vs 값타입 실습 2](#22)
 - [23. 랜덤 클래스](#23)
+- [24. 배열](#24)
+- [25. 배열 실습](#25)
+- [26. 리스트](#26)
+- [27. 리스트 실습](#27)
+
 
 <h2 name="1">1. C# vs .NET</h2>
 
@@ -916,8 +921,8 @@
     - Jagged 
     - img폴더 Multi Dimension Arrays 이미지 참조
     
-- .NET에서는 CLR은 Single Dimension에 최적화 되어있다. 
-- 매트릭스를 모델은 Jagged가 좋다.
+- .NET에서 CLR은 Single Dimension에 최적화 되어있다. 
+- 매트릭스 모델은 Jagged가 좋다.
 - 2차원 배열 만들기
   ```c
   var matrix = new int[3, 5];
@@ -955,40 +960,36 @@
               var numbers = new[] { 3, 7, 9, 2, 14, 6};
 
               // Length
-              Console.WriteLine("Length: " + numbers.Length);
+              Console.WriteLine("Length: " + numbers.Length); // 6
 
               // IndexOf()
               var index = Array.IndexOf(numbers, 9);
-              Console.WriteLine(index);
+              Console.WriteLine(index); // 2
 
               // Clear
               Array.Clear(numbers, 0, 2);
-
               Console.WriteLine("Effect of Clear()");
               foreach (var n in numbers)
-                  Console.WriteLine(n);
+                  Console.WriteLine(n); // 0 0 9 2 14 6
 
               // Copy()
               int[] another = new int[3];
               Array.Copy(numbers, another, 3);
-
               Console.WriteLine("Effect of Copy()");
               foreach (var n in another)
-                  Console.WriteLine(n);
+                  Console.WriteLine(n); // 3 7 9
 
               // Sort()
               Array.Sort(numbers);
-
               Console.WriteLine("Effect of Sort()");
               foreach (var n in numbers)
-                  Console.WriteLine(n);
+                  Console.WriteLine(n); // 2 3 6 7 9 14
 
               // Reverse()
               Array.Reverse(numbers);
-
               Console.WriteLine("Effect of Reverse()");
               foreach (var n in numbers)
-                  Console.WriteLine(n);
+                  Console.WriteLine(n); // 6 14 2 9 7 3
           }
       }
   }
@@ -1018,34 +1019,35 @@
   - Count
 
 <h2 name="27">27. Demo: Lists</h2>
-  ```c
-  using System.Collections.Generic;
-
-  namespace Lists
-  {
-      class Program
-      {
-          static void Main(string[] args)
-          {
-              var numbers = new List<int>() { 1, 2, 3, 4};
-              numbers.Add(1);
-              numbers.AddRange(new int[3] { 5, 6, 7 });
-              foreach(var number in numbers)
-                  System.Console.WriteLine(number); // 1 2 3 4 1 5 6 7
-
-              System.Console.WriteLine("Index of 1: " + numbers.IndexOf(1)); // Index of 1: 0
-              System.Console.WriteLine("Last Index of 1: " + numbers.LastIndexOf(1)); // Last Index of 1: 4
-
-              System.Console.WriteLine("Count: " + numbers.Count); // Count: 8
-
-              numbers.Remove(1);
-              foreach (var number in numbers)
-                  System.Console.WriteLine(number); // 2 3 4 1 5 6 7
-              // C#에서 foreach 루프안에 있는 요소들을 수정할 수 없다 하지만 일반적인 for 루프에서는 가능하다
-
-              numbers.Clear();
-              System.Console.WriteLine("Count: " + numbers.Count); // Count: 0
-          }
-      }
-  }
   ```
+    using System.Collections.Generic;
+
+    namespace Lists
+    {
+    class Program
+    {
+    static void Main(string[] args)
+    {
+    var numbers = new List<int>() { 1, 2, 3, 4 };
+    numbers.Add(1);
+    numbers.AddRange(new int[3] { 5, 6, 7 });
+    foreach(var number in numbers)
+        System.Console.WriteLine(number); // 1 2 3 4 1 5 6 7
+
+    System.Console.WriteLine("Index of 1: " + numbers.IndexOf(1)); // Index of 1: 0
+    System.Console.WriteLine("Last Index of 1: " + numbers.LastIndexOf(1)); // Last Index of 1: 4
+
+    System.Console.WriteLine("Count: " + numbers.Count); // Count: 8
+
+    numbers.Remove(1);
+    foreach (var number in numbers)
+        System.Console.WriteLine(number); // 2 3 4 1 5 6 7
+    // C#에서 foreach 루프안에 있는 요소들을 수정할 수 없다 하지만 일반적인 for 루프에서는 가능하다
+
+    numbers.Clear();
+    System.Console.WriteLine("Count: " + numbers.Count); // Count: 0
+    }
+    }
+    }
+  ```
+
