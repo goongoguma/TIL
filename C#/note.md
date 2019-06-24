@@ -1263,3 +1263,60 @@
       }
     }
   ```
+
+<h2 name="33">33. StringBuilder</h2>
+
+- 문자열을 조작해야 하는 일이 많이 있을 경우 StringBuilder를 사용한다.
+- StringBuilder
+  - Defined in System.Text
+  - A mutable string
+  - Easy and fast to create and manipulate strings
+- But not optimize for searching
+  - IndexOf()
+  - LastIndexOf()
+  - Contains()
+  - StartsWith()
+  - ...
+- String Manipulation Methods
+  - Append()
+  - Insert()
+  - Remove()
+  - Replace()
+  - Clear()
+
+<h2 name="34">34. StringBuilder 실습</h2>
+
+  ```c
+  static void Main(string[] args)
+    {
+        var builder = new StringBuilder();
+        builder
+              .Append('-', 10)
+              .AppendLine()
+              .Append("Header")
+              .AppendLine()
+              .Append('-', 10);
+        Console.WriteLine(builder); 
+        
+        // ----------
+        // Header
+        // ----------
+
+        builder.Replace('-', '+');
+
+        // ++++++++++
+        // Header
+        // ++++++++++
+
+        builder.Remove(0, 10);
+
+        // Header
+        // ++++++++++
+
+        builder.Insert(0, new string('-', 10));
+
+        // ----------
+        // Header
+        // ++++++++++
+    }
+  ```
