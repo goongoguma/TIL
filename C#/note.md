@@ -1090,16 +1090,16 @@
   Console.WriteLine(now.ToShortDateString());
 
   // 13:09:38 PM
-   Console.WriteLine(now.ToLongTimeString());
+  Console.WriteLine(now.ToLongTimeString());
 
-   // 13:09 PM
-   Console.WriteLine(now.ToShortTimeString());
+  // 13:09 PM
+  Console.WriteLine(now.ToShortTimeString());
 
-   // current date and time
-   Console.WriteLine(now.ToString());
+  // current date and time
+  Console.WriteLine(now.ToString());
 
-   // 2019-06-24 13:13
-   Console.WriteLine(now.ToString("yyyy-MM-dd HH:mm"));
+  // 2019-06-24 13:13
+  Console.WriteLine(now.ToString("yyyy-MM-dd HH:mm"));
   ```
 
 <h2 name="29">29. TimeSpan</h2>
@@ -1322,3 +1322,44 @@
         // ++++++++++
     }
   ```
+
+<h2 name="35">35. Procedural Programming</h2>
+
+- Procedural Programming
+  - A programming paradigm based on procedure calls.
+- Object-oriented Programming
+  - A programming paradigm based on objects.
+- 리액트에서 로직을 담당하는 container component와 화면만을 담당하는 presentational component로 나누어서 작업하듯이 C#도 클래스 안에서 메소드 각자의 역할을 분담해줌으로써 재사용이 가능하도록 만드는것이 좋다.
+  ```c
+  using System;
+  using System.Text;
+  using System.Collections.Generic;
+
+  namespace 연습장
+  {
+      class Program
+      {
+          public static void Main(string[] args)
+          {
+              Console.WriteLine("What is your name? ");
+              var name = Console.ReadLine();
+              var reversed = ReverseName(name);
+              Console.WriteLine("Reversed name: " + reversed);
+          }
+
+          public static string ReverseName(string name)
+          {
+              var array = new char[name.Length];
+              for(var i = name.Length; i > 0; i--)
+              {
+                  array[name.Length - i] = name[i - 1];
+              }
+
+              var reversed = new string(array);
+
+              return reversed;
+          }
+      }
+  }
+  ```
+  
