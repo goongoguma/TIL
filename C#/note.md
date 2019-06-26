@@ -1190,37 +1190,37 @@
   ```
 
 <h2 name="31">31. Strings 실습</h2>
-  ```c
-  // trim 메소드
-  var fullName = "Jae Hyun  ";
-  Console.WriteLine("'{0}'", fullName.Trim()); // 'Jae Hyun'
+    ```c
+    // trim 메소드
+    var fullName = "Jae Hyun  ";
+    Console.WriteLine("'{0}'", fullName.Trim()); // 'Jae Hyun'
+   
+    // 대문자
+    Console.WriteLine("'{0}'", fullName.Trim().ToUpper()); // 'JAE HYUN'
 
-  // 대문자
-  Console.WriteLine("'{0}'", fullName.Trim().ToUpper()); // 'JAE HYUN'
+    // 이름 나누기 1
+    var index = fullName.IndexOf(' ');
+    var firstName = fullName.Substring(0, index);
+    var lastName = fullName.Substring(index + 1);
+    Console.WriteLine(firstName); // Jae 
+    Console.WriteLine(lastName); // Hyun
 
-  // 이름 나누기 1
-  var index = fullName.IndexOf(' ');
-  var firstName = fullName.Substring(0, index);
-  var lastName = fullName.Substring(index + 1);
-  Console.WriteLine(firstName); // Jae 
-  Console.WriteLine(lastName); // Hyun
+    // 이름 나누기 2
+    var names = fullName.Split(' ');
+    Console.WriteLine(names[0] + names[1]);
 
-  // 이름 나누기 2
-  var names = fullName.Split(' ');
-  Console.WriteLine(names[0] + names[1]);
+    // replace 메소드
+    var replaceName = fullName.Replace("Jae", "An");
+    Console.WriteLine(replaceName); // 'An Hyun'
 
-  // replace 메소드
-  var replaceName = fullName.Replace("Jae", "An");
-  Console.WriteLine(replaceName); // 'An Hyun'
+    // 문자열에서 숫자열로 변환
+    var str = "25";
+    var age = Convert.ToByte(str);
+    Console.WriteLine(age); // 25
 
-  // 문자열에서 숫자열로 변환
-  var str = "25";
-  var age = Convert.ToByte(str);
-  Console.WriteLine(age); // 25
-
-  float price = 29.95f;
-  Console.WriteLine(price.ToString("C")); // $29.95
-  ```
+    float price = 29.95f;
+    Console.WriteLine(price.ToString("C")); // $29.95
+    ```
 
 <h2 name="32">32. Live Coding: Summarising Text</h2>
 
