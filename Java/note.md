@@ -1,4 +1,5 @@
 <h2 name="1">1. Creating Your first Java Program</h2>
+  
   ```java
   public class Hello {
 
@@ -11,6 +12,7 @@
   ```
 
 <h2 name="2">2. What are variables?</h2>
+  
   ```java
   public class Hello {
 
@@ -22,6 +24,7 @@
   ```
 
 <h2 name="3">3. Getting To Know Primitive Data Types - The Byte, Short, Int And Long</h2>
+  
   ```java
   package com.company;
 
@@ -107,14 +110,15 @@
 2. Calculate the number of Kilograms for the number above and store in a variable.
 3. Print out the result.
 Note: 1 pound is equalt to 0.45359237 kilograms.
-  ```c
+  ```java
   int pounds = 60;
   double poundsToKilo = pounds * 0.45359237d;
   System.out.println(poundsToKilo); // 27.2155422
   ```
 
 <h2 name="5">5. Getting To Know Primitive Data Types - Char And Boolean</h2>
-  ```c
+  
+  ```java
   public static void main(String[] args) {
       // char에는 딱 하나의 알파벳이나 유니코드 캐릭터만
     char myChar = 't';
@@ -133,6 +137,7 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
   ```
 
 <h2 name="6">6. Understanding Strings And Finishing Up Primitive Data Types</h2>
+  
   ```java
   public static void main(String[] args) {
     String myString = "This is a string";
@@ -158,7 +163,7 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
   - call both methods and display the results of the following
   - a score of 1500, 900, 400 and 50
 
-    ```c
+    ```java
     public static void main(String[] args) {
       int position = calculateHighScorePosition(1000);
       displayHighScorePosition("Jae", position);
@@ -192,18 +197,19 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
     ```
  
 <h2 name="8">8. Method Overloading</h2>
+  
   ```java
   public class Main {
 
       public static void main(String[] args) {
-          int newScore = calculateScore("Jay", 500);
-          System.out.println("New score is " + newScore)  ;
-          calculateScore(75);
+        int newScore = calculateScore("Jay", 500);
+        System.out.println("New score is " + newScore)  ;
+        calculateScore(75);
       }
 
       public static int calculateScore(String playerName, int score) {
-          System.out.println("Player " + playerName + " scored " + score + " points");
-          return score * 1000;
+        System.out.println("Player " + playerName + " scored " + score + " points");
+        return score * 1000;
       }
 
       public static int calculateScore(int score) {
@@ -231,7 +237,7 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
 - It is the ability to create multiple methods of the same name with different implementations. 
 - Calls to an overloaded method will run a specific implementation of that method. 
 - 화면에 내용을 출력할때 사용하는 println이 좋은예
-  ```c
+  ```java
   System.out.println('Hello');
   System.out.println(1);
   System.out.println(57,9);
@@ -335,6 +341,7 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
   ```
 
 <h2 name="12">12. Reading User Input</h2>
+
   ```java
   public static void main(String[] args) {
 
