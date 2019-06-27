@@ -191,3 +191,184 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
     // Marek managed to get into position and positioned 4 on the high score table.
     ```
  
+<h2 name="8">8. Method Overloading</h2>
+  ```java
+  public class Main {
+
+      public static void main(String[] args) {
+          int newScore = calculateScore("Jay", 500);
+          System.out.println("New score is " + newScore)  ;
+          calculateScore(75);
+      }
+
+      public static int calculateScore(String playerName, int score) {
+          System.out.println("Player " + playerName + " scored " + score + " points");
+          return score * 1000;
+      }
+
+      public static int calculateScore(int score) {
+          System.out.println("Unnamed player scored " + score + " points");
+          return score * 1000;
+      }
+
+      public static int calculateScore() {
+        System.out.println("No player name, no player score.");
+        return 0;
+      }
+  }
+
+  // Player Jay scored 500 points
+  // New score is 500000
+  // Unnamed player scored 75 points
+  // No player name, no player score.
+
+  ```
+- When we overloading our method, we need to create unique method signature(method name). 
+
+<h2 name="9">9. Method Overloading Recap</h2>
+
+- Method overloading is a feature that allows us to have more than one method with the same name, so long as we use different parameters.
+- It is the ability to create multiple methods of the same name with different implementations. 
+- Calls to an overloaded method will run a specific implementation of that method. 
+- 화면에 내용을 출력할때 사용하는 println이 좋은예
+  ```c
+  System.out.println('Hello');
+  System.out.println(1);
+  System.out.println(57,9);
+  ```
+- It improves code readability and re-uability
+- It is easier to remember one method name instead of remembering multiple names.
+- Achieves consistency in naming. One name for methods that are commonly used for example println.
+- Overloaded methods give programmers the flexibility to call a similar method with different types of data. 
+- Challenege
+  - Create a method called getDurationString with two parameters, first parameter minutes and 2nd parameter seconds.
+  - You should validate that the first parameter minutes is >=0.
+  - You should validate that the 2nd parameter seconds is >=0 and <=59.
+  - The method should return "Invalid value" in the method if either of the above are not true.
+  - If the parameters are valid then calculate how many hours minutes and secods equal the minutes and seconds passed to this method and return that value as string in format "XXh YYm ZZs" where XX represents a number of hours, YY the minutes and ZZ the seconds.
+  - Create a 2nd method of the same name but with only one parameter seconds.
+  - Validate that it is >=0, and return "Invalid value" if it is not true.
+  - If it is valid, then calculate how many minutes are in the seconds value and then call the other overloaded method passing the correct minutes and seconds calculated so that it can calculate correctly.
+  - Call both methods to print values to the console.
+  - Tips: 
+    - Use int or long for your number data types is probably a good idea.
+    - 1 minute = 60 seconds and 1 hour = 60 minutes or 3600 seconds.
+    - Methods should be static as we have used previously.
+  ```java
+  public static void main(String[] args) {
+        getDurationString(3945);
+  }
+
+  private static String getDurationString (int minutes, long seconds) {
+      if (minutes < 0 || (seconds < 0 && seconds > 59)) {
+          return "Invalid value";
+      }
+
+      int hour = minutes / 60;
+      int remainingMinutes = minutes % 60;
+      System.out.println("The total is "+hour+"h "+remainingMinutes+"m "+seconds+"s");
+      return "This is the time now";
+  }
+
+  private  static String getDurationString(long seconds) {
+      if (seconds < 0) {
+          return "Invalid value";
+      }
+
+      int minutes = (int)(seconds / 60);
+      long remainingSeconds = seconds % 60;
+      return getDurationString(minutes, remainingSeconds);
+  }
+  ```
+
+<h2 name="10">10. Switch Statement</h2>
+
+- Challenge
+  - Create a new switch statement using char instead of int
+  - create a new char variable
+  - create a switch statment testing for
+  - A, B, C, D
+  - display a message if any of these are found and then break
+  - Add a default which displays a message saying not found
+  ```java
+  public static void main(String[] args) {
+    char character = 'A';
+    switch(character) {
+      case 'B':
+          System.out.println("The value was B");
+          break;
+      case 'C':
+          System.out.println("The value was C");
+          break;
+      case 'D':
+          System.out.println("The value was D");
+          break;
+      case 'F':
+          System.out.println("The value was F");
+          break;
+      case 'A':
+          System.out.println("The value was A"); // The value was A
+          break;
+      default:
+          System.out.println("None of these are found");
+          break;
+      }
+  }
+  ```
+
+<h2 name="11">11. Parsing Values from a String</h2>
+
+  ```java
+  public static void main(String[] args) {
+    String numberAsString = "2018";
+      System.out.println("numberAsString = " + numberAsString);
+
+      // Integer는 primitive 타입의 wrapper 클래스
+      // Integer는 parseInt뿐만 아니라 다른 메소드들도 가지고 있다
+      // parseInt는 string에서 number로 전환
+      int number = Integer.parseInt(numberAsString);
+      System.out.println(number); // 2018
+
+      numberAsString += 1; // 20181
+      number += 1; // 2019
+  }
+  ```
+
+<h2 name="12">12. Reading User Input</h2>
+  ```java
+  public static void main(String[] args) {
+
+    // Scanner는 자바의 클래스로서 유저의 입력값을 받는다
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Enter your year of birth");
+
+    // 다음에 입력된 값이 integer인지 확인한다.
+    boolean hasNextInt = scanner.hasNextInt();
+
+    if(hasNextInt) {
+        // Scanner는 입력을 문자열로 받지만 nextInt 메소드를 이용해 문자열 -> 숫자 가능
+        int yearOfBirth = scanner.nextInt();
+
+        // handle next line character (enter key)
+        scanner.nextLine();
+
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
+        int age = 2019 - yearOfBirth;
+
+        // 입력한 생일의 유효성을 확인
+        if(age >= 0 && age <= 100) {
+            // name에는 유저가 입력한 값이 들어있다.
+            System.out.println("Your name is " + name + ", and you are " + age + " year old.");
+        } else {
+            System.out.println("Invalid year of birth");
+        }
+    } else {
+        System.out.println("Unable to parse year of birth.");
+    }
+
+    // Scanner를 쓰지않는다면 지우는게 좋다
+    scanner.close();
+  }
+  ```
