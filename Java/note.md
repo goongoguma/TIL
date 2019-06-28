@@ -394,3 +394,371 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
     scanner.close();
   }
   ```
+
+<h2 name="13">13. Reading User Input Challenge</h2>
+
+- Challenge
+  - Read 10 numbers from the console entered by the user and print the sum of those numbers.
+  - Create a Scanner 
+  - Use hasNextInt() method from the scanner to check if the user has entered an int value.
+  - if hasNextInt() returns false, print the message "Invalid Number". Continue reading until you have read 10 numbers.
+  - Use the nextInt() method to get the number and add it to the sum. 
+  - Before the user enters each number, print the message "Enter number #x:" where x represents the count, i.e. 1, 2, 3, 4 etc.
+  - For example, the first message printed to the user would be "Enter number #1:", the next "Enter number #2:", and so on.
+  - Hint:
+    - Use a while loop.
+    - Use a counter variable for counting valid numbers.
+    - Close the scanner after you don't need it anymore.
+    - Create a project with the name ReadingUserInputChallenge.
+  ```java
+  public static void main(String[] args) {
+    System.out.println("Enter number #1");
+    Scanner scanner = new Scanner(System.in);
+    int count = 1;
+    int accumulator = 0;
+    boolean hasNextInt = scanner.hasNextInt();
+
+    while(count <= 10) {
+      if (!hasNextInt) {
+          System.out.println("Invalid Input");
+          break;
+      } else {
+          int sequenceNumber = scanner.nextInt();
+          count++;
+          accumulator += sequenceNumber;
+          System.out.println("accumulated number is " + accumulator);
+          if (count < 11)
+          System.out.println("Enter number #" + count);
+      }
+    }
+    scanner.close();
+  }
+  ```
+
+<h2 name="14">14. Classes</h2>
+
+- 클래스는 객체를 생성하기 위한 청사진이나 템플릿이라고 할 수 있다.
+- private은 해당 클래스에서밖에 접근할 수 없으나 public인 메소드를 만들어 줌으로써 간접적으로 접근 가능
+  ```java
+  // Main.java
+
+  public class Main {
+    public static void main(String[] args) {
+        // Car 클래스를 이용해 객체 만들기
+        // initializing
+        // Car라는 템플릿을 이용하여 porsche라는 객체를 생성
+        // porsche와 holden는 여러 메소드들을 자바로부터 상속받는다
+        Car porsche = new Car();
+        Car holden = new Car();
+        porsche.setModel("Carrera");
+        System.out.println("Model is " + porsche.getModel());
+    }
+  }
+  ```
+  ```java
+  // Car.java
+
+  public class Car {
+      // 필드들
+      // private은 해당 클래스 안에서만 접근이 가능하다 public은 외부에서도 접근이 가능
+      private int doors;
+      private int wheels;
+      private String model;
+      private String engine;
+      private String color;
+
+      public void setModel(String model) {
+        String validModel = model.toLowerCase();
+        if(validModel.equals("carrera") || validModel.equals(("commodore"))) {
+            // 메소드를 이용해 model 업데이트 하기
+          this.model = model;
+        } else {
+          this.model = "unknown";
+        }
+      }
+      public String getModel() {
+        return this.model;
+      }
+  }
+  ```
+
+<h2 name="15">15. Classes Challenge</h2>
+
+- Challenge
+  - Create a new class for a bank account
+  - Create fields for the account number, balance, customer name, email and phone number.
+  - Create getters and setters for each field
+  - Create two additional methods
+  - To allow the customer to deposit funds (this should increment the balance field).
+  - To allow the customer to withdraw funds. This should deduct from the balance field,
+  - but not allow the withdrawal to complete if their are insufficient funds.
+  
+  - Your will want to create variaous code in the Main class (this one created by IntelliJ) to confirm your code is working.
+  - Add some System.out.println's in the two methods above as well.
+  ```java
+  // Main.java
+
+  public class Main {
+
+    public static void main(String[] args) {
+
+        BankAccount customer= new BankAccount();
+
+        customer.setAccountNumber("123-234-345345");
+        customer.setBalance(100000);
+        customer.setCustomerName("Jay");
+        customer.setEmail("sdkf@google.com");
+        customer.setPhoneNumber("010-1031-1234");
+
+        System.out.println(
+          "Customer's name " + customer.getCustomerName() + " " +
+          "Customer's phone number " + customer.getPhoneNumber() + " " +
+          "Customer's email " + customer.getEmail() + " " +
+          "Customer's account number " + customer.getAccountNumber() + " " +
+          "Customer's account balance is " + customer.getBalance()
+          );
+        customer.depositFunds(3000);
+        customer.withdrawFunds(4000);
+    }
+  }
+  ```
+  ```java
+  // BankAccount.java
+
+  public class BankAccount {
+
+    private String accountNumber;
+    private int balance;
+    private String customerName;
+    private String email;
+    private String phoneNumber;
+
+    // Additional
+    public void depositFunds(int input) {
+        this.balance += input;
+        System.out.println(input + " is just added in your account. Total is " + this.balance);
+    }
+
+    public void withdrawFunds(int output) {
+      if(this.balance < output) {
+          System.out.println("Not Sufficient Balance");
+      } else {
+          this.balance -= output;
+          System.out.println("You just withdraw " + output + " from your account. Total is " + this.balance);
+      }
+    }
+
+    // Setter
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    // Getter
+    public String getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public int getBalance() {
+        return this.balance;
+    }
+
+    public String getCustomerName() {
+        return this.customerName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+  }
+  ```
+
+<h2 name="16">16. Constructors</h2>
+
+- 생성자는 해당 클래스의 이름을 따라 만들어야 하며 프로그램을 실행시키면 제일 상단에서 작동한다.
+  ```java
+  // Main.java
+
+  BankAccount customer= new BankAccount("123-234-345345", 100000, "Jay", "sdkf@google.com", "010-1031-1234" );
+  BankAccount timsAccount = new BankAccount("Tim", "time@email.com", "12345");
+  System.out.println(timsAccount.getAccountNumber()); // 999999
+  ```
+  ```java
+  // BankAccount.java
+
+  // 생성자 만들기
+  public BankAccount() {
+      // this를 이용해서 default 생성자 생성가능
+      // new BankAccount의 인수가 아무것도 없을때 실행된다.
+      this("56789", 2500, "naruto", "qwe@gmail.com", "010-98-5462");
+      System.out.println("Empty constructor called");
+  }
+
+  public BankAccount(String accountNumber, int balance, String customerName, String email, String phoneNumber) {
+    this.accountNumber = accountNumber;
+    this.balance = balance;
+    this.customerName = customerName;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+  }
+
+  // for timsAccount
+  public BankAccount(String customerName, String email, String phoneNumber) {
+      this("999999", 40000, customerName, email, phoneNumber);
+    }
+  ```
+- 생성자가 여러개가 있지만 각 생성자마다 역할을 분담하게 하는게 좋다. 
+- Challenge
+  - Create a new class VipCustomer
+  - It should have 3 fields name, credit limit, and email address.
+  - 1st constructor empty should call the constructor with 3 parameters with default values
+  - 2nd constructor should pass on the 2 values it receives and add a default value for the 3rd
+  - 3rd constructor should save all fields.
+  - create getters only for this using code generation of intellij as setters won't be needed
+  - test and confirm it works.
+  ```java
+  // Main.java
+
+  public class Main {
+
+    public static void main(String[] args) {
+        VipCustomer jay = new VipCustomer("wogu@gmail.com");
+        VipCustomer tim = new VipCustomer();
+        System.out.println(
+          jay.getName() + " " + jay.getEmail() + " " + jay.getCreditLimit() + " " +
+          tim.getName() + " " + tim.getEmail() + " " + tim.getCreditLimit()
+        );
+    }
+  }
+  ```
+  ```java
+  // VipCustomer.java
+
+  public class VipCustomer {
+
+    private String name;
+    private long creditLimit;
+    private String email;
+
+    public VipCustomer(String name, long creditLimit, String email) {
+        this.name = name;
+        this.creditLimit = creditLimit;
+        this.email = email;
+    }
+
+    public VipCustomer(String email) {
+        this("Jay", 5000, email);
+    }
+
+    public VipCustomer() {
+        this("Tim", 7000,";lkj@naver.com");
+    }
+
+    public String getName() {
+        return "His name is " + this.name;
+    }
+
+    public long getCreditLimit() {
+        return this.creditLimit;
+    }
+
+    public String getEmail() {
+        return "His email is " + this.email;
+    }
+  }
+
+   // His name is Jay His email is wogu@gmail.com 5000 His name is Tim His email is ;lkj@naver.com 7000
+  ```
+
+<h2 name="17">17. Inheritance</h2>
+
+- Inheritance is about how it applies to objects.
+
+  ```java
+  // Animal.java
+
+  public class Animal {
+      private String name;
+      private int brain;
+      private  int body;
+      private  int size;
+      private int weight;
+
+      public Animal(String name, int brain, int body, int size, int weight) {
+        this.name = name;
+        this.brain = brain;
+        this.body = body;
+        this.size = size;
+        this.weight = weight;
+      }
+
+      public void eat() {
+
+      }
+
+      public void move() {
+
+      }
+
+      public String getName() {
+          return name;
+      }
+
+      public int getBrain() {
+          return brain;
+      }
+
+      public int getBody() {
+          return body;
+      }
+
+      public int getSize() {
+          return size;
+      }
+
+      public int getWeight() {
+          return weight;
+      }
+  }
+  ```
+  ```java
+  // Dog.java 
+
+  public class Dog extends Animal {
+
+    private int eyes;
+    private int legs;
+    private int tail;
+    private int teeth;
+    private  String coat;
+    public Dog(String name, int size, int weight, int eyes, int legs, int tail, int teeth, String coat) {
+        // super를 사용해서 부모 클래스로부터 특성들을 받아올 수 있다
+        // 또한 상속뿐만 아니라 Dog 클래스만의 특별한 특징들도 생성 및 사용 가능하다
+        super(name, brain: 1, body: 1, size, weight);
+        this.eyes = eyes;
+        this.legs = legs;
+        this.tail = tail;
+        this.teeth = teeth;
+        this.coat = coat;
+    }
+  }
+  ```
