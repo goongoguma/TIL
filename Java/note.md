@@ -499,7 +499,7 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
   - To allow the customer to withdraw funds. This should deduct from the balance field,
   - but not allow the withdrawal to complete if their are insufficient funds.
   
-  - Your will want to create variaous code in the Main class (this one created by IntelliJ) to confirm your code is working.
+  - You will want to create variaous code in the Main class (this one created by IntelliJ) to confirm your code is working.
   - Add some System.out.println's in the two methods above as well.
   ```java
   // Main.java
@@ -630,9 +630,9 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
   // for timsAccount
   public BankAccount(String customerName, String email, String phoneNumber) {
       this("999999", 40000, customerName, email, phoneNumber);
-    }
+  }
   ```
-- 생성자가 여러개가 있지만 각 생성자마다 역할을 분담하게 하는게 좋다. 
+- 같은 이름의 생성자가 여러개가 있지만 각 생성자마다 역할을 분담하게 하는게 좋다. 
 - Challenge
   - Create a new class VipCustomer
   - It should have 3 fields name, credit limit, and email address.
@@ -718,11 +718,11 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
       }
 
       public void eat() {
-
+        System.out.println("Animal.eat() called");
       }
 
-      public void move() {
-
+      public void move(int speed) {
+        System.out.println("Animal is moving at " + speed);
       }
 
       public String getName() {
@@ -751,20 +751,92 @@ Note: 1 pound is equalt to 0.45359237 kilograms.
 
   public class Dog extends Animal {
 
+    // 또한 상속뿐만 아니라 Dog 클래스만의 특별한 특징들도 생성 및 사용 가능하다
     private int eyes;
     private int legs;
     private int tail;
     private int teeth;
     private  String coat;
     public Dog(String name, int size, int weight, int eyes, int legs, int tail, int teeth, String coat) {
-        // super를 사용해서 부모 클래스로부터 특성들을 받아올 수 있다
-        // 또한 상속뿐만 아니라 Dog 클래스만의 특별한 특징들도 생성 및 사용 가능하다
+        
+        // 부모로부터 상속받은 특징들을 사용하기 위해서 super를 이용해 생성자를 생성
         super(name, brain: 1, body: 1, size, weight);
+        // Dog 클래스만의 특징들 초기화 
         this.eyes = eyes;
         this.legs = legs;
         this.tail = tail;
         this.teeth = teeth;
         this.coat = coat;
     }
+
+    private void chew() {
+        System.out.println("Dog chew() called");
+    }
+
+    // generate 키워드에서 override를 사용함으로써 부모클래스에서 상속된 함수를 자식클래스에서 부모클래스와는 다르게 사용가능하다
+    // @override
+     public void eat() {
+        System.out.println("Dog.eat() called");
+        chew();
+
+        // 부모 클래스의 eat() 메소드 호출
+        super.eat();
+    }
+
+    public void walk() {
+        System.out.println("Dog.walk() called");
+        move(50);
+    }
+
+    public void run() {
+        System.out.println("Dog.run() called");
+        move(100);
+    }
   }
   ```
+  ```java
+  public static void main(String[] args) {
+    Animal animal = new Animal("Animal",1,1,5,5);
+
+    Dog dog = new Dog("Yorki", 8, 20, 2,4, 1, 20,"long silky");
+
+    dog.eat();
+
+    dog.walk();
+
+    dog.run();
+  }
+
+  // Dog.eat() called
+  // Dog chew() called
+  // Animal.eat() called
+  // Dog.walk() called
+  // Animal is moving at 50
+  // Dog.run() called
+  // Animal is moving at 100
+  ```
+
+<h2 name="18">18. Reference vs Object vs Instance vs Class</h2>
+
+- A class is basically a blueprint for a house, using the blueprint(plans) we can build as many houses as we like based on those plans.
+- Each house you build (in other words instantiate using the new operator) is an object also known as an instance.
+- Each house you build has an address (a physical locaiton). In other words if you want to tell someone where you live, you give them your address (perhaps written on a piece of paper).
+This is known as a reference.
+- You can copy that reference as many times as you like but there is still just one house. In other words we are copying the paper that has address on it not the house itself.
+- We can pass references as parameters to constructors and methods.
+
+<h2 name="19">19. this vs super</h2>
+
+- The keyword super is used to access/call the parent class members (variables and methods).
+- The keyword this is used to call the current class members (variables and methods). This is required when we have a parameter with the same name as an instance variable(field).
+- Note: We can use both of them anywhere in a class except static areas(this static block or a static method). Any attempt to do so will lead to compile-time errors (more on static later in the course).
+- The keyword super is commonly used with method overriding, when we call a method with the same name from the parent class.
+- In Java we have the this() call and the super() call. Notice the braces it is known as a call since it looks like a regular method call.
+- Use this() to call a constructor from another overloaded constructor in the same class.
+- The call to this() can be used only in a constructor, and it must be the first statement in a constructor. It's used with constructor chaining, in other words when one constructor calls another constructor, and helps to reduce duplicated code. 
+- The only way to call a parent constructor is by calling super(). This calls the parent constructor. 
+- The Java Compiler puts a default call to super() if we do not add it, and it is always the no-args super which is inserted by compiler (constructor without arguments).
+- The call to super() must be the first statement in each constructor. 
+- Even Abstract classes have constructors, although you can never instantiate an abstract class using the new keyword. 
+- An abstract class is still a super class, so its constructors run when someone makes an instance of a concrete subclass. 
+- NOTE: A constructor can have a call to super() or this() but never both.
