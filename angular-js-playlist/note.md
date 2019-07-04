@@ -13,6 +13,16 @@
 - [12. ng-click](#12)
 - [13. ng-submit](#13)
 - [14. ng-src](#14)
+- [15. 앵귤러JS 라우터](#15)
+- [16. JSON 데이터와 $http](#16)
+- [17. 커스텀 directives](#17)
+- [18. Transclude와 Replace](#18)
+- [19. 앵귤러JS 애니메이션 1](#19)
+- [20. 앵귤러JS 애니메이션 2](#20)
+- [21. 앵귤러JS 폼 유효성 검사 1](#21)
+- [22. 앵귤러JS 폼 유효성 검사 2](#22)
+- [23. 앵귤러JS location](#23)
+- [24. URL 정상화](#24)
 
 <h2 name="1">1. Introduction to AngularJS</h2>
 
@@ -181,7 +191,7 @@
 
 <h2 name="9">9. Filters</h2>
 
-- AngularJS에서 필터는 |으로 구분하며 여러개의 |를 사용할 수 있다.
+- 앵귤러JS에서 필터는 |으로 구분하며 여러개의 |를 사용할 수 있다.
   ```js
   myNinjaApp.controller('NinjaController', function($scope) {
  
@@ -504,7 +514,7 @@
       </div>  
     </body>
   ```
-- AngularJS에서 src가 아닌 ng-src를 쓰는 이유는 앵귤러가 이미지를 주입하기 전에 브라우저가 이미지를 찾기 때문에 에러가 나기 때문
+- 앵귤러JS에서 src가 아닌 ng-src를 쓰는 이유는 앵귤러JS가 이미지를 주입하기 전에 브라우저가 이미지를 찾기 때문에 에러가 나기 때문
 
 <h2 name="15">15. Views and Routes</h2>
 
@@ -580,3 +590,529 @@
       });
   }]);
   ```
+
+<h2 name="16">16. JSON and $http</h2>
+
+- 리스트들을 로컬이 아닌 JSON 데이터로 만들어 http 요청으로 데이터 가져오기 
+- app.js에 있는 데이터를 JSON 형태로 만들기
+- data라는 폴더안에 ninjas.json 파일을 생성한 뒤 json으로 만든 데이터 넣어주기
+  ```json
+  // data/ninjas.json
+  [
+    {
+      "name": "yoshi",
+      "belt": "green",
+      "rate": 50,
+      "available": true,
+      "thumb": "content/img/yoshi.png"
+    },
+    {
+      "name": "crystal",
+      "belt": "yellow",
+      "rate": 30,
+      "available": true,
+      "thumb": "content/img/crystal.png" 
+    },
+    {
+      "name": "Ryu",
+      "belt": "orange",
+      "rate": 10,
+      "available": false,
+      "thumb": "content/img/ryu.png"
+    },
+    {
+      "name": "shaun",
+      "belt": "black",
+      "rate": 1000,
+      "available": true,
+      "thumb": "content/img/shaun.png"
+    }
+  ]
+  ```
+- $http를 이용해서 서비스에 필요한 api 가져오기 
+  ```js
+  // app/app.js
+  myNinjaApp.controller('NinjaController', ['$scope', '$http', function($scope, $http) {
+
+    $scope.removeNinja = function(ninja) {
+      var removedNinja = $scope.ninjas.indexOf(ninja);
+      $scope.ninjas.splice(removedNinja, 1)
+    };
+
+    $scope.addNinja = function(){
+      $scope.ninjas.push({
+        name: $scope.newninja.name,
+        belt: $scope.newninja.belt,
+        rate: parseInt($scope.newninja.rate),
+        available: true
+      });
+
+      $scope.newninja.name = "";
+      $scope.newninja.belt = "";
+      $scope.newninja.rate = "";
+    };
+
+    // 강의에서는 .success를 사용했으나 앵귤러JS 1.6버전부터 사라짐 대신 then을 사용
+    $http.get('data/ninjas.json').then(function(res) {
+      $scope.ninjas = res.data
+    })
+  }]);
+  ```
+
+<h2 name="17">17. Custom Directives</h2>
+
+- 커스텀 directives 만들어보기
+- http://127.0.0.1:5500/#!/home에 랜덤 이름 보여주기
+- 그렇게 하기 위해서는 /home 라우터에 NinjaController 컨트롤러 연결시켜주기
+  ```js
+  // app/app.js
+  myNinjaApp.config(['$routeProvider', function($routeProvider){
+    $routeProvider
+      // templateUrl은 /home 라우트에 대한 view 설정 
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'NinjaController'
+      })
+      .when('/directory', {
+        templateUrl: 'views/directory.html',
+        // directory.html의 컨트롤러를 지정했으므로 컨트롤러를 지정해주는 html의 ng-controller는 필요없다
+        controller: 'NinjaController'
+      })
+      // 라우트가 존재하지 않을경우 
+      .otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+  ```
+  ```html
+  // views/home.html
+  <div class="content">
+    <h1 style="text-align: center;">Homepage</h1>
+    <random-ninja ninjas="ninjas" title="'Random Ninja'"></random-ninja>
+  </div>
+  ```
+  ```js
+  // app/app.js
+  // randomNinja는 home.html의 태그 이름과 같게 만들기 (단, 케밥 -> camelCase로)
+  myNinjaApp.directive('randomNinja', [function(){
+    return {
+      // restrict 프로퍼티에서 directive가 어떻게 사용될지 설정하며
+      // A, E, C, M을 값으로 사용할 수 있다
+      // E는 Element, A는 Attribute 둘 다 사용하고 싶으면 EA
+      restrict: 'E',
+      // 해당 directive가 속해있는 controller scope객체에서 데이터를 여기 scope에 맵핑한다
+      scope: {
+        // random-ninja 태그안에서 같은 directive를 찾아서 데이터를 바인딩함 
+        ninjas: '=',
+        title: '='
+      },
+      // 해당 directive안의 템플릿이 정의된 파일경로 
+      templateUrl: 'views/random.html',
+      controller: function($scope){
+        // 무작위 숫자 생성
+        $scope.random = Math.floor(Math.random() * 4);
+      }
+    };
+  }]);
+  ```
+  ```html
+  // views/random.html
+  <div style="text-align: center">
+    <h4>{{title}}</h4>
+    <h3>{{ninjas[random].name}}</h3>
+  </div>
+  ```
+
+<h2 name="18">18. Transclude & Replace</h2>
+
+- home.html에서 생성한 메인 템플릿에서 random-ninja태그 사이에 또 다른 태그를 넣어도 화면에 출력되지 않는다.
+  ```html
+  <div class="content">
+    <h1 style="text-align: center;">Homepage</h1>
+    <random-ninja ninjas="ninjas" title="'Random Ninja'">
+      <p>Check out our random ninja</p>
+    </random-ninja>
+  </div>
+  ```
+- random-ninja 태그 사이에 넣은 태그를 화면에 그려주기 위해서 transclude 설정을 사용한다.  
+  ```js
+  yNinjaApp.directive('randomNinja', [function(){
+    return {
+      restrict: 'E',
+      scope: {
+        ninjas: '=',
+        title: '='
+      },
+      templateUrl: 'views/random.html',
+      transclude: true,
+      controller: function($scope){
+        $scope.random = Math.floor(Math.random() * 4);
+      }
+    };
+  }]);
+  ```
+- 하지만 앵귤러JS는 해당 템플릿을 어디서 보여줘야 할지 모르기 때문에 아직 화면에 나오지 않는다. 앵귤러JS에게 위치를 알려주기 위해서는 ng-transclude를 사용한다. 
+  ```html
+  <div style="text-align: center">
+    <h4>{{title}}</h4>
+    <div ng-transclude></div>
+    <h3>{{ninjas[random].name}}</h3>
+  </div>
+  ```
+- 만약 커스텀된 태그를 html 지정태그로 바꾸고싶다면 (예를들어 random-ninja 태그를 div 태그로) replace를 사용한다. 
+  ```js
+  myNinjaApp.directive('randomNinja', [function(){
+    return {
+      restrict: 'E',
+      scope: {
+        ninjas: '=',
+        title: '='
+      },
+      templateUrl: 'views/random.html',
+      transclude: true,
+      replace: true,
+      controller: function($scope){
+        $scope.random = Math.floor(Math.random() * 4);
+      }
+    };
+  }]);
+  ```
+- 개발자도구에서 Element 탭을보면 random-ninja태그가 div 태그로 바뀐것을 확인 가능
+
+<h2 name="19">19. Animations 1</h2>
+
+- 앵귤러JS additional module로 animate.min.js 받기
+  ```html
+  // index.html
+  <head>
+    <title>TheNetNinja Angular Playlist</title>
+    <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.8/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.8/angular-animate.min.js"></script>
+    <script src="app/app.js"></script>
+  </head>
+  ```
+- app.js에서 모듈에 ngAnimate를 추가
+  ```js
+  var myNinjaApp = angular.module('myNinjaApp', ['ngRoute', 'ngAnimate']);
+  ```
+- animation 종류는 https://docs.angularjs.org/api/ngAnimate 참조
+- 해당 코드를 CSS에 추가
+  ```css
+  /* The starting CSS styles for the enter animation */
+  .fade.ng-enter {
+    transition:0.5s linear all;
+    opacity:0;
+  }
+
+  /* The finishing CSS styles for the enter animation */
+  .fade.ng-enter.ng-enter-active {
+    opacity:1;
+  }
+  ```
+- index.html의 main 태그에 css를 맞춰준다.
+  ```css
+  /* The starting CSS styles for the enter animation */
+  main.ng-enter {
+    transition: 0.5s linear all;
+    opacity: 0;
+  }
+
+  /* The finishing CSS styles for the enter animation */
+  main.ng-enter.ng-enter-active {
+    opacity: 1;
+  }
+  ```
+- 페이지 변환뿐만 아니라 리스트를 추가하고 삭제하는데도 애니메이션을 사용할 수 있다.
+  ```css
+  #ninja-list li.ng-enter {
+  transition: 0.2s linear all;
+  opacity: 0;
+  transform: translateY(30px);
+  }
+
+  #ninja-list li.ng-enter.ng-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #ninja-list li.ng-leave {
+    transition: 0.2s linear all;
+    opacity: 1;
+    transform: translateX(0)
+  }
+
+  #ninja-list li.ng-leave.ng-leave-active {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  ```
+
+<h2 name="20">20. Animations 2</h2>
+
+- 전체 리스트 삭제할때 stagger 효과주기 
+  ```css
+  #ninja-list li.ng-leave.ng-leave-active {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  #ninja-list li.ng-leave-stagger{
+    transition-delay: .2s;
+    transition-duration: 0;
+  }
+  ```
+
+<h2 name="21">21. Form Validation 1</h2>
+
+- views 폴더에 content.html 파일 생성 및 작성
+  ```html
+  <div class="contact">
+    <form name="contactForm" novalidate>
+      <input type="text" placeholder="name" name="name" />
+      <input type="email" placeholder="Email" name="email" />
+      <textarea placeholder="Your Message" name="message"></textarea>
+      <input type="submit" value="Send" />
+    </form>
+  </div>
+  ```
+- 위쪽 코드에서 novalidate은 html이 아닌 앵귤러JS가 폼 유효성을 체크하게 만들어준다. 
+- routeProvider에 contact 라우터 추가
+  ```js
+  myNinjaApp.config(['$routeProvider', function($routeProvider){
+    $routeProvider
+      // templateUrl은 /home 라우트에 대한 view 설정 
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'NinjaController'
+      })
+      .when('/contact', {
+        templateUrl: 'views/contact.html'
+      })
+      .when('/directory', {
+        templateUrl: 'views/directory.html',
+        // directory.html의 컨트롤러를 지정했으므로 컨트롤러를 지정해주는 html의 ng-controller는 필요없다
+        controller: 'NinjaController'
+      })
+      // 라우트가 존재하지 않을경우 
+      .otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+  ```
+- 참고로 views안에 있는 파일의 이름과 이동하고 싶은 라우터의 이름이 같아야 페이지로 이동 
+- Form Classes
+  - ng-pristine : when form/input not used yet -> $pristine (corresponding properties)
+  - ng-dirty : when form/input has been used -> $dirty
+  - ng-untouched : when input has not been touched 
+  - ng-touched : when input has been touched -> $touched
+  - ng-valid : when a form field is valid -> $valid
+  - ng-invalid : when a form field is not valid -> $invalid
+- 앵귤러JS에 맞게 폼 양식을 고쳐준다.
+  ```html
+  // contact.html
+  <div class="content">
+    <form name="contactForm" novalidate>
+      <input type="text" placeholder="name" name="name" ng-model="contact.name" ng-required="true"/>
+      <input type="email" placeholder="Email" name="email" ng-model="contact.email" ng-required="true"/>
+      <textarea placeholder="Your Message" name="message" ng-model="contact.message" ng-required="true"></textarea>
+      <input type="submit" value="Send" />
+    </form>
+  </div>
+  ```
+- css를 이용해 폼이 invalid가 되었을 경우 border를 red로 만들어준다.
+  ```css
+  /* ng-touched가 없으면 기본 폼 border색이 red가 된다 */
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border: 2px solid red;
+  }
+  ```
+
+<h2 name="22">22. Form Validation 2</h2>
+
+- 앵귤러JS가 제공해주는 기능으로 폼 업그레이드 해주기 
+- Form Properties
+- ng-pristine -> $pristine 
+  - ng-dirty -> $dirty
+  - ng-touched -> $touched
+  - ng-valid -> $valid
+  - ng-invalid -> $invalid
+- 프로퍼티 체크해보기
+  ```html
+  // contact.html
+  <div class="content">
+    <form name="contactForm" novalidate>
+      <input type="text" placeholder="name" name="name" ng-model="contact.name" ng-required="true"/>
+      <span>
+        $pristine - {{contactForm.name.$pristine}}, // true
+        $dirty - {{contactForm.name.$dirty}}, // false
+        $untouched - {{contactForm.name.$untouched}}, //true
+        $touched - {{contactForm.name.$touched}}, // false
+        $invalid - {{contactForm.name.$invalid}}, //true
+        $valid - {{contactForm.name.$valid}} // false
+      </span>
+      <input type="email" placeholder="Email" name="email" ng-model="contact.email" ng-required="true"/>
+      <textarea placeholder="Your Message" name="message" ng-model="contact.message" ng-required="true"></textarea>
+      <input type="submit" value="Send" />
+    </form>
+  </div>
+  ```
+- 폼에 내용을 입력하거나 클릭했을 경우 프로퍼티들이 바뀐다. 
+- 이 프로퍼티들의 특성을 이용해서 입력폼과 버튼의 유효성 설정을 만들어준다.
+  ```html
+  <div class="content">
+    <form name="contactForm" novalidate>
+      <input type="text" placeholder="name" name="name" ng-model="contact.name" ng-required="true"/>
+      <div ng-show="contactForm.name.$touched && contactForm.name.$invalid">
+        <small style="color: red; display: block; text-align: center;">Enter a valid name</small>
+      </div>
+      <input type="email" placeholder="Email" name="email" ng-model="contact.email" ng-required="true"/>
+      <div ng-show="contactForm.email.$touched && contactForm.email.$invalid">
+        <small style="color: red; display: block; text-align: center;">Enter a valid email</small>
+      </div>
+      <textarea placeholder="Your Message" name="message" ng-model="contact.message" ng-required="true"></textarea>
+      <input type="submit" value="Send" ng-disabled="contactForm.$invalid" />
+    </form>
+  </div>
+  ```
+  ```css
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border: 2px solid red;
+  }
+
+  input[disabled="disabled"] {
+    opacity: .4;
+    cursor: not-allowed !important;
+  }
+  ```
+
+<h2 name="23">23. Location Service</h2>
+
+- Send 버튼 작동시키기 
+- contact-success.html 파일 만들어주기
+  ```html
+  <div class="content">
+    <h2>Thanks a bunch for getting in touch!</h2>
+  </div>
+  ```
+- form에 ng-submit directive 추가
+  ```html
+  <div class="content">
+    <form name="contactForm" ng-submit="sendMessage()" novalidate>
+      <input type="text" placeholder="name" name="name" ng-model="contact.name" ng-required="true"/>
+      <div ng-show="contactForm.name.$touched && contactForm.name.$invalid">
+        <small style="color: red; display: block; text-align: center;">Enter a valid name</small>
+      </div>
+      <input type="email" placeholder="Email" name="email" ng-model="contact.email" ng-required="true"/>
+      <div ng-show="contactForm.email.$touched && contactForm.email.$invalid">
+        <small style="color: red; display: block; text-align: center;">Enter a valid email</small>
+      </div>
+      <textarea placeholder="Your Message" name="message" ng-model="contact.message" ng-required="true"></textarea>
+      <input type="submit" value="Send" ng-disabled="contactForm.$invalid" />
+    </form>
+  </div>
+  ```
+- 하지만 현재 해당 view를 담당하는 컨트롤러가 없으며 sendMessage() 함수가 존재하지 않으므로 작동하지않는다. 
+- routeProvider에서 /contact에 컨트롤러 설정해주기
+  ```js
+  // app.js
+
+  myNinjaApp.config(['$routeProvider', function($routeProvider){
+
+    $routeProvider
+      // templateUrl은 /home 라우트에 대한 view 설정 
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'NinjaController'
+      })
+      .when('/contact', {
+        templateUrl: 'views/contact.html',
+        controller: 'ContactController'
+      })
+      .when('/directory', {
+        templateUrl: 'views/directory.html',
+        // directory.html의 컨트롤러를 지정했으므로 컨트롤러를 지정해주는 html의 ng-controller는 필요없다
+        controller: 'NinjaController'
+      })
+      // 라우트가 존재하지 않을경우 
+      .otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+
+    myNinjaApp.controller('ContactController', ['$scope', '$location', function($scope, $location){
+      $scope.sendMessage = function(){
+        // 메인페이지로 연결 
+        $location.path('contact.success');
+      };
+  }]);
+  ```
+- Submit 버튼을 누르면 페이지가 이동한다. 
+
+<h2 name="24">24. Pretty URL's</h2>
+
+- 현재 url 형식을(http://127.0.0.1:5500/#!/home) 바꿔보자(http://127.0.0.1:5500/home)
+- 먼저 app.js에서 locationProvider 설정해주기
+  ```js
+    myNinjaApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+
+    $locationProvider.html5Mode(true);
+
+    $routeProvider
+      // templateUrl은 /home 라우트에 대한 view 설정 
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'NinjaController'
+      })
+      .when('/contact', {
+        templateUrl: 'views/contact.html',
+        controller: 'ContactController'
+      })
+      .when('/contact-success', {
+        templateUrl: 'views/contact-success.html',
+        controller: 'ContactController'
+      })
+      .when('/directory', {
+        templateUrl: 'views/directory.html',
+        // directory.html의 컨트롤러를 지정했으므로 컨트롤러를 지정해주는 html의 ng-controller는 필요없다
+        controller: 'NinjaController'
+      })
+      // 라우트가 존재하지 않을경우 
+      .otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+  ```
+- index.html에서 base href 설정하기
+  ```html
+  <!DOCTYPE html>
+  <html lang="en" ng-app="myNinjaApp">
+    <head>
+      <base href="/" />
+      <title>TheNetNinja Angular Playlist</title>
+      <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+      <script src="https://code.angularjs.org/1.7.8/angular-route.min.js"></script>
+      <script src="https://code.angularjs.org/1.7.8/angular-animate.min.js"></script>
+      <script src="app/app.js"></script>
+    </head>
+    <body>
+      <header ng-include="'./header.html'"></header>
+      <main ng-view></main>
+    </body>
+  </html>
+  ```
+- header.html에서 #! 지워주기
+  ```html
+  <div id="menu-bar">
+    <h1>Ninja Directory</h1>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/directory">List Ninjas</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div>
+  ```
+- #!가 없는 주소가 정상적으로 보여지나 직접 주소를 입력하면 Cannot GET /home 에러가 뜬다. 왜냐하면 앵귤러JS는 직접 입력한 주소를 핸들링 하지 않기 때문 
+- 그런데 강의에서는 Wamp server를 이용하기 때문에 여기까지...

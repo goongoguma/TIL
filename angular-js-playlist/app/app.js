@@ -1,12 +1,23 @@
 // [] is for dependency injection
-var myNinjaApp = angular.module('myNinjaApp', ['ngRoute']);
+var myNinjaApp = angular.module('myNinjaApp', ['ngRoute', 'ngAnimate']);
 
-myNinjaApp.config(['$routeProvider', function($routeProvider){
+myNinjaApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+
+  $locationProvider.html5Mode(true);
 
   $routeProvider
     // templateUrl은 /home 라우트에 대한 view 설정 
     .when('/home', {
-      templateUrl: 'views/home.html'
+      templateUrl: 'views/home.html',
+      controller: 'NinjaController'
+    })
+    .when('/contact', {
+      templateUrl: 'views/contact.html',
+      controller: 'ContactController'
+    })
+    .when('/contact-success', {
+      templateUrl: 'views/contact-success.html',
+      controller: 'ContactController'
     })
     .when('/directory', {
       templateUrl: 'views/directory.html',
@@ -19,8 +30,24 @@ myNinjaApp.config(['$routeProvider', function($routeProvider){
     });
 }]);
 
+myNinjaApp.directive('randomNinja', [function(){
+  return {
+    restrict: 'E',
+    scope: {
+      ninjas: '=',
+      title: '='
+    },
+    templateUrl: 'views/random.html',
+    transclude: true,
+    replace: true,
+    controller: function($scope){
+      $scope.random = Math.floor(Math.random() * 4);
+    }
+  };
+}]);
+
 // 컨트롤러의 이름 뒤에 Controller라고 짓는거는 컨벤션 
-myNinjaApp.controller('NinjaController', function($scope) {
+myNinjaApp.controller('NinjaController', ['$scope', '$http', function($scope, $http) {
 
   $scope.removeNinja = function(ninja) {
     var removedNinja = $scope.ninjas.indexOf(ninja);
@@ -39,36 +66,19 @@ myNinjaApp.controller('NinjaController', function($scope) {
     $scope.newninja.belt = "";
     $scope.newninja.rate = "";
   };
- 
-  $scope.ninjas = [
-    {
-      name: "yoshi",
-      belt: "green",
-      rate: 50,
-      available: true,
-      thumb: "content/img/yoshi.png"
-    },
-    {
-      name: "crystal",
-      belt: "yellow",
-      rate: 30,
-      available: true,
-      thumb: "content/img/crystal.png" 
-    },
-    {
-      name: "Ryu",
-      belt: "orange",
-      rate: 10,
-      available: false,
-      thumb: "content/img/ryu.png"
-    },
-    {
-      name: "shaun",
-      belt: "black",
-      rate: 1000,
-      available: true,
-      thumb: "content/img/shaun.png"
-    }
-  ];
-});
 
+  $scope.removeAll = function() {
+    $scope.ninjas = [];
+  }
+
+  $http.get('data/ninjas.json').then(function(res) {
+    $scope.ninjas = res.data
+  })
+}]);
+
+myNinjaApp.controller('ContactController', ['$scope', '$location', function($scope, $location){
+  $scope.sendMessage = function(){
+    // contact-success 라우트에 연결 
+    $location.path('/contact.success');
+  };
+}]);
