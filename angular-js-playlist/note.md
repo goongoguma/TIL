@@ -14,7 +14,7 @@
 - [13. ng-submit](#13)
 - [14. ng-src](#14)
 
-<h2 name="1">Introduction to AngularJS</h2>
+<h2 name="1">1. Introduction to AngularJS</h2>
 
 - What is AngularJS?
   - MVC style JavaScript framework for creating single page apps.
@@ -31,7 +31,7 @@
   - Additional content brought into the web page without the need to refresh.
   - Use 'views'(the Vin MVC) to achieve this.
 
-<h2 name="2">MVC Architecture</h2>
+<h2 name="2">2. MVC Architecture</h2>
 
 - Model
   - Think of the model as data
@@ -53,7 +53,7 @@
   - The function communicates with the 'users' model and retrieves all the user data
   - The controller passes accessibility to this data to the view, which then displays it to the end user via expressions
 
-<h2 name="3">2 Way Data Binding</h2>
+<h2 name="3">3. 2 Way Data Binding</h2>
 
 - Example of 2 way data binding
   ```html
@@ -72,13 +72,13 @@
   ```
 - 유저가 input에 입력한 데이터(model)이 ng-model의 favMeat에 저장이 되고 favMeat은 {{}}을 통해 데이터를 유저에게 보여준다(view).
 
-<h2 name="4">Directives</h2>
+<h2 name="4">4. Directives</h2>
 
 - 방금전에 사용한 ng-app이나 ng-model을 directives라고 한다. 
 - https://docs.angularjs.org/api/ng/directive/ngClassOdd
 - 또한 유저가 directive를 직접 만들 수 있다.
 
-<h2 name="5">Expressions</h2>
+<h2 name="5">5. Expressions</h2>
 
 - {{}}을 표현식으로 사용할 수 있다.
 - ng-init은 어플리케이션이 로드될 때 초기화 시킴 
@@ -95,7 +95,7 @@
   </body>
   ```
 
-<h2 name="6">ng-repeat directive</h2>
+<h2 name="6">6. ng-repeat directive</h2>
 
 - ng-repeat은 리스트의 내용들을 화면에 보여줄때 사용된다.
   ```html
@@ -104,10 +104,10 @@
       <ul>
         <li ng-repeat="ninja in ninjas">{{ninja}}</li>
       </ul>
-    </body>
+  </body>
   ```
 
-<h2 name="7">Modules</h2>
+<h2 name="7">7. Modules</h2>
 
 - 모듈을 작성할 파일을 만들자
   ```js
@@ -130,7 +130,7 @@
   myNinjaApp.controller
   ```
   ```html
-  // html 파일은 ng-app="myNinjaApp"을 통해 컨트롤러가 제어한다 (참고로 myNinjaApp은 변수의 이름이 아님)
+  // html 파일은 ng-app="myNinjaApp"을 통해 컨트롤러가 제어한다 (참고로 myNinjaApp은 모듈의 첫번째 인수)
   <html lang="en" ng-app="myNinjaApp">
     <head>
       <title>TheNetNinja Angular Playlist</title>
@@ -147,7 +147,7 @@
   </html>
   ```
 
-<h2 name="8">Controllers</h2>
+<h2 name="8">8. Controllers</h2>
 
   ```js
   var myNinjaApp = angular.module('myNinjaApp', []);
@@ -179,7 +179,7 @@
   </html>
   ```
 
-<h2 name="9">Filters</h2>
+<h2 name="9">9. Filters</h2>
 
 - AngularJS에서 필터는 |으로 구분하며 여러개의 |를 사용할 수 있다.
   ```js
@@ -223,7 +223,7 @@
   ```
 - 문서에서 더 많은 필터를 확인 할 수 있다.
 
-<h2 name="10">ng-include</h2>
+<h2 name="10">10. ng-include</h2>
 
 - 헤더나 푸터처럼 고정되어있는 메뉴를 만들때 ng-include를 사용한다.
 
@@ -252,7 +252,7 @@
     </body>
   ```
 
-<h2 name="11">ng-show & ng-hide</h2>
+<h2 name="11">11. ng-show & ng-hide</h2>
 
 - 닌자 리스트중에서 available이 true인 닌자만 보여주고 싶다. 
 - ng-show를 이용해서 나타낼 수 있다. 
@@ -304,7 +304,7 @@
   ```
 - ng-hide로 반대인 경우를 보여줄 수 있다. 
 
-<h2 name="12">ng-click directive</h2>
+<h2 name="12">12. ng-click directive</h2>
 
 - ng-click을 이용해 버튼의 클릭 이벤트를 구현가능 
 - ng-click을 이용해서 order의 순서에 맞게 정리해주는 버튼을 만들어보자
@@ -365,7 +365,7 @@
   ```
 - x 버튼을 클릭하면 리스트에서 없어진다. 
 
-<h2 name="13">ng-submit directive</h2>
+<h2 name="13">13. ng-submit directive</h2>
 
 - 닌자를 추가해보자 
   ```js
@@ -443,7 +443,7 @@
   </body>
   ```
 
-<h2 name="14">ng-src</h2>
+<h2 name="14">14. ng-src</h2>
 
 - 각 리스트에 작은 썸네일 이미지를 추가해보자 
   ```js
@@ -505,3 +505,78 @@
     </body>
   ```
 - AngularJS에서 src가 아닌 ng-src를 쓰는 이유는 앵귤러가 이미지를 주입하기 전에 브라우저가 이미지를 찾기 때문에 에러가 나기 때문
+
+<h2 name="15">15. Views and Routes</h2>
+
+- 앵귤러JS에서 ng-view를 이용해 라우트 만들어주기 
+- index.html에서 기존의 리스트부분을 지우고 main 태그안에서 ng-view를 설정
+  ```html
+  <html lang="en" ng-app="myNinjaApp">
+    <head>
+      <title>TheNetNinja Angular Playlist</title>
+      <link href="content/css/styles.css" rel="stylesheet" type="text/css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+      <script src="https://code.angularjs.org/1.7.8/angular-route.min.js"></script>
+      <script src="app/app.js"></script>
+    </head>
+    <body>
+      <header ng-include="'./header.html'"></header>
+      <main ng-view></main>
+    </body>
+  </html>
+  ```
+- 새로운 폴더와 파일 만들어주기
+  ```html
+  // views/home.html
+
+  <h1>Homepage</h1>
+  ```
+  ```html
+  // views/directory.html
+
+  // directory.html에서는 index.html에서 잘라낸 부분 붙여넣기
+  <div class="content">
+    <button ng-click="order = 'name'">Order by Name</button>
+    <button ng-click="order = 'belt'">Order by Belt</button>
+    <input type="text" ng-model="search" placeholder="Search for a ninja"/>
+    <ul>
+      <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
+        <img ng-src="{{ninja.thumb}}" alt="thumbnail-image" style="margin: -12px 10px 0 0; float: left; width: 50px;" ng-show="ninja.thumb" />
+        <h3>{{ninja.name}} - {{ninja.rate | currency: '$'}}</h3>
+        <div class="remove" ng-click="removeNinja(ninja)">x</div>
+        <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
+      </li>
+    </ul>
+    <form ng-submit="addNinja()">
+      <input type="text" placeholder="name" ng-model="newninja.name" />
+      <input type="text" placeholder="belt" ng-model="newninja.belt" />
+      <input type="text" placeholder="rate" ng-model="newninja.rate" />
+      <input type="submit" value="Add new ninja" />
+    </form>
+  </div>  
+  ```
+- app.js에서 라우트 설정
+  ```js
+  // [] is for dependency injection
+  // ngRoute는 앵귤러JS browser additional module에서 다운받은 라우트
+  var myNinjaApp = angular.module('myNinjaApp', ['ngRoute']);
+
+  // myNinjaApp에서 라우트 설정
+  myNinjaApp.config(['$routeProvider', function($routeProvider){
+
+    $routeProvider
+      // templateUrl은 /home 라우트에 대한 view 설정 
+      .when('/home', {
+        templateUrl: 'views/home.html'
+      })
+      .when('/directory', {
+        templateUrl: 'views/directory.html',
+        // directory.html의 컨트롤러를 지정했으므로 ng-controller는 필요없다
+        controller: 'NinjaController'
+      })
+      // 라우트가 존재하지 않을경우 
+      .otherwise({
+        redirectTo: '/home'
+      });
+  }]);
+  ```
