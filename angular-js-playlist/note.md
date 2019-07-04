@@ -544,7 +544,7 @@
   ```html
   // views/directory.html
 
-  // directory.html에서는 index.html에서 잘라낸 부분 붙여넣기
+  // directory.html에서 index.html에서 잘라낸 부분 붙여넣기
   <div class="content">
     <button ng-click="order = 'name'">Order by Name</button>
     <button ng-click="order = 'belt'">Order by Belt</button>
@@ -581,7 +581,7 @@
       })
       .when('/directory', {
         templateUrl: 'views/directory.html',
-        // directory.html의 컨트롤러를 지정했으므로 ng-controller는 필요없다
+        // directory.html의 컨트롤러를 지정했으므로 해당 html파일에서 ng-controller는 필요없다
         controller: 'NinjaController'
       })
       // 라우트가 존재하지 않을경우 
@@ -652,7 +652,7 @@
       $scope.newninja.rate = "";
     };
 
-    // 강의에서는 .success를 사용했으나 앵귤러JS 1.6버전부터 사라짐 대신 then을 사용
+    // 강의에서는 .success를 사용했으나 앵귤러JS 1.6버전부터 then을 사용
     $http.get('data/ninjas.json').then(function(res) {
       $scope.ninjas = res.data
     })
@@ -662,7 +662,7 @@
 <h2 name="17">17. Custom Directives</h2>
 
 - 커스텀 directives 만들어보기
-- http://127.0.0.1:5500/#!/home에 랜덤 이름 보여주기
+- http://127.0.0.1:5500/#!/home 메인화면에 리스트에 있는 이름 무작위로 보여주기
 - 그렇게 하기 위해서는 /home 라우터에 NinjaController 컨트롤러 연결시켜주기
   ```js
   // app/app.js
@@ -824,7 +824,7 @@
     opacity: 1;
   }
   ```
-- 페이지 변환뿐만 아니라 리스트를 추가하고 삭제하는데도 애니메이션을 사용할 수 있다.
+- 페이지 변환뿐만 아니라 리스트를 추가하고 삭제할때 애니메이션 효과를 사용할 수 있다.
   ```css
   #ninja-list li.ng-enter {
   transition: 0.2s linear all;
@@ -866,7 +866,7 @@
 
 <h2 name="21">21. Form Validation 1</h2>
 
-- views 폴더에 content.html 파일 생성 및 작성
+- views 폴더에 contact.html 파일 생성 및 작성
   ```html
   <div class="contact">
     <form name="contactForm" novalidate>
@@ -877,7 +877,7 @@
     </form>
   </div>
   ```
-- 위쪽 코드에서 novalidate은 html이 아닌 앵귤러JS가 폼 유효성을 체크하게 만들어준다. 
+- 위쪽 코드에서 novalidate은 html대신 앵귤러JS가 폼 유효성을 체크하게 만들어준다. 
 - routeProvider에 contact 라우터 추가
   ```js
   myNinjaApp.config(['$routeProvider', function($routeProvider){
@@ -903,12 +903,12 @@
   ```
 - 참고로 views안에 있는 파일의 이름과 이동하고 싶은 라우터의 이름이 같아야 페이지로 이동 
 - Form Classes
-  - ng-pristine : when form/input not used yet -> $pristine (corresponding properties)
-  - ng-dirty : when form/input has been used -> $dirty
+  - ng-pristine : when form/input not used yet 
+  - ng-dirty : when form/input has been used 
   - ng-untouched : when input has not been touched 
-  - ng-touched : when input has been touched -> $touched
-  - ng-valid : when a form field is valid -> $valid
-  - ng-invalid : when a form field is not valid -> $invalid
+  - ng-touched : when input has been touched 
+  - ng-valid : when a form field is valid 
+  - ng-invalid : when a form field is not valid 
 - 앵귤러JS에 맞게 폼 양식을 고쳐준다.
   ```html
   // contact.html
@@ -921,7 +921,8 @@
     </form>
   </div>
   ```
-- css를 이용해 폼이 invalid가 되었을 경우 border를 red로 만들어준다.
+- 폼의 상태에 따라 form의 클래스들이 유동적으로 바뀐다.
+- 이것을 이용해 폼이 invalid가 되었을 경우 border를 red로 만들어준다.
   ```css
   /* ng-touched가 없으면 기본 폼 border색이 red가 된다 */
   input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
@@ -933,7 +934,7 @@
 
 - 앵귤러JS가 제공해주는 기능으로 폼 업그레이드 해주기 
 - Form Properties
-- ng-pristine -> $pristine 
+  - ng-pristine -> $pristine 
   - ng-dirty -> $dirty
   - ng-touched -> $touched
   - ng-valid -> $valid
@@ -1044,7 +1045,7 @@
     myNinjaApp.controller('ContactController', ['$scope', '$location', function($scope, $location){
       $scope.sendMessage = function(){
         // 메인페이지로 연결 
-        $location.path('contact.success');
+        $location.path('contact-success');
       };
   }]);
   ```
@@ -1052,7 +1053,7 @@
 
 <h2 name="24">24. Pretty URL's</h2>
 
-- 현재 url 형식을(http://127.0.0.1:5500/#!/home) 바꿔보자(http://127.0.0.1:5500/home)
+- 현재 url 형식을 http://127.0.0.1:5500/#!/home에서 http://127.0.0.1:5500/home로 바꿔보자
 - 먼저 app.js에서 locationProvider 설정해주기
   ```js
     myNinjaApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
