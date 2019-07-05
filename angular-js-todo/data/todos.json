@@ -1,0 +1,14 @@
+[
+  {
+    "task": "집청소하기",
+    "done": false
+  },
+  {
+    "task": "자전거타기",
+    "done": true
+  },
+  {
+    "task": "공부하기",
+    "done": false
+  }
+]

@@ -1,0 +1,16 @@
+<div class="content">
+  <button ng-click="order = 'task'">Order by Name</button>
+  <input type="text" ng-model="search" placeholder="Search your task" />
+  <form ng-submit="addTodo()">
+    <input type="text" placeholder="Enter your todo" ng-model="newTodo.task" ng-required="true"/>
+    <input type="submit" value="Add new todo" />
+  </form>
+    <a href="" ng-click="removeAll()">Remove all todos</a>
+    <ul class="todo-list">
+      <li ng-repeat="todo in todos | orderBy: order | filter: search">
+        <h4>{{todo.task}}</h4>
+        <input type="checkbox" ng-model="todo.done" >
+        <div class="remove" ng-click="removeTodo(todo)">X</div>
+      </li>
+    </ul>
+</div>
