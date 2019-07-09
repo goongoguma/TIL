@@ -1,3 +1,5 @@
+# AngularJS Tutorial by The Net Ninja
+
 ## Index
 - [1. 앵귤러JS에 대해](#1)
 - [2. MVS 구조](#2)
