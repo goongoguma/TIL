@@ -100,6 +100,7 @@
 <h2 name="7">7. Getting a shell inside containers: no need for ssh</h2>
 
 - 컨테이너 조작 커맨드들
+  - -it : https://stackoverflow.com/questions/48368411/what-is-docker-run-it-flag
   - `docker container run -it` : start new container interactively
   - `docker container exec -it` : run additional command in existing container
 - `docker container run -it` 뒤에 여러 옵션을 붙일 수 있다.
@@ -111,7 +112,7 @@
 - 정지된 컨테이너를 실행시킴으로써 bash를 다시 사용하기 위해서는 `docker container start -ai <container name>`입력하면 된다. 
 - 실행되고 있는 컨테이너 안의 shell을 보기위해서는 `docker container exec -it`를 사용할 수 있다.
 - 예를들어 mysql이라는 이름을 가진 컨테이너안에 있는 mysql에서 관리자 작업을 하고싶다면 `docker container exec -it mysql bash` 커맨드를 입력하면 된다 (커맨드 안에있는 mysql은 컨테이너의 이름).
-- exec 명령어는 현재 실행되고 있는 컨테이너에서 추가적인 작업만을 해주기 때문에 mysql deamon에 영향을 주지 않는다. 그렇기에 `exit`을 이용해 bash에서 나올수 있지만 run 커맨드와는 다르게 컨테이너의 실행이 중지되지 않는다. 
+- exec 명령어는 현재 실행되고 있는 컨테이너에서 추가적인 작업만을 해주기 때문에 deamon에 영향을 주지 않는다. 그렇기에 `exit`을 이용해 bash에서 나올수 있지만 run 커맨드와는 다르게 컨테이너의 실행이 중지되지 않는다. 
 
 <h2 name="8">8. Docker Networks: Concepts for private and public comms in containers</h2>
 
@@ -132,7 +133,7 @@
 - cmder에 `docker container run -p 80:80 --name webhost -d nginx`로 새로운 컨테이너를 생성. (Remember publishing ports is always in HOST:CONTAINER format)
 - `docker container port webhost`를 입력하면 host -> 컨테이너 ip 확인 가능 (하지만 내 컴퓨터의 ip주소와는 다르다)
 
-### Anywhere I do a docker container run <stuff> nginx , where nginx  is the image you should use, replace that with nginx:alpine , which still has ping command in it.
+### Anywhere I do a docker container run <stuff> nginx , where nginx is the image you should use, replace that with nginx:alpine , which still has ping command in it.
 
 <h2 name="9">9. Docker Networks: CLI management of virtual networks</h2>
 
@@ -161,5 +162,41 @@
   - All externally exposed ports closed by default 
   - You must manually expose via -p which is better default security
 
-  
+<h2 name="10">10. Docker Networks: DNS and how containers find each other</h2>
 
+- 컨테이너들과 가상 네트워크들이 서로 소통을 하기 위해서는 이름이 굉장히 중요한 역할을 한다.
+- forget IP's : Static IP's and using IP's for talking to containers is an anti-pattern. Do your best to avoid it because we cannot assume that everytime ip addresses are the same. 
+- The solution for this is DNS naming.
+- Docker DNS : Docker daemon has a built-in DNS server that containers use by default
+- DNS default names : Docker defaults the hostname to the container's name but you can also set aliases
+- `docker container exec -it my_nginx ping new_nginx` 커맨드는 my_nginx와 new_nginx의 소통을 가능하게 한다. 
+- Docker Networks: DNS
+  - Containers should not rely on IP's for inter communication
+  - DNS for friendly names is built-in if you use custom networks
+  - recommend to use custom networks 
+  - This gets way easier with Docker Componse in future section
+
+<h2 name="11">11. Assignment: CLI App Testing</h2>
+  
+- Use different Linux distro containers to check curl li tool version
+- Use two different terminal windows to start bash in both centos:7 and ubuntu:14.04, using -it
+- Learn the `docker container --rm` option so you can save cleanup
+- Ensure curl is installed and on latest version for that distro
+  - ubuntu: `apt-get update && apt-get install curl`
+  - centos: `yum update curl`
+- Check `curl --version`
+- `docker container run --rm` 커맨드는 bash에서 exit을 하게되면 자동적으로 삭제된다. 
+
+<h2 name="12">12. Assignment Requirements: DNS RR Test</h2>
+
+- DNS Round Robin
+  - https://www.facebook.com/dnssentry40/posts/242111185960335/
+- Ever since Docker Engine 1.11, we can have multiple containers on a created network respond to the same DNS address
+- Create a new virtual network (default bridge driver)
+- Create two containers from elasticsearch:2 image
+- Research and use `-network-alias search` when creating them to give them an additional DNS name to respond to
+- Run `alpine nslookup search` with --net to see the two containers list for the same DNS name
+- Run `centos curl -s search:9200` with --net multiple times until you see both "name" fields show
+- `docker container run -d --net dude --net-alias search elasticsearch:2` : dude 네트워크 안에서 가명을 가지고 있는 container 두개를 생성 
+- `docker container run --rm --net dude alpine nslookup search` : 이 커맨드는 nslookup을 search DNS 엔트리에서 실행한뒤 exit을 하면 삭제된다. 
+- `docker container run --rm --net dude centos curl -s search:9200` 실행
