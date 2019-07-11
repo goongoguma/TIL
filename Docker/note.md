@@ -11,6 +11,9 @@
 - [7. 컨테이너 안에서 bash 사용하기](#7)
 - [8. 도커 네트워크: 기본개념](#8)
 - [9. 도커 네트워크: 가상 네트워크](#9)
+- [10. 도커 네트워크: DNS](#10)
+- [11. 과제: CLI App Testing](#11)
+- [12. 과제: DNS RR Test](#12)
 
 
 <h2 name="1">1. Check Our Docker Install and Config</h2>
@@ -174,7 +177,7 @@
   - Containers should not rely on IP's for inter communication
   - DNS for friendly names is built-in if you use custom networks
   - recommend to use custom networks 
-  - This gets way easier with Docker Componse in future section
+  - This gets way easier with Docker Compose in future section
 
 <h2 name="11">11. Assignment: CLI App Testing</h2>
   
@@ -186,6 +189,8 @@
   - centos: `yum update curl`
 - Check `curl --version`
 - `docker container run --rm` 커맨드는 bash에서 exit을 하게되면 자동적으로 삭제된다. 
+- `docker container run --rm -it centos:7 bash`
+- `docker container run --rm -it ubuntu:14.04 bash`
 
 <h2 name="12">12. Assignment Requirements: DNS RR Test</h2>
 
@@ -197,6 +202,6 @@
 - Research and use `-network-alias search` when creating them to give them an additional DNS name to respond to
 - Run `alpine nslookup search` with --net to see the two containers list for the same DNS name
 - Run `centos curl -s search:9200` with --net multiple times until you see both "name" fields show
-- `docker container run -d --net dude --net-alias search elasticsearch:2` : dude 네트워크 안에서 가명을 가지고 있는 container 두개를 생성 
-- `docker container run --rm --net dude alpine nslookup search` : 이 커맨드는 nslookup을 search DNS 엔트리에서 실행한뒤 exit을 하면 삭제된다. 
+- `docker container run -d --net dude --net-alias search elasticsearch:2` : dude라는 네트워크 안에서 elasticsearch2 이미지를 가지고있는 컨테이너를 실행하고 give it the network alias search.
+- `docker container run --rm --net dude alpine nslookup search` : 이 커맨드는 nslookup을 search DNS 엔트리에서 실행한뒤 exit을 하면 삭제된다. 참고로 nslookup은 DNS look up이다.
 - `docker container run --rm --net dude centos curl -s search:9200` 실행

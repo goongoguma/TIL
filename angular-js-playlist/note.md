@@ -380,6 +380,31 @@
 <h2 name="13">13. ng-submit directive</h2>
 
 - 닌자를 추가해보자 
+  ```html
+  <body>
+    <header ng-include="'./header.html'"></header>
+    <div class="content">
+      <div ng-controller="NinjaController">
+        <button ng-click="order = 'name'">Order by Name</button>
+        <button ng-click="order = 'belt'">Order by Belt</button>
+        <input type="text" ng-model="search" placeholder="Search for a ninja"/>
+        <ul>
+          <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
+            <h3>{{ninja.name}} - {{ninja.rate | currency: '$'}}</h3>
+            <div class="remove" ng-click="removeNinja(ninja)">x</div>
+            <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
+          </li>
+        </ul>
+        <form ng-submit="addNinja()">
+          <input type="text" placeholder="name" ng-model="newninja.name" />
+          <input type="text" placeholder="belt" ng-model="newninja.belt" />
+          <input type="text" placeholder="rate" ng-model="newninja.rate" />
+          <input type="submit" value="Add new ninja" />
+        </form>
+      </div> 
+    </div>  
+  </body>
+  ```
   ```js
   myNinjaApp.controller('NinjaController', function($scope) {
 
@@ -429,35 +454,36 @@
     ];
   });
   ```
-  ```html
-  <body>
-    <header ng-include="'./header.html'"></header>
-    <div class="content">
-      <div ng-controller="NinjaController">
-        <button ng-click="order = 'name'">Order by Name</button>
-        <button ng-click="order = 'belt'">Order by Belt</button>
-        <input type="text" ng-model="search" placeholder="Search for a ninja"/>
-        <ul>
-          <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
-            <h3>{{ninja.name}} - {{ninja.rate | currency: '$'}}</h3>
-            <div class="remove" ng-click="removeNinja(ninja)">x</div>
-            <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
-          </li>
-        </ul>
-        <form ng-submit="addNinja()">
-          <input type="text" placeholder="name" ng-model="newninja.name" />
-          <input type="text" placeholder="belt" ng-model="newninja.belt" />
-          <input type="text" placeholder="rate" ng-model="newninja.rate" />
-          <input type="submit" value="Add new ninja" />
-        </form>
-      </div> 
-    </div>  
-  </body>
-  ```
 
 <h2 name="14">14. ng-src</h2>
 
 - 각 리스트에 작은 썸네일 이미지를 추가해보자 
+  ```html
+    <body>
+      <header ng-include="'./header.html'"></header>
+      <div class="content">
+        <div ng-controller="NinjaController">
+          <button ng-click="order = 'name'">Order by Name</button>
+          <button ng-click="order = 'belt'">Order by Belt</button>
+          <input type="text" ng-model="search" placeholder="Search for a ninja"/>
+          <ul>
+            <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
+              <img ng-src="{{ninja.thumb}}" alt="thumbnail-image" style="margin: -12px 10px 0 0; float: left; width: 50px;" ng-show="ninja.thumb" />
+              <h3>{{ninja.name}} - {{ninja.rate | currency: '$'}}</h3>
+              <div class="remove" ng-click="removeNinja(ninja)">x</div>
+              <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
+            </li>
+          </ul>
+          <form ng-submit="addNinja()">
+            <input type="text" placeholder="name" ng-model="newninja.name" />
+            <input type="text" placeholder="belt" ng-model="newninja.belt" />
+            <input type="text" placeholder="rate" ng-model="newninja.rate" />
+            <input type="submit" value="Add new ninja" />
+          </form>
+        </div> 
+      </div>  
+    </body>
+  ```
   ```js
   $scope.ninjas = [
     {
@@ -489,32 +515,6 @@
       thumb: "content/img/shaun.png"
     }
   ];
-  ```
-  ```html
-    <body>
-      <header ng-include="'./header.html'"></header>
-      <div class="content">
-        <div ng-controller="NinjaController">
-          <button ng-click="order = 'name'">Order by Name</button>
-          <button ng-click="order = 'belt'">Order by Belt</button>
-          <input type="text" ng-model="search" placeholder="Search for a ninja"/>
-          <ul>
-            <li ng-repeat="ninja in ninjas | orderBy: order | filter: search" ng-show="ninja.available">
-              <img ng-src="{{ninja.thumb}}" alt="thumbnail-image" style="margin: -12px 10px 0 0; float: left; width: 50px;" ng-show="ninja.thumb" />
-              <h3>{{ninja.name}} - {{ninja.rate | currency: '$'}}</h3>
-              <div class="remove" ng-click="removeNinja(ninja)">x</div>
-              <span class="belt" style="background: {{ninja.belt}}">{{ninja.belt}} belt</span>
-            </li>
-          </ul>
-          <form ng-submit="addNinja()">
-            <input type="text" placeholder="name" ng-model="newninja.name" />
-            <input type="text" placeholder="belt" ng-model="newninja.belt" />
-            <input type="text" placeholder="rate" ng-model="newninja.rate" />
-            <input type="submit" value="Add new ninja" />
-          </form>
-        </div> 
-      </div>  
-    </body>
   ```
 - 앵귤러JS에서 src가 아닌 ng-src를 쓰는 이유는 앵귤러JS가 이미지를 주입하기 전에 브라우저가 이미지를 찾기 때문에 에러가 나기 때문
 
@@ -666,31 +666,18 @@
 - 커스텀 directives 만들어보기
 - http://127.0.0.1:5500/#!/home 메인화면에 리스트에 있는 이름 무작위로 보여주기
 - 그렇게 하기 위해서는 /home 라우터에 NinjaController 컨트롤러 연결시켜주기
-  ```js
-  // app/app.js
-  myNinjaApp.config(['$routeProvider', function($routeProvider){
-    $routeProvider
-      // templateUrl은 /home 라우트에 대한 view 설정 
-      .when('/home', {
-        templateUrl: 'views/home.html',
-        controller: 'NinjaController'
-      })
-      .when('/directory', {
-        templateUrl: 'views/directory.html',
-        // directory.html의 컨트롤러를 지정했으므로 컨트롤러를 지정해주는 html의 ng-controller는 필요없다
-        controller: 'NinjaController'
-      })
-      // 라우트가 존재하지 않을경우 
-      .otherwise({
-        redirectTo: '/home'
-      });
-  }]);
-  ```
   ```html
   // views/home.html
   <div class="content">
     <h1 style="text-align: center;">Homepage</h1>
     <random-ninja ninjas="ninjas" title="'Random Ninja'"></random-ninja>
+  </div>
+  ```
+  ```html
+  // views/random.html
+  <div style="text-align: center">
+    <h4>{{title}}</h4>
+    <h3>{{ninjas[random].name}}</h3>
   </div>
   ```
   ```js
@@ -717,12 +704,25 @@
     };
   }]);
   ```
-  ```html
-  // views/random.html
-  <div style="text-align: center">
-    <h4>{{title}}</h4>
-    <h3>{{ninjas[random].name}}</h3>
-  </div>
+  ```js
+  // app/app.js
+  myNinjaApp.config(['$routeProvider', function($routeProvider){
+    $routeProvider
+      // templateUrl은 /home 라우트에 대한 view 설정 
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'NinjaController'
+      })
+      .when('/directory', {
+        templateUrl: 'views/directory.html',
+        // directory.html의 컨트롤러를 지정했으므로 컨트롤러를 지정해주는 html의 ng-controller는 필요없다
+        controller: 'NinjaController'
+      })
+      // 라우트가 존재하지 않을경우 
+      .otherwise({
+        redirectTo: '/home'
+      });
+  }]);
   ```
 
 <h2 name="18">18. Transclude & Replace</h2>
@@ -738,7 +738,7 @@
   ```
 - random-ninja 태그 사이에 넣은 태그를 화면에 그려주기 위해서 transclude 설정을 사용한다.  
   ```js
-  yNinjaApp.directive('randomNinja', [function(){
+  myNinjaApp.directive('randomNinja', [function(){
     return {
       restrict: 'E',
       scope: {
