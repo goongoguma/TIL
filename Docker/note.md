@@ -205,3 +205,56 @@
 - `docker container run -d --net dude --net-alias search elasticsearch:2` : dude라는 네트워크 안에서 elasticsearch2 이미지를 가지고있는 컨테이너를 실행하고 give it the network alias search.
 - `docker container run --rm --net dude alpine nslookup search` : 이 커맨드는 nslookup을 search DNS 엔트리에서 실행한뒤 exit을 하면 삭제된다. 참고로 nslookup은 DNS look up이다.
 - `docker container run --rm --net dude centos curl -s search:9200` 실행
+
+<h2 name="13">13. What's in an image (and what isn't)</h2>
+
+- App binaries and dependencies
+- Metadata about the image data and how to run the image
+- Official definition: "An image is an ordered collection of root filesystem changes and the corresponding execution parameters for use within a container runtime."
+- Not a complete OS. No kernel, kernel modules (e.g. drivers), it is just binary that my application needs because the host provides the kernel
+- Small as one file (your app binary) like a golang static binary
+- Big as a Ubuntu distro with apt, and Apache, PHP, and more installed is available but it will need multiple gigabytes
+
+<h2 name="14">14. The Mighty Hub: Using docker hub registry images</h2>
+
+- `docker image ls` : 이미지 리스트 확인
+- `docker pull <image name>` : 최신버전의 이미지 다운받기
+- `docker pull <image name>.version` : 해당 버전의 이미지 다운받기
+- Use different base images like debian or alpine (alpine is typically smaller than debian)
+
+<h2 name="15">15. Images and Their Layers: Discover the Image Cache</h2>
+
+- `docker image history <image>` : Show layers of changes made in image.
+- Every image starts with blank layer known as scratch.
+- And every set of changes that happens after that on the file system in the image is another layer.
+- 이미지들 마다 레이어가 다르다. 
+- Docker never store same image data more than once in file system which means we do not need to upload and download the same layer that we already have on the other side.
+- `docker image inspect <image>` : returns JSON metadata about the image. 
+- Image and Their Layers: Review
+  - Images are made up of file system changes and metadata
+  - Each layer is uniquely identified and only stored once on a host
+  - This saves storage space on host and transfer time on push/pull
+  - A container is just a single read/write layer on top of image
+  - `docker image history` and `inspect` commands can teach us
+- 도커 이미지 참조 : https://trylhc.tistory.com/entry/Docker-image
+
+<h2 name="16">16. Image Tagging and Push</h2>
+
+- This is about how to upload image tag and upload in docker hub.
+- `docker image tag` : assign one or more tags to an image
+- 이미지는 이름이 없는대신 ID를 가지고있다. 하지만 ID는 기억하기 쉽지 않으므로 이미지를 구분하기 위해 <user>/<repo>:<tag>가 존재한다. 
+- Official Repositories : They live at the "root namespace" of the registry, so they don't need account name in front of repo name.
+- 예를들어 `docker pull mysql/mysql-server`로 mysql을 받으면 REPOSITORY에 '팀이름 or id/repo이름'으로 표시된다. 
+- TAG is a pointer to a specific image commit and image id
+- "latest" tag : It's just the default tag, but image owners should assign it to the newest stable version.
+- `docker image tag <old tag> <new tag>` : It adds new tag to an existing image that I did not make
+- `docker image push` : Uploads changed layers to a image registry (default is Hub)
+- 새로 생성한 태그를 push 명령어로 도커허브에 업로드 시킬려고 했으나
+denied: requested access to the resource is denied 메세지가 나온다. 왜냐하면 로그인을 아직 하지 않았기 때문
+- `docker login` : Defaults to logging in Hub, but you can override by adding server url
+- `docker logout` : always logout from shared machines or servers when done, to protect your account
+
+
+
+
+
