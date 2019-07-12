@@ -268,8 +268,139 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
   - Logging into Docker Hub from docker cli
   - How to create private Docker Hub images
 
+<h2 name="17">17. Building Images: The Dockerfile Basics</h2>
 
+- Bret의 도커 깃 레포를 클론받아 dockerfile-sample-1에 들어가면 Dockerfile 하나가 있다. 
+- `vim Dockerfile`로 도커파일 살펴보기 
+  ```docker
+  # NOTE: this example is taken from the default Dockerfile for the official nginx Docker Hub Repo
+  # https://hub.docker.com/_/nginx/
+  # NOTE: This file is slightly different than the video, because nginx versions have been updated
+  #       to match the latest standards from docker hub... but it's doing the same thing as the video
+  #       describes
+  FROM debian:stretch-slim
+  # all images must have a FROM
+  # usually from a minimal Linux distribution like debian or (even better) alpine
+  # if you truly want to start with an empty container, use FROM scratch
 
+  ENV NGINX_VERSION 1.13.6-1~stretch
+  ENV NJS_VERSION   1.13.6.0.1.14-1~stretch
+  # optional environment variable that's used in later lines and set as envvar when container is running
 
+  RUN apt-get update \
+          && apt-get install --no-install-recommends --no-install-suggests -y gnupg1 \
+          && \
+          NGINX_GPGKEY=45252342F62; \
+          found=''; \
+          for server in \
+                  ha.pool.sks-keyservers.net \
+                  hkp://keyserver.ubuntu.com:80 \
+                  hkp://p80.pool.sks-keyservers.net:80 \
+                  pgp.mit.edu \
+          ; do \
+                  echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
+                  apt-key adv --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
+          done; \
+          test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
+          apt-get remove --purge -y gnupg1 && apt-get -y --purge autoremove && rm -rf /var/lib/apt/lists/* \
+          && echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" >> /etc/apt/sources.list \
+          && apt-get update \
+          && apt-get install --no-install-recommends --no-install-suggests -y \
+                                                  nginx=${NGINX_VERSION} \
+                                                  nginx-module-xslt=${NGINX_VERSION} \
+                                                  nginx-module-geoip=${NGINX_VERSION} \
+                                                  nginx-module-image-filter=${NGINX_VERSION} \
+                                                  nginx-module-njs=${NJS_VERSION} \
+                                                  gettext-base \
+          && rm -rf /var/lib/apt/lists/*
+  # optional commands to run at shell inside container at build time
+  # this one adds package repo for nginx from nginx.org and installs it
 
+  RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+          && ln -sf /dev/stderr /var/log/nginx/error.log
+  # forward request and error logs to docker log collector
+
+  EXPOSE 80 443
+  # expose these ports on the docker virtual network
+  ```
+- package manager : pm's like apt and yum are one of the reasons to build containers FROM Debian, Ubuntu, Fedora or CentOS
+- Environment Variables(ENV) : One reason they were chosen as preferred way to inject key/value is they work everywhere, on every OS and config
+- RUN에 있는 &&들은 하나의 layer을 가리킨다. 
+- https://subicura.com/2017/02/10/docker-guide-for-beginners-create-image-and-deploy.html
+
+<h2 name="18">18. Building Images: Running Docker Builds</h2>
+
+- `docker image build -t customnginx .` : customnginx 태그를 가진 도커 이미지파일을 로컬에 생성 
+- 커맨드를 입력하면 폴더 안에있는 Dockerfile을 기반으로 Dockerfile 안의 순서에 맞게 실행되고있다(FROM -> ENV -> RUN -> EXPOSE -> CMD).
+- 변화가 거의 없는 부분들은 파일의 상단에, 변화가 자주 있는 부분들은 파일 하단에 위치한다. 
+
+<h2 name="19">19. Building Images: Extending Official Images</h2>
+
+- dockerfile-sample-2에 Dockerfile과 index.html 파일이 있다.
+  ```docker
+  # this same shows how we can extend/change an existing official image from Docker Hub
+
+  FROM nginx:latest
+  # highly recommend you always pin versions for anything beyond dev/learn
+
+  WORKDIR /usr/share/nginx/html
+  # change working directory to root of nginx webhost
+  # using WORKDIR is preferred to using 'RUN cd /some/path'
+
+  COPY index.html index.html
+  # Overwritting the file in nginx directory for the custome homepage web server
+  # I don't have to specify EXPOSE or CMD because they're in my FROM
+  ```
+- 파일이 좀 더 복잡해지고 컨테이너를 왔다갔다 하면서 작업해야 할 경우 WORKDIR을 이용하는것이 좋다. 
+- 이 경우에는 기본 nginx 경로에서 html파일로 바꾸기
+- 도커 이미지를 chaining으로 만들면 하나의 이미지가 여러 이미지들에 의존적으로 만들 수 있다. 
+- `docker container run -p 80:80 --rm nginx`로 nginx 컨테이너를 만들고 `docker image build -t nginx-with_html .` 이미지를 만들면 폴더에 있는 Dockerfile이 index.html을 가져와 덮어쓰고 `docker container run -p 80:80 --rm nginx-with-html`로 nginx-with-html이미지를 이용해 컨테이너를 만들고 포트 80에 접속하면 index.html의 내용이 화면에 출력된다. 
+- `docker image tag nginx-with-html:latest goongamja/nginx-with-html:latest`로 태그이름 설정한 뒤 내 도커 레포에 push.
+
+<h2 name="20">20. Assignment: Build Your Own Dockerfile and Run Containers From It</h2>
+
+- Dockerfiles are part process workflow and part art
+- Take existing Node.js app and Dockerize it
+- Make Dockerfile. Build it. Test it. Push it. (rm it). Run it.
+- Expect this to be iterative. Rarely do I get it right the first time.
+- Details in dockerfile-assignment-1/Dockerfile
+- Use the Alpine version of the official 'node' 6.x image
+- Expected result is web site at http://localhost
+- Tag and push to your Docker Hub account (free)
+- Remove your image from local cache, run again from Hub
+
+<h2 name="21">21. Assignment Answers: Build Your Own Dockerfile and Run Containers From It</h2>
+
+  ```docker
+  # Dockerfile in dockerfile-assignment-1
+  # Instructions from the app developer
+  # - you should use the 'node' official image, with the alpine 6.x branch
+  FROM node:6-alpine
+  # - this app listens on port 3000, but the container should launch on port 80
+  #  so it will respond to http://localhost:80 on your computer
+  EXPOSE 3000
+  # - then it should use alpine package manager to install tini: 'apk add --update tini'
+  RUN apk add --update tini
+  # - then it should create directory /usr/src/app for app files with 'mkdir -p /usr/src/app'
+  RUN mkdir -p /usr/src/app
+  # - Node uses a "package manager", so it needs to copy in package.json file
+  WORKDIR /usr/src/app
+  COPY package.json package.json
+  # - then it needs to run 'npm install' to install dependencies from that file
+  # - to keep it clean and small, run 'npm cache clean' after above
+  RUN npm install && npm cache clean
+  # - then it needs to copy in all files from current directory
+  COPY . .
+  # - then it needs to start container with command '/sbin/tini -- node ./bin/www'
+  # CMD 관련은 문서에서 확인 가능
+  CMD [ "tini", "--", "node", "./bin/www"]
+  # - in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands
+  ```
+- 이미지 생성 : `docker build -t testnode .`
+- 컨테이너 생성 : `docker container run --rm -p 81:3000 testnode`
+- localhost:81에서 확인 가능
+- 이미지 태그 바꾸기 : `docker tag testnode goongamja/testing-node`
+- 도커레포에 올리기 : `docker push goongamja/testing-node`
+- 이미지 삭제 : `docker image rm goongamja/testing-node`
+- 레포에서 이미지 다운받기 : `docker container run --rm -p 81:3000 goongamja/testing-node`
 
