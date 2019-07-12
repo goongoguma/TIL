@@ -246,7 +246,7 @@
 
 - This is about how to upload image tag and upload in docker hub.
 - `docker image tag` : assign one or more tags to an image
-- 이미지는 이름이 없는대신 ID를 가지고있다. 하지만 ID는 기억하기 쉽지 않으므로 이미지를 구분하기 위해 <user>/<repo>:<tag>가 존재한다. 
+- 이미지는 이름이 없는대신 ID를 가지고있다. 하지만 ID는 기억하기 쉽지 않으므로 이미지를 구분하기 위해 `<user>/<repo>:<tag>`가 존재한다. 
 - Official Repositories : They live at the "root namespace" of the registry, so they don't need account name in front of repo name.
 - 예를들어 `docker pull mysql/mysql-server`로 mysql을 받으면 REPOSITORY에 '팀이름 or id/repo이름'으로 표시된다. 
 - TAG is a pointer to a specific image commit and image id
