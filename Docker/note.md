@@ -14,6 +14,10 @@
 - [10. 도커 네트워크: DNS](#10)
 - [11. 과제: CLI App Testing](#11)
 - [12. 과제: DNS RR Test](#12)
+- [13. 이미지의 구조](#13)
+- [14. 허브에서 이미지 받기](#14)
+- [15. 이미지 레이어](#15)
+- [16. 이미지 태그](#16)
 
 
 <h2 name="1">1. Check Our Docker Install and Config</h2>
@@ -246,13 +250,24 @@
 - Official Repositories : They live at the "root namespace" of the registry, so they don't need account name in front of repo name.
 - 예를들어 `docker pull mysql/mysql-server`로 mysql을 받으면 REPOSITORY에 '팀이름 or id/repo이름'으로 표시된다. 
 - TAG is a pointer to a specific image commit and image id
+- `docker image tag nginx:alpine goongamja/nginx:alpine` : nginx:alpine을 goongamja/nginx:alpine 이름으로 받으며 ':'은 태그의 기준이 된다. (`docker image tag --help`를 이용해 확인이 가능) 만일 태그를 지정하지 않는다면 기본으로 latest가 설정된다. 
+- 중요한 점은 TARGET_IMAGE의 이름을 도커 아이디의 이름과 같게 해야한다. 그렇지 않으면 push할때 타임아웃 에러가 나온다.
 - "latest" tag : It's just the default tag, but image owners should assign it to the newest stable version.
-- `docker image tag <old tag> <new tag>` : It adds new tag to an existing image that I did not make
 - `docker image push` : Uploads changed layers to a image registry (default is Hub)
 - 새로 생성한 태그를 push 명령어로 도커허브에 업로드 시킬려고 했으나
 denied: requested access to the resource is denied 메세지가 나온다. 왜냐하면 로그인을 아직 하지 않았기 때문
 - `docker login` : Defaults to logging in Hub, but you can override by adding server url
 - `docker logout` : always logout from shared machines or servers when done, to protect your account
+- 현재 가지고있는 이미지에 태그를 붙이고 push를 했을뿐 인위적으로 레포를 만들지 않았지만 새로운 레포가 생성되었다. 
+- `docker image tag goongamja/nginx:alpine goongamja/nginx:testing` 커맨드로 같은 이미지에 다른 태그를 붙여본뒤에 push해보면 도커허브 태그 메뉴에 새로운 태그가 생성된 것을 볼 수 있다. 
+- Review
+  - Properly tagging images
+  - Tagging images for upload to Docker Hub
+  - How tagging is related to image ID
+  - The Latest Tag
+  - Logging into Docker Hub from docker cli
+  - How to create private Docker Hub images
+
 
 
 
