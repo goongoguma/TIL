@@ -54,7 +54,7 @@
 - `docker container ls` 커맨드를 사용해 현재 실행되고 있는 컨테이너들의 정보를 확인할 수 있다. 
 - `docker ps`으로도 현재 실행중인 도커 리스트 확인. 만일, 중지된 컨테이너까지 모두 확인하려면 -a 옵션을 추가하면 된다. (docker container ls의 옛날 버전)
 - docker container run vs docker container start?
-  - `docker container run` always starts a new container
+  - `docker containe r run` always starts a new container
   - use `docker container start` to start an existing stopped one
 - 컨테이너의 이름을 지정해 주지 않는다면 랜덤으로 생성된다. 하지만 예를 들어 webhost nginx라는 이름의 컨테이너를 생성하고 싶다면 `docker container run --publish 80:80 --detach --name webhost nginx` 커맨드를 사용한다. 
 - `docker container logs` 커맨드는 특정 컨테이너의 로그를 보여준다. 예를들어 docker container logs webhost 커맨드는 webhost 이름을 가지고 있는 컨테이너의 로그를 보여준다.
@@ -353,13 +353,13 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
   # using WORKDIR is preferred to using 'RUN cd /some/path'
 
   COPY index.html index.html
-  # Overwritting the file in nginx directory for the custome homepage web server
+  # Overwritting the file in nginx directory for the custom homepage web server
   # I don't have to specify EXPOSE or CMD because they're in my FROM
   ```
 - 파일이 좀 더 복잡해지고 컨테이너를 왔다갔다 하면서 작업해야 할 경우 WORKDIR을 이용하는것이 좋다. 
 - 이 경우에는 기본 nginx 경로에서 html파일로 바꾸기
 - 도커 이미지를 chaining으로 만들면 하나의 이미지가 여러 이미지들에 의존적으로 만들 수 있다. 
-- `docker container run -p 80:80 --rm nginx`로 nginx 컨테이너를 만들고 `docker image build -t nginx-with_html .` 이미지를 만들면 폴더에 있는 Dockerfile이 index.html을 가져와 덮어쓰고 `docker container run -p 80:80 --rm nginx-with-html`로 nginx-with-html이미지를 이용해 컨테이너를 만들고 포트 80에 접속하면 index.html의 내용이 화면에 출력된다. 
+- `docker container run -p 80:80 --rm nginx`로 nginx 컨테이너를 만들고 `docker image build -t nginx-with-html .` 이미지를 만들면 폴더에 있는 Dockerfile이 index.html을 가져와 덮어쓰고 `docker container run -p 80:80 --rm nginx-with-html`로 nginx-with-html이미지를 이용해 컨테이너를 만들고 포트 80에 접속하면 index.html의 내용이 화면에 출력된다. 
 - `docker image tag nginx-with-html:latest goongamja/nginx-with-html:latest`로 태그이름 설정한 뒤 내 도커 레포에 push.
 
 <h2 name="20">20. Assignment: Build Your Own Dockerfile and Run Containers From It</h2>
@@ -409,3 +409,69 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
 - 이미지 삭제 : `docker image rm goongamja/testing-node`
 - 레포에서 이미지 다운받기 : `docker container run --rm -p 81:3000 goongamja/testing-node`
 
+<h2 name="22">22. Container Lifetime & Persistent Data</h2>
+
+- Container Lifetime & Persistent Data
+  - Containers are usually immutable and ephemeral
+  - "immutable infrastructure": only re-deploy containers, never change
+  - This is the ideal scenario, but what about databases, or unique data?
+  - Docker gives us features to ensure these "separation of concerns"
+  - This is known as "persistent data"
+  - Two ways: Volumes and Bind Mounts
+  - Volumes: make special location outside of container UFS(Union File System)
+  - Bind Mounts: link container path to host path
+
+<h2 name="23">23. Persistent Data: Data Volumes</h2>
+
+- 도커파일을 살펴보면 VOLUME을 확인 할 수 있다. 
+- VOLUME 경로안에 있는 파일들은 컨테이너 안에서 실행되며 삭제하지 않는이상 계속해서 존재한다. 즉, 컨테이너를 삭제한다고 해서 볼륨도 삭제되지 않는다. (볼륨의 중요성)
+- mysql 이미지를 만들고 `docker image inspect mysql` 명령어를 입력하면 JSON안에 Volumes를 확인 할 수 있다.
+- ` docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql`명령어로 컨테이너를 생성하고 inspect를 이용해 살펴보면 JSON 파일 Config안에있는 Volumes과 Mounts의 Type에 volume을 확인 할 수 있다.
+- Mounts is actually a running container getting its own unique location on the host to store that data and in that background, map or mounted to that location the container.
+- `docker volume ls`로 볼륨을 확인 할 수 있고 inspect로 세부내용 확인가능 
+- 하지만 컨테이너를 삭제해도 볼륨은 삭제되지 않으며 볼륨에 이름이 없기에 구분하기가 힘들다.
+- 이 때 named volumes을 사용한다. 
+- named volumes : friendly way to assign vols to containers
+- named volumes는 컨테이너를 생성할 때 -v를 이용하면된다. 
+- `docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql` 명령어를 실행하고 볼륨리스트를 확인하면 mysql-db 이름의 볼륨이 생성된 것을 확인 할 수 있다. 
+- `docker volume create` : required to do this before "docker run" to use custom drivers and labels
+
+<h2 name="24">24. Persistent Data: Bind Mounting</h2>
+
+- Maps a host file or directory to a container file or directory
+- Basically just two locations pointing to the same file(s)
+- Again, skips UFS, and host files overwrite any in container 
+- Can't use in Dockerfile, must be at container run
+- `... run -v //c/Users/bret/stuff:/path/container`(windows)
+- dockerfile-sample-2 폴더안에 Dockerfile과 index.html 두 파일이 있다. 
+- `docker container run -d --name nginx -p 80:80 -v ${pwd}:/usr/share/nginx/html nginx`으로 localhost:80 만들어주기 
+- pwd : print out working directory and replace command with following path.
+- 호스트에서 파일을 수정한 뒤에 컨테이너에서 확인할 수 있다. 
+
+<h2 name="25">25. Assignment: Database Upgrades with Named Volumes</h2>
+
+- Database upgrade with containers
+- Create a postgres container with named volume psql-data using version 9.6.1
+- Use Docker Hub to learn VOLUME path and versions needed to run it
+- Check logs, stop container
+- Create a new postgres container with same named volume using 9.6.2
+- Check logs to validate
+- (this only works with patch versions, most SQL DB's require manual commands to upgrade DB's to major/minor versions, i.e. it's a DB limitation not a container one)
+
+<h2 name="26">26. Assignment Answers: Database Upgrades with Named Volumes</h2>
+
+- `docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1`
+- `docker container logs psql`
+- `docker container stop psql`
+- `docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.2`
+
+<h2 name="27">27. Assignment: Edit Code Running In Containers With Bind Mounts</h2>
+
+- Use a Jekyll "Static Site Generator" to start a local web server
+- Don't have to be web developer: this is example of bridging the gap between local file access and apps running in containers
+- source code is in the course repo under bindmount-sample-1
+- We edit files with editor on our host using native tools
+- Container detects changes with host files and updates web server
+- Start container with `docker run -p 80:4000 -v ${pwd}:/site bretfisher/jekyll-serve`
+- Refresh our browser to see changes
+- Change the file in _posts\ and refresh browser to see changes
