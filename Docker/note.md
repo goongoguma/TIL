@@ -432,7 +432,7 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
 - 도커파일을 살펴보면 VOLUME을 확인 할 수 있다. 
 - VOLUME 경로안에 있는 파일들은 컨테이너 안에서 실행되며 삭제하지 않는이상 계속해서 존재한다. 즉, 컨테이너를 삭제한다고 해서 볼륨도 삭제되지 않는다. (볼륨의 중요성)
 - mysql 이미지를 만들고 `docker image inspect mysql` 명령어를 입력하면 JSON안에 Volumes를 확인 할 수 있다.
-- ` docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql`명령어로 컨테이너를 생성하고 inspect를 이용해 살펴보면 JSON 파일 Config안에있는 Volumes과 Mounts의 Type에 volume을 확인 할 수 있다.
+- `docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql`명령어로 컨테이너를 생성하고 inspect를 이용해 살펴보면 JSON 파일 Config안에있는 Volumes과 Mounts의 Type에 volume을 확인 할 수 있다.
 - Mounts is actually a running container getting its own unique location on the host to store that data and in that background, map or mounted to that location the container.
 - `docker volume ls`로 볼륨을 확인 할 수 있고 inspect로 세부내용 확인가능 
 - 하지만 컨테이너를 삭제해도 볼륨은 삭제되지 않으며 볼륨에 이름이 없기에 구분하기가 힘들다.
@@ -450,6 +450,7 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
 - Can't use in Dockerfile, must be at container run
 - `... run -v //c/Users/bret/stuff:/path/container`(windows)
 - dockerfile-sample-2 폴더안에 Dockerfile과 index.html 두 파일이 있다. 
+- 컨테이너 밖(호스트)에 있는 파일을 컨테이너 안에서 실행시켜보기
 - `docker container run -d --name nginx -p 80:80 -v ${pwd}:/usr/share/nginx/html nginx`으로 localhost:80 만들어주기 
 - pwd : print out working directory and replace command with following path.
 - 호스트에서 파일을 수정한 뒤에 컨테이너에서 확인할 수 있다. 
@@ -481,3 +482,134 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
 - Start container with `docker run -p 80:4000 -v ${pwd}:/site bretfisher/jekyll-serve`
 - Refresh our browser to see changes
 - Change the file in _posts\ and refresh browser to see changes
+
+<h2 name="28">28. Assignment Answers: Edit Code Running In Containers With Bind Mounts</h2>
+
+- `docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
+- localhost에 접속하면 jekyll 사이트를 볼 수 있음
+- _posts에 있는 내용 수정 
+- 내용을 수정하면 로그가 변화를 감지한다.
+- 새로고침을 하면 변화된 내용을 볼 수 있다. 
+
+<h2 name="29">29. Docker Compose and The docker-compose.yml File</h2>
+
+- Docker Compose
+  - Why: configure relationships between containers
+  - Why: save our docker container run settings in easy-to-read file
+  - Why: create one-liner developer environment startups
+  - Comprised of 2 separate but related things
+  - First part of docker compose is YAML-formatted file that describes our solution option for:
+    - containers
+    - networks
+    - volumes
+    - images
+    - environment variables 
+  - Second part of docker compose is a CLI tool `docker-compose` used for local dev/test automation with those YAML files to simplify docker commands. 
+- docker-compose.yml
+  - Compose YAML format has it's own versions: 1, 2, 2.1, 3, 3.1
+  - YAML file can be used with `docker-compose` command for local docker automation or..
+  - With docker directly in production with Swarm (as of v1.13)
+  - `docker-compose --help`
+  - `docker-compose.yml` is default filename, but any can be used with `docker-compose -f`.
+
+<h2 name="30">30. Trying Out Basic Compose Commands</h2>
+
+- CLI tool comes with Docker for Windows/Mac, but separate download for Linux
+- Not a production-grade tool but ideal for local development and test
+- Two most common commands are
+  - `docker-compose up` : setup volumes/networks and start all containers
+  - `docker-compose down` : stop all containers and remove cont/vol/net
+- If all your projects had a Dockerfile and docker-compose.yml then "new developer onboarding" would be:
+  - git clone github.com/some/software
+  - docker-compose up
+- compose-sample-2 경로에서 `docker-compose up` 명령어를 실행하면 아파치 서버가 실행되고 localhost에 접속해서 확인 할 수 있다. 
+- `docker-compose up -d` 명령어로 백그라운드에서 실행하게 할 수도 있다. 
+- `docker-compose down`으로 서버를 끄고 삭제할 수 있다. (-v를 뒤에 붙이면 볼륨도 삭제된다.)
+- `docker-compose down --rmi local` 로컬의 이미지도 같이 삭제한다.
+
+<h2 name="31">31. Assignment: Build a Compose File For a Multi-Container Service</h2>
+
+- In compose-assignment-2 directory
+- Build a basic compose file for a Drupal content management system website. Docker Hub is your friend
+- Use the drupal image along with the postgres image
+- Use ports to expose Drupal on 8080 so you can localhost:8080
+- Be sure to set POSTGRES_PASSWORD for postgres
+- Walk though Drupal setup via browser
+- Tip: Drupal assumes DB is localhost, but it's service name
+
+<h2 name="32">32. Assignment Answers: Build a Compose File For a Multi-Container Service</h2>
+
+  ```yml
+  # Drupal with PostgreSQL
+  #
+  # Access via "http://localhost:8080"
+  #   (or "http://$(docker-machine ip):8080" if using docker-machine)
+  #
+  # During initial Drupal setup,
+  # Database type: PostgreSQL
+  # Database name: postgres
+  # Database username: postgres
+  # Database password: example
+  # ADVANCED OPTIONS; Database host: postgres
+
+  version: '3.1'
+
+  services:
+
+    drupal:
+      image: drupal:8-apache
+      ports:
+        - 8080:80
+      volumes:
+        - /var/www/html/modules
+        - /var/www/html/profiles
+        - /var/www/html/themes
+        # this takes advantage of the feature in Docker that a new anonymous
+        # volume (which is what we're creating here) will be initialized with the
+        # existing content of the image at the same location
+        - /var/www/html/sites
+      restart: always
+
+    postgres:
+      image: postgres:10
+      environment:
+        POSTGRES_PASSWORD: mypassword
+      restart: always
+  ```
+
+<h2 name="33">33. Adding Image Building to Compose Files</h2>
+
+- Using Compose to Build
+  - Compose can also build your custom images
+  - Will build them with `docker-compose up` if not found in cache
+  - Also rebuild with `docker-compose build`
+  - Great for complex builds that have lots of vars or build args
+
+  ```yml
+  # docker-compose.yml
+
+  version: '2'
+  # based off compose-sample-2, only we build nginx.conf into image
+  # uses sample site from https://startbootstrap.com/template-overviews/agency/
+
+  services:
+    proxy:
+      build:
+        context: .
+        dockerfile: nginx.Dockerfile
+        # 먼저 image가 캐시에 있는지 확인한 후 없으면 build를 실행한 뒤 dockerfile를 찾아보고 이미지를 빌드한다
+      ports:
+        - '80:80'
+    web:
+      image: httpd
+      volumes:
+        - ./html:/usr/local/apache2/htdocs/
+  ```
+  ```docker
+  # nginx.Dockerfile
+
+  FROM nginx:1.13
+
+  COPY nginx.conf /etc/nginx/conf.d/default.conf
+  ```
+
