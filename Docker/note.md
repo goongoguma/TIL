@@ -27,8 +27,15 @@
 - [23. 영구적 데이터: 데이터 볼륨](#23)
 - [24. 영구적 데이터: Bind Mounting](#24)
 - [25. 과제: Database Upgrades with Named Volumes](#25)
-- [26. 과제 정답](#26)
-- [26. 과제:  Edit Code Running In Containers With Bind Mounts](#27)
+- [26. 과제 정답: Database Upgrades with Named Volumes](#26)
+- [27. 과제:  Edit Code Running In Containers With Bind Mounts](#27)
+- [28. 과제 정답: Edit Code Running In Containers With Bind Mounts](#28)
+- [29. 도커 컴포즈와 yml 파일](#29)
+- [30. 기본적인 컴포즈 명령어 실행해보기](#30)
+- [31. 과제: Build a Compose File For a Multi-Container Service](#31)
+- [32. 과제 정답: Build a Compose File For a Multi-Container Service](#32)
+- [33. 컴포즈 파일에 이미지 추가하기](#33)
+- [34. Swarm 모드](#34)
 
 
 <h2 name="1">1. Check Our Docker Install and Config</h2>
@@ -613,3 +620,25 @@ denied: requested access to the resource is denied 메세지가 나온다. 왜�
   COPY nginx.conf /etc/nginx/conf.d/default.conf
   ```
 
+<h2 name="34">34. Swarm Mode: Built-in Orchestration</h2>
+
+- Containers Everywhere = New Problems
+  - How do we automate container lifecycle?
+  - How can we easily scale out/in/up/down?
+  - How can we ensure our containers are re-created if they fail?
+  - How can we replace containers without downtime (blue/green deploy)?
+  - How can we control/track where containers get started?
+  - How can we create cross-node virtual networks?
+  - How can we ensure only trusted servers run our containers?
+  - How can we store secrets, keys, passwords and get them to the right container (and only that container)?
+- Swarm Mode: Built-In Orchestration
+  - Swarm Mode is a clustering solution built inside Docker
+  - Not related to Swarm "classic" for pre-1.12 versions
+  - Added in 1.12 (Summer 2016) via SwarmKit toolkit
+  - Enhanced in 1.13 (Jan 2017) via Stacks and Secrets
+  - Not enabled by default, new commands once enabled
+    - docker swarm
+    - docker node
+    - docker service
+    - docker stack
+    - docker secret
