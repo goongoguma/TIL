@@ -1,3 +1,5 @@
+https://edgeguides.rubyonrails.org/getting_started.html
+
 - $rails generate controller Welcome index 커맨드를 사용하면 Welcome 컨트롤러와 index 액션을 생성
 - Welcome 컨트롤러의 파일은 app/controllers/welcome_controller.rb에서 확인할 수 있음
 - 해당 컨트롤러의 view 파일은 app/views/welcome/index.html.erb에서 확인가능
@@ -10,7 +12,7 @@
     root 'welcome#index'
   end
   ```
-- root 'welcome#index'는 레일즈에게 어플리케이션의 루트에(즉, 그냥 localhost) Welcome 컨트롤러의 index 액션을 묶어놓으라고 설정한것이고 get 'welcome/index'는 localhost:3000/welcome/index의 요청을 레일즈에 묶어놓으라고 하는것(get 'welcome/index'는 컨트롤러가 만들때 자동으로 생성됨)
+- root 'welcome#index'는 레일즈에게 어플리케이션의 루트(즉, 그냥 localhost)에 Welcome 컨트롤러의 index 액션을 묶어놓으라고 설정한것이고 get 'welcome/index'는 localhost:3000/welcome/index의 요청을 레일즈에 묶어놓으라고 하는것(get 'welcome/index'는 컨트롤러가 만들때 자동으로 생성됨)
 - 지금까지 컨트롤러와 컨트롤러의 액션 그리고 뷰를 생성해봤다.
 - 새로운 리소스를 생성해보고(리소스란 비슷한 객체의 집합이라는 용어) CRUD 기능을 만들어보자
 - 레일즈에서는 REST를 위해 resources라는 메소드를 제공해준다.
@@ -48,7 +50,7 @@
   ```
 - 다시 localhost:3000/articles/new에 들어가면 다른 에러가 보일것.
 - ArticlesController#new is missing a template for request formats: text/html
-- 레일즈는 new 메소드와 연관된 화면에 정보를 보여주는 뷰를 못찾아서 발생함.
+- 레일즈가 new 메소드와 연관된 화면에 정보를 보여주는 뷰를 못찾아서 발생함.
 - 레일즈는 articles안에 있는 new 템플릿을 찾고 만일 new 템플릿이 articles안에 없다면 application의 new 템플릿을 찾는다. 왜냐하면 ArticlesController는 ApplicationController를 상속받기 때문
 - articles의 new 메소드와 연관된 파일인 new.html.erb를 app/views/articles안에 만들어야한다.
 - 여기서 이름이 중요한데 첫번째는 해당 템플릿의 포맷이고 두번째는 템플릿을 화면에 렌더링 하기위한 핸들러이다. 
@@ -116,7 +118,7 @@
     render plain: params[:article].inspect
   end
   ```
-- 여기서 render 메소드는 :plain를 키로 params[:article].inspect를 값으로 가지고있는 간단한 해시 형태를 하고있다.
+- 여기서 render 메소드는 :plain을 키로 params[:article].inspect를 값으로 가지고있는 간단한 해시 형태를 하고있다.
 - params 메소드는 폼에 작성된 내용을 받고있는 매개변수의 형태를 가지고있는 객체이다. 
 - Ensure you have a firm grasp of the params method, as you'll use it fairly regularly. Let's consider an example URL: http://www.example.com/?username=dhh&email=dhh@email.com. In this URL, params[:username] would equal "dhh" and params[:email] would equal "dhh@email.com".
 - 폼을 다시한번 submit하게되면 아래와 같은 메세지가 나온다. 
@@ -134,4 +136,67 @@
 - 이 커맨드를 실행함으로써 레일즈는 Aricle 모델과 문자열 타입을 가지고있는 title 속성과 text 속성을 생성했다.
 - 또한 다양한 파일들을 생성했는데 지금은 app/models/article.rb 파일과 db/migarte/20191022104958_create_articles.rb 파일에 집중하자.
 - 두번째 파일은 db구조를 생성하는데 필요한 파일이다. 
-- 
+- 알다시피 rails generate model 커맨드는 db migration을 db/migrate 디렉토리에 생성했다.
+- Migrations는 루비 클래스로서 db테이블 생성과 수정을 간단하게 만들어준다. 
+- 레일즈는 rake 커맨드를 사용해서 migrations을 실행 할 수도 있으며 db가 적용된 이후에도 migration을 되돌릴 수 있다.
+- Migration의 만들어진 시간에 따라 이름이 붙여짐
+- db/migrate/YYYYMMDDHHMMSS_create_articles.rb 파일을 살펴보면 아래처럼 생김
+  ```js
+  class CreateArticles < ActiveRecord::Migration[6.0]
+    def change
+      create_table :articles do |t|
+        t.string :title
+        t.text :text
+
+        t.timestamps
+      end
+    end
+  end
+  ```
+- 위의 migration은 change라는 메소드를 생성했고 이 migration이 호출될때 작동할것.
+- 이 파일의 정의된 액션들 또한 되돌리는것이 가능하다.
+- 이 migration 파일을 사용하게되면 articles 테이블이 생성되고 articles string column과 text column이 존재한다.
+- 또한 두개의 timestamp 필드를 생성함으로써 레일즈가 article의 생성과 업데이트 시간을 추적할 수 있다.
+- 여기서 $ rails db:migrate 커맨드를 사용해서 migration을 실행시킬 수 있다.
+- 커맨드를 실행하면 Articles table이 만들어진다.
+  ```js
+  == 20191022104958 CreateArticles: migrating ===================================
+  -- create_table(:articles)
+    -> 0.0019s
+  == 20191022104958 CreateArticles: migrated (0.0020s) ==========================
+  ```
+- Because you're working in the development environment by default, this command will apply to the database defined in the development section of your config/database.yml file. If you would like to execute migrations in another environment, for instance in production, you must explicitly pass it when invoking the command: rails db:migrate RAILS_ENV=production.
+- 다시 ArticlesController로 돌아와서, 새로운 Article 모델이 db에 데이터를 저장하게 만들기 위해 create 액션을 바꿔야한다.
+- articles_controller.rb 파일을 열고 create액션을 아래와 같이 바꿔라.
+  ```js
+  def create
+    @article = Article.new(params[:article])
+  
+    @article.save
+    redirect_to @article
+  end
+  ```
+- Here's what's going on: every Rails model can be initialized with its respective attributes, which are automatically mapped to the respective database columns. In the first line we do just that (remember that params[:article] contains the attributes we're interested in). Then, @article.save is responsible for saving the model in the database. Finally, we redirect the user to the show action, which we'll define later.
+- You might be wondering why the A in Article.new is capitalized above, whereas most other references to articles in this guide have used lowercase. In this context, we are referring to the class named Article that is defined in app/models/article.rb. Class names in Ruby must begin with a capital letter.
+- 이제 localhost:3000/articles/new에 접속해보면 에러가 뜰것.
+- ActiveModel::ForbiddenAttributesError in ArticlesController#create
+- 레일즈는 어플리케이션을 위해 안전장치를 몇개 만들어놓았는데 그것들중 하나.
+- 이것은 strong.parameters라고 불리우며 이것은 레일즈에게 해당 컨트롤러의 액션에게 필요한 매개변수를 아래와 같이 알려줘야 한다.
+  ```js
+  @article = Article.new(params.require(:article).permit(:title, :text))
+  ```
+- 이러한 형식은 같은 컨트롤러 안에서 다시 재활용 할 수 있다. (create, update 할 때)
+- 대랑의 assignment 이슈가 발생할경우 private 메소드를 사용해서 컨텍스트 바깥에서 호출되지 않게 할 수 있다.
+  ```js
+  def create
+    @article = Article.new(article_params)
+  
+    @article.save
+    redirect_to @article
+  end
+  
+  private
+    def article_params
+      params.require(:article).permit(:title, :text)
+    end
+  ```
