@@ -133,7 +133,7 @@ https://edgeguides.rubyonrails.org/getting_started.html
 - 레일즈는 모델을 생성하기 위한 생성자를 제공한다.
 - 모델을 생성하기 위해 커맨드를 실행
 - $ rails generate model Article title:string text:text
-- 이 커맨드를 실행함으로써 레일즈는 Aricle 모델과 문자열 타입을 가지고있는 title 속성과 text 속성을 생성했다.
+- 이 커맨드를 실행함으로써 레일즈는 Article 모델과 문자열 타입을 가지고있는 title 속성과 text 속성을 생성했다.
 - 또한 다양한 파일들을 생성했는데 지금은 app/models/article.rb 파일과 db/migarte/20191022104958_create_articles.rb 파일에 집중하자.
 - 두번째 파일은 db구조를 생성하는데 필요한 파일이다. 
 - 알다시피 rails generate model 커맨드는 db migration을 db/migrate 디렉토리에 생성했다.
@@ -200,3 +200,106 @@ https://edgeguides.rubyonrails.org/getting_started.html
       params.require(:article).permit(:title, :text)
     end
   ```
+
+
+
+- 폼을 다시 한번 submit하게되면 'show' 액션을 찾을 수 없다고 에러가 뜬다. 
+- rails routes에서 보았듯이 show는 다음과 같이 쓰일 수 있다.
+  ```js
+  article GET    /articles/:id(.:format)      articles#show
+  ```
+- :id는 레일즈에게 이 라우트는 :id 매개변수를 받아야하며 우리의 어플리케이션 안에서 article의 id가 될 것.
+- 전에도 했듯이 articles_controller.rb에 show 액션을 추가해보자
+  ```js
+  def show
+    @article = Article.find(params[:id])
+  end
+  ```
+- 알아두어야 할 점은 우리가 찾고싶은 article을 찾기 위해 필요한 :id값을 구하기 위해 Article.find에 params[:id]를 전달해주고 있다. 
+- 또한 @을 사용해서 article object의 참조를 가지고있다.
+- 왜냐하면 레일즈는 모든 인스턴스 변수를 뷰에 패스하기 때문이다. 
+- 이제 새로운 show.html.erb파일을 만들고 해당 컨텐츠를 붙여넣기 해보자
+  ```js
+  <p>
+    <strong>Title:</strong>
+    <%= @article.title %>
+  </p>
+  
+  <p>
+    <strong>Text:</strong>
+    <%= @article.text %>
+  </p>
+  ```
+- 이제 new article을 생성했고 localhost:3000/articles/new에 접속해서 테스트해보면 썼던 내용들이 화면에 출력되는것을 확인할 수 있다.
+
+
+
+- 이제 index 액션을 articles_controller.rb파일에 만들어보자
+- 기본적으로 액션을 새로 만들면 기존액션 위(맨 위)에다가 써준다. 
+  ```js
+  class ArticlesController < ApplicationController
+    def index
+      @articles = Article.all
+    end
+  
+    def show
+      @article = Article.find(params[:id])
+    end
+  
+    def new
+    end
+  ```
+- 그리고 마지막으로 index.html.erb를 생성해 articles의 뷰를 만들어주자
+  ```html
+  <h1>Listing articles</h1>
+ 
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Text</th>
+      <th></th>
+    </tr>
+  
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.text %></td>
+        <td><%= link_to 'Show', article_path(article) %></td>
+      </tr>
+    <% end %>
+  </table>
+  ```
+- 이제 localhost:3000/articles에 가보면 썼던 articles의 리스트를 확인할 수 있을것
+
+
+
+- 이제 article들을 create하고 show하고 리스트를 볼 수 있다. 이제는 링크를 추가해보자
+- welcome/index.html.erb를 열어서 다음과 같이 수정해라
+  ```html
+  <h1>Hello, Rails!</h1>
+  <%= link_to 'My Blog', controller: 'articles' %>
+  ```
+- 이 링크는 article을 create하는 페이지로 이동시켜줄것
+- articles/new.html.erb에 다음과 같은 양식을 복붙해라(index 액션으로 가기 위한 링크)
+  ```js
+  <%= form_with scope: :article, url: articles_path, local: true do |form| %>
+    ...
+  <% end %>
+  
+  <%= link_to 'Back', articles_path %>
+  ```
+- 그리고 index 액션으로 넘어가기 위해 articles/show.html.erb에 해당 템플릿을 복붙해라
+  ```html
+  <p>
+    <strong>Title:</strong>
+    <%= @article.title %>
+  </p>
+  
+  <p>
+    <strong>Text:</strong>
+    <%= @article.text %>
+  </p>
+  
+  <%= link_to 'Back', articles_path %>
+  ```
+- 이렇게 하면 이제부터 하나의 article에서 리스트 페이지로 이동할 수 있다.
