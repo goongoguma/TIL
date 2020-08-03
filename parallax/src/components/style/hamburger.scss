@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #bbb;
+}
+
+a {
+  color: #000;
+}
+
+.header {
+  background-color: #fff;
+  opacity: 0.9;
+  border-bottom: 1px solid #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.header ul a {
+  display: block;
+  padding: 20px;
+  // border-right: 1px solid #aaa;
+  text-decoration: none;
+  color: #181818;
+}
+
+.header ul a:hover {
+  background-color: #ddd;
+}
+
+.header .logo {
+  float: left;
+  display: block;
+  font-size: 2em;
+  padding: 10px 20px;
+}
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  /* 메뉴 애니메이션 */
+  transition: max-height .2s ease-out;
+}
+
+.header .menu-icon {
+  padding: 28px 20px;
+  position: relative;
+  float: right;
+  cursor: pointer;
+}
+
+.header .menu-icon .nav-icon {
+  background: #181818;
+  display: block;
+  height: 2px;
+  width: 18px;
+  position: relative;
+  transition: background .2s ease-out;
+}
+
+.header .menu-icon .nav-icon:before {
+  background: #181818;
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all .2s ease-in-out;
+  top: 5px;
+}
+
+.header .menu-icon .nav-icon:after {
+  background: #181818;
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all .2s ease-in-out;
+  top: -5px;
+}
+
+.header .menu-btn {
+  display: none;
+}
+
+/* menu-btn이 체크 되었을때 형제 요소인 menu의 css 속성을 변경시킨다 */
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon:before {
+  transform: rotate(-45deg);
+  top: 0;
+} 
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon:after {
+  transform: rotate(45deg);
+  top: 0;
+} 
+

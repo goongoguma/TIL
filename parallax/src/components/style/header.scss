@@ -1,0 +1,24 @@
+.header-wrapper {
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid #fff;
+  display: flex;
+  justify-content: space-between;
+  z-index: 9999;
+  background: #fff;
+  color: #181818;
+  opacity: 0.8;
+}
+
+.header-logo {
+  margin: 16px 0;
+  padding: 0 30px;
+}
+
+.header-menu {
+  padding: 0 30px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}

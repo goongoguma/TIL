@@ -1,0 +1,20 @@
+.slider-container {
+  width: 60%;
+  overflow: hidden;
+
+  button {
+    all: unset;
+    border: 1px solid coral;
+    padding: 0.5em 2em;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  .slide {
+    all: unset;
+    border: 1px solid coral;
+    padding: 0.5em 2em;
+    color: #fff;
+    border-radius: 10px;
+  }
+}

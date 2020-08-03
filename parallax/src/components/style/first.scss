@@ -1,0 +1,33 @@
+.first-section {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('../../img/background.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.first-section-wrapper {
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+.frist-section-title {
+  margin: 0px;
+  font-size: 80px;
+}
+
+.first-section-button {
+  background: fff;
+  color: #181818;
+  width: 120px;
+  height: 50px;
+}
