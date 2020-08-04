@@ -1,0 +1,92 @@
+#menuToggle {
+  cursor: pointer;
+  height: 0;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.menu {
+  max-height: 0;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 80px;
+  z-index: 999;
+  list-style-type: none;
+  overflow: hidden;
+  /* 메뉴 애니메이션 */
+  transition: max-height .2s ease-out;
+}
+
+.menu li {
+  padding: 10px 15px;
+  font-size: 22px;
+}
+
+.menu-icon {
+  padding: 13px;
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-icon {
+  background: #333;
+  display: block;
+  height: 2px;
+  width: 25px;
+  position: relative;
+  transition: background .2s ease-out;
+}
+
+.nav-icon::before {
+  content: "";
+  background: #333;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all .2s ease-in-out;
+  top: -7px;
+}
+
+.nav-icon::after {
+  content: "";
+  background: #333;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: all .2s ease-in-out;
+  top: 7px;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.menu-btn:checked ~ .menu {
+  max-height: 424px;
+}
+
+.menu-btn:checked ~ .menu-icon .nav-icon {
+  background: transparent;
+}
+
+.menu-btn:checked ~ .menu-icon .nav-icon:before {
+  transform: rotate(-45deg);
+  top: 0;
+} 
+
+.menu-btn:checked ~ .menu-icon .nav-icon:after {
+  transform: rotate(45deg);
+  top: 0;
+} 
