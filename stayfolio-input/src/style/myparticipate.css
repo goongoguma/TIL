@@ -1,0 +1,535 @@
+@charset 'utf-8';
+
+/**
+트래블
+**/
+.travel_box {
+	position: relative;
+	margin-bottom: 60px;
+	width: 100%;
+	overflow: hidden;
+}
+.travel_box .tit {
+	display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+	width: 69%;
+	position: relative;
+}
+.travel_box .tit span {
+	font-size: 24px; font-weight: 500; color: #181818;
+	display: inline-block;
+	width: 100%;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: auto;
+}
+.travel_box .tit em {
+	display: inline-block;
+	flex: 0 0 80px;
+	font-size: 13px;
+	line-height: 24px;
+	text-align: center;
+	vertical-align: bottom;
+	border-radius: 100px;
+	width: 80px;
+	margin-left: 10px;
+	border: 1px solid #000;
+}
+.travel_box .tit em.badge_bk {
+	color: #fff;
+	background: #000;
+}
+.travel_box .tit em.badge_wh {
+	color: #000;
+	background: #fff;
+}
+.travel_box .txt {
+	font-size: 14px; color: #666; line-height: 1.7;
+	width: 65%;
+	margin-top: 13px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp : 3;
+	max-height: 70px;
+}
+.travel_box .etc {
+	margin-top: 18px;
+	font-size: 14px; color: #666;
+}
+.travel_box .etc .cmt,
+.travel_box .etc .date {
+	display: inline-block;
+}
+.travel_box .etc .cmt span::after {
+	content:"";
+	display: inline-block;
+	width: 1px; height: 14px;
+	background: #ddd;
+	vertical-align: middle;
+	margin: 0 12px;
+}
+.travel_box .img {
+	position: absolute; top: 0; right: 0;
+	width: 30%; height: 145px;
+}
+@media (max-width: 768px) {
+	.travel_box {border-bottom: 1px solid #ddd; padding-bottom: 80px;}
+	.travel_box .tit {width: 100%; font-size: 21px;}
+	.travel_box .tit span {padding-right: 0; line-height: 1.3;}
+	.travel_box .tit em {font-size: 12px; line-height: 25px; width: 70px; position: absolute; top: 0; right: 0;}
+	.travel_box .txt {width: 100%; font-size: 12px; -webkit-line-clamp : 4; max-height: 80px;}
+	.travel_box .etc {font-size: 12px; overflow: hidden;}
+	.travel_box .etc .cmt {float: right; margin-right: -20px;}
+	.travel_box .etc .date {float: left;}
+	.travel_box .img {position: relative; top: 23px; width: 100%; height: 0; max-height: 200px; overflow: hidden; padding-bottom: 63%;}
+}
+
+
+
+.mytravel_wrap {
+	border-bottom: 1px solid #ddd;
+	margin-top: 50px;
+}
+.mytravel_wrap .my_tit{
+	padding: 0 0 45px;
+}
+.travel_guide a {
+	position: absolute; top: -3px; right: 0;
+	font-size: 14px; color: #181818;
+	padding: 10px 0;
+	display: inline-block;
+}
+.travel_img {
+	padding: 40px 0 20px;
+	margin-bottom: 70px;
+	border-bottom: 1px solid #ddd;
+}
+.travel_wrap img {width: 100%;}
+.travel .bt_btns {margin-top: -70px;}
+@media (max-width: 768px) {
+	.mytravel_wrap {border: 0; padding: 0; margin: 0;}
+	.mytravel_wrap .travel_box {margin: 40px 0 50px;}
+	.travel_guide {margin: 20px 0 -20px; }
+	.travel_guide a {position: relative; font-size: 12px; color: #666;}
+	.travel_guide a::before {
+		content:""; display: inline-block;
+		background: url(../img/ico_guide.png) no-repeat center;
+		background-size: cover;
+		width:  15px; height: 15px;
+		vertical-align: middle; margin-right: 5px;
+	}
+	.travel_img {border: none;}
+}
+
+
+/* 트래블 작성하기 */
+.travel_list {
+	overflow: hidden;
+	margin-top: 40px;
+}
+.travel_list .img {
+	width: 150px; height: 90px;
+	float: left;
+}
+.travel_list .travel_info {
+	width: 48%;
+	float: left;
+	padding-left: 22px;
+}
+.travel_list .travel_info .name {
+	font-size: 24px; color: #181818; font-weight: 500;
+}
+.travel_list .travel_info .day {
+	font-size: 16px; color: #000;
+	margin: 25px 0 8px;
+}
+.travel_list .travel_info .option {
+	font-size: 14px; color: #666;
+}
+.travel_list .btn {
+	width: 18%;
+	min-width: 120px;
+	float: right;
+	text-align: center;
+	position: relative;
+}
+.travel_list .btn::after {
+	content:"";
+	display: inline-block;
+	width: 1px; height: 90px;
+	background: #ddd;
+	position: absolute; top: 0; left: -20px;
+}
+.travel_list .btn .btn_bk {
+	line-height: 45px;
+	width: 100%;
+	font-size: 14px;
+	display: block;
+}
+.travel_list .btn .mileage {
+	font-size: 14px; color: #000;
+	margin-top: 25px;
+	display: block;
+}
+@media (max-width: 768px) {
+	.travel_list {border-bottom: 1px solid #ddd; padding-bottom: 40px;}
+	.travel_list .img {width: 100px; height: 65px;}
+	.travel_list .travel_info {width: 67%; padding-left: 13px;}
+	.travel_list .travel_info .name {font-size: 19px;}
+	.travel_list .travel_info .day {font-size: 12px; margin: 13px 0 7px;}
+	.travel_list .travel_info .option {font-size: 12px;}
+	.travel_list .btn {width: 100%; margin-top: 20px;}
+	.travel_list .btn::after {display: none;}
+	.travel_list .btn .mileage {display: none;}
+}
+
+
+.travel_write_box {
+	margin-top: 70px;
+}
+.travel_write_box .input_box {
+	display: inline-block;
+	vertical-align: top;
+}
+.travel_write_box .row .input_box:nth-child(1) { width: 56%; }
+.travel_write_box .row .input_box:nth-child(2) { width: 27%; margin: 0 0 -80px 80px; }
+.travel_write_box .row .input_box:nth-child(3) { width: 56%; }
+.travel_write_box .row .input_box:nth-child(4) { width: 100%; }
+.travel_write_box .input_box .photo {
+	margin-top: 25px;
+}
+.travel_write_box .input_box .photo .img {
+	width: 120px; height: 80px;
+	border: 1px solid #ddd;
+	display: inline-block;
+	background: #ededed url(../img/img_photo.png) no-repeat center;
+	background-size: 40px 31px;
+	cursor: pointer;
+	text-indent: -999999px;
+}
+.travel_write_box .input_box .file .del {
+	display: inline-block;
+	font-size: 12px; color: #999;
+	padding-left: 5px;
+	vertical-align: bottom;
+}
+.travel_write_box .textarea .input {
+	height: 550px;
+}
+.travel_write_box .textarea textarea {
+	height: 550px;
+	border-bottom: 1px solid #ddd;
+}
+.travel_write_wrap .bt_btns {
+	padding: 0;
+}
+@media (max-width: 768px) {
+	.travel_write_box {margin-top: 50px;}
+	.travel_write_box .input_box {display: block;}
+	.travel_write_box .row .input_box:nth-child(1) { width: 100%; }
+	.travel_write_box .row .input_box:nth-child(2) { width: 100%; margin: 0 0 50px; }
+	.travel_write_box .row .input_box:nth-child(3) { width: 100%; }
+	.travel_write_box .row .input_box:nth-child(4) { width: 100%; }
+	.travel_write_box .input_box .photo {margin-top: 20px;}
+	.travel_write_box .textarea .input {height: 230px;}
+	.travel_write_box .textarea textarea {height: 230px;}
+}
+
+
+/* 트래블 제출하기 팝업 */
+.travel_complete_wrap {
+	padding-bottom: 20px;
+}
+.travel_complete_wrap .txt {
+	font-size: 18px; color: #181818; font-weight: 500;
+	line-height: 1.7;
+	text-align: center;
+	padding: 70px 0;
+}
+@media (max-width: 768px) {
+	.travel_complete_wrap {padding: 0 20px;}
+	.travel_complete_wrap .txt {font-size: 14px;}
+	.travel_complete_wrap .bt_btns {margin-bottom: -30px;}
+}
+
+/* 호스트 도전하기 작성 */
+.host_write_box {
+	margin-top: 45px;
+	margin-left: -50px;
+}
+.host_write_box .input_box {
+	width: 50%;
+	float: left;
+	padding-left: 50px;
+}
+.host_write_box .input_box .file {
+	font-size: 0;
+	margin: 25px 0 5px;
+}
+.host_write_box .input_box .textarea {
+	height: 200px;
+}
+.host_write_wrap .bt_btns {
+	padding: 0;
+}
+@media (max-width: 768px) {
+	.host_write_wrap .my_tit {font-size: 20px; color: #181818; margin-top: 35px; line-height: 1.2;}
+	.host_write_box .input_box {width: 100%;}
+	.host_write_box .input_box .photo .img {width: 105px; height: 70px;}
+}
+
+
+/**
+멤버쉽
+**/
+
+/* 내 레벨 정보 */
+.mb_wrap .lv_box {
+	text-align: center;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin-top: 30px; padding: 80px 0 60px;
+}
+.mb_wrap .lv_box .lv_my {
+	font-size: 21px; font-weight: 100;
+}
+.mb_wrap .lv_box .lv_my strong {
+	font-size: 40px; font-family: 'Lato-Bold';
+	display: block;
+	margin: 8px 0;
+}
+.mb_wrap .lv_box .lv_my .milestone {
+	font-size: 36px; color: #000;
+	display: block;
+	margin: 8px 0;
+}
+.mb_wrap .lv_box .lv_my .milestone strong {
+	display: inline-block;
+	font-size: 36px; font-weight: 700; font-family: 'NanumSquare';
+}
+.mb_wrap .lv_box .lv_bar {
+	width: 420px;
+	position: relative;
+	height: 5px;
+	border-radius: 100px;
+	background: #f3f3f3;
+	margin: 70px auto 18px;
+	font-size: 0;
+}
+.mb_wrap .lv_box .lv_bar .state {
+	display: block;
+	height: 5px;
+	border-radius: 100px;
+	background: #000;
+	position: relative;
+}
+.mb_wrap .lv_box .lv_bar .state::after {
+	content:"";
+	display: inline-block;
+	background: url(../img/ico_bar.png) no-repeat center;
+	background-size: cover;
+	width: 20px; height: 20px;
+	position: absolute; bottom: -6px; right: -10px;
+}
+.mb_wrap .lv_box .lv_bar .state .point {
+	position: absolute; top: -34px; right: -19px;
+	background: #000;
+	line-height: 20px; width: 40px;
+	border-radius: 100px;
+	color: #fff; font-size: 12px;
+}
+.mb_wrap .lv_box .lv_bar .state .point::after {
+	border-top: 7px solid #000;
+	border-left: 3px solid transparent;
+	border-right: 3px solid transparent;
+	border-bottom: 0 solid transparent;
+	content: "";
+	position: absolute; bottom: -6px; left: 50%;
+	margin-left: -2px;
+}
+.mb_wrap .lv_box .lv_txt {
+	width: 420px;
+	margin: 0 auto;
+	font-size: 0;
+}
+.mb_wrap .lv_box .lv_txt .left {
+	display: inline-block;
+	width: 50%;
+	text-align: left;
+	font-size: 14px; font-weight: 500; color: #181818;
+}
+.mb_wrap .lv_box .lv_txt .right {
+	display: inline-block;
+	width: 50%;
+	text-align: right;
+	font-size: 13px; color: #666;
+}
+.mb_wrap .lv_box .lv_percent {
+	margin: 25px auto 20px;
+	line-height: 33px;
+	background: #efefef;
+	padding: 0 30px;
+	display: inline-block;
+	border-radius: 100px;
+	font-size: 14px; font-weight: 500; color: #181818;
+}
+@media (max-width: 768px) {
+	.mb_wrap .lv_box {border-top: 0; margin-top: 0; padding: 50px 0 35px;}
+	.mb_wrap .lv_box .lv_my {font-size: 15px;}
+	.mb_wrap .lv_box .lv_my strong {font-size: 30px; margin: 5px 0 7px;}
+	.mb_wrap .lv_box .lv_my .milestone {font-size: 27px; margin: 6px 0 2px;}
+	.mb_wrap .lv_box .lv_my .milestone strong {font-size: 27px;}
+	.mb_wrap .lv_box .lv_bar {width: 85%;}
+	.mb_wrap .lv_box .lv_txt {width: 85%;}
+	.mb_wrap .lv_box .lv_txt .left {font-size: 13px;}
+	.mb_wrap .lv_box .lv_txt .right {font-size: 11px;}
+	.mb_wrap .lv_box .lv_percent {margin: 17px auto; line-height: 25px; font-size: 11px; padding: 0 20px;}
+}
+
+/* 혜택 */
+.mb_wrap .mb_sec_box {
+	padding: 80px 0 70px;
+	border-bottom: 1px solid #ddd;
+	position: relative;
+}
+.mb_wrap .mb_sec_box h3 {
+	margin: 0 0 20px;
+}
+.mb_wrap .mb_sec_box .guide_view {
+	position: absolute; top: 70px; right: 0;
+	font-size: 12px; color: #ddd;
+}
+.mb_wrap .mb_sec_box .guide_view a {
+	display: inline-block;
+	font-size: 14px; color: #000; font-weight: 500;
+	margin-left: 10px; padding: 10px 10px 10px 0;
+}
+.mb_wrap .mb_sec_box .guide_view a+a {border: 0;}
+.mb_wrap .mb_sec_box .guide_view a::after {
+	content:"";
+	display: inline-block;
+	background: url(../img/arw_02.png) no-repeat center;
+	background-size: cover;
+	width: 5px; height: 11px;
+	vertical-align: middle;
+	margin: 0 0 0 6px;
+}
+.mb_wrap .mb_sec_box .benefit_list {
+	font-size: 0;
+	margin-bottom: 10px;
+	width: 100%; height: 135px;
+	display: table; table-layout: fixed;
+}
+.mb_wrap .mb_sec_box .benefit_list dt {
+	display: table-cell;
+	background: #000;
+	color: #fff; font-size: 12px; font-family: 'Lato-Regular';
+	letter-spacing: 6px; line-height: 1.7;
+	width: 152px;
+	text-align: center; vertical-align: middle;
+	text-transform: uppercase;
+}
+.mb_wrap .mb_sec_box .benefit_list dd {
+	display: table-cell;
+	background: #f5f5f5;
+	font-size: 18px; color: #000;
+	text-align: center; vertical-align: middle;
+}
+.mb_wrap .mb_sec_box .benefit_list dd .day {
+	display: block;
+	font-size: 12px; color: #999;
+	margin-top: 8px;
+}
+@media (max-width: 768px) {
+	.mb_wrap .mb_sec_box {padding: 0 0 40px; margin: 50px 0 0;}
+	.mb_wrap .mb_sec_box .guide_view {top: -8px;}
+	.mb_wrap .mb_sec_box .guide_view a {font-size: 12px;}
+	.mb_wrap .mb_sec_box .benefit_list {height: 68px;}
+	.mb_wrap .mb_sec_box .benefit_list dt {width: 24%; font-size: 7px; letter-spacing: 2px; line-height: 1.3;}
+	.mb_wrap .mb_sec_box .benefit_list dd {font-size: 12px;}
+	.mb_wrap .mb_sec_box .benefit_list dd .day {font-size: 9px; margin-top: 5px;}
+}
+
+/* 안내 */
+.mb_wrap .mb_guide {
+	padding-top: 70px;
+}
+.mb_wrap .mb_guide h3 {
+	margin: 0 0 17px;
+}
+.mb_wrap .ms_bar_box {
+	background: #f5f5f5;
+	padding: 90px 40px 55px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.mb_wrap .ms_bar_box .btn_ms {
+	position: absolute; top: 50%; right: 40px;
+	font-size: 16px; color: #fff; font-weight: 500;
+	width: 160px; line-height: 45px;
+	margin-top: -24px;
+	background: #000;
+	text-align: center;
+}
+.ms_bar_box .ms_bar {
+	width: 70%;
+	position: relative;
+	height: 5px;
+	border-radius: 100px;
+	background: #dedede;
+}
+.ms_bar_box .ms_bar .ms_txt {
+	position: absolute; top: -32px; left: 0;
+	font-size: 16px; color: #181818; font-weight: 500;
+}
+.ms_bar_box .ms_bar .ms_num {
+	position: absolute; top: -27px; right: 0;
+	font-size: 13px; color: #666;
+}
+.ms_bar_box .ms_bar .state {
+	display: block;
+	height: 5px;
+	border-radius: 100px;
+	background: #000;
+	position: relative;
+}
+.ms_bar_box .ms_bar .state::after {
+	content:"";
+	display: inline-block;
+	background: url(../img/ico_bar.png) no-repeat center;
+	background-size: cover;
+	width: 22px; height: 22px;
+	position: absolute; bottom: -8px; right: -11px;
+}
+@media (max-width: 768px) {
+	.mb_wrap .mb_guide {padding-top: 50px;}
+	.mb_wrap .ms_bar_box {padding: 65px 32px 40px;}
+	.mb_wrap .ms_bar_box .btn_ms {position: relative; top: auto; right: auto; font-size: 14px; line-height: 40px; margin: 32px auto 0; display: block;}
+	.ms_bar_box .ms_bar {width: 100%;}
+	.ms_bar_box .ms_bar .ms_txt {font-size: 15px;}
+	.ms_bar_box .ms_bar .ms_num {font-size: 11px;}
+}
+
+/* 마일스톤 지급 - 팝업 */
+.ms_pop_wrap .txt {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	height: 350px;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	text-align: center;
+}
+.ms_pop_wrap .txt span {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 24px; line-height: 1.8; font-weight: 500;
+}
+@media (max-width: 768px) {
+	.ms_pop_wrap .txt {height: 120px; padding-top: 25px; border: 0;}
+	.ms_pop_wrap .txt span {font-size: 16px;}
+}
+

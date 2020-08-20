@@ -1,0 +1,888 @@
+@charset 'utf-8';
+
+/**
+Journal Main
+**/
+
+/* Magazine Travel List */
+.journal_list_wrap {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+.journal_list_wrap .journal_mt  {
+	width: 50%;
+	float: left;
+	border-right: 1px solid #e6e6e6;
+	padding: 0 45px 0 0;
+	text-align: center;
+}
+.journal_list_wrap .journal_mt.right {
+	float: right;
+	padding: 0 0 0 45px;
+	border: none;
+}
+.journal_mt .sec_title {
+	font-size: 14px;
+	text-align: center;
+	margin-bottom: 55px;
+}
+.journal_mt .btn_sm {
+	margin-top: 50px;
+}
+@media (max-width: 768px) {
+	.journal_list_wrap {margin-top: -20px;}
+	.journal_list_wrap .journal_mt {width: 100%; float: inherit; border: none; padding: 0; margin-top: 80px;}
+	.journal_list_wrap .journal_mt.right {float: inherit; padding: 0;}
+	.journal_mt .sec_title {font-size: 11px; letter-spacing: 11px; margin-bottom: 30px;}
+}
+
+
+/* Journal Pick */
+.journal_pick {
+	width: 100%;
+	margin: 100px auto 0;
+	padding: 100px 0;
+	background: #f5f5f5;
+	text-align: center;
+}
+.journal_pick .sec_title {
+	margin-bottom: 30px;
+}
+.journal_pick .stay_list::before {
+	background: #f5f5f5;
+}
+.journal_pick .btn_sm {
+	margin-top: 50px;
+}
+.journal_pick .stay_list .slick-prev {
+	left: inherit; right: 23px; top: -35px;
+	margin-left: 16px;
+	width: 9px; height: 15px;
+	font-size: 0;
+	background: url(../img/arw-bk.png) no-repeat 9px 20px;
+	background-position: 0 -15px;
+}
+.journal_pick .stay_list .slick-next {
+	left: inherit; right: 0; top: -35px;
+	margin-left: 38px;
+	width: 9px; height: 15px;
+	font-size: 0;
+	background: url(../img/arw-bk.png) no-repeat 9px 20px;
+	background-position: 0 0;
+}
+.journal_pick .stay_list .slider-count {
+	display: none;
+}
+@media (max-width: 768px) {
+	.journal_pick {margin: 80px auto 0; padding: 60px 0;}
+	.journal_pick .container {padding: 0;}
+	.journal_pick .btn_sm {margin-top: 35px;}
+}
+
+
+/* Video */
+.journal_video {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+.journal_video .sec_title {
+	font-size: 14px;
+	margin-bottom: 30px;
+	letter-spacing: 14px;
+}
+.journal_video .video_view {
+	width: 65.89%;
+	float: left;
+}
+.journal_video .video_view .video {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+.journal_video .video_view .video iframe,
+.journal_video .video_view .video object,
+.journal_video .video_view .video embed {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+}
+.journal_video .video_view .video .btn-play {
+	position: absolute;
+	top: 50%; left: 50%;
+	margin: -45px 0 0 -45px;
+	background: url(../img/btn-play.png) no-repeat center;
+	width: 90px; height: 90px;
+	text-indent: -99999px;
+}
+.video_view .video_info {
+	margin-top: 45px;
+}
+.video_view .video_info .tit {
+	font-size: 24px; color: #181818;
+	font-weight: 500;
+	line-height: 30px;
+}
+.video_view .video_info .tit small {
+	display: block;
+	font-size: 14px;
+}
+.video_view .video_info .txt {
+	font-size: 14px; color: #181818;
+	line-height: 1.9;
+	margin: 20px 0 25px;
+}
+.video_view .video_info .etc {
+	font-size: 13px; color: #181818;
+	line-height: 1.7;
+}
+.journal_video .video_list {
+	float: right;
+	width: 31%;
+}
+.video_list .video_box {
+	clear: both;
+	margin-bottom: 40px;
+}
+.video_list .video_box::after {content:""; display: block; clear:both;}
+.video_list .video_box .img {
+	width: 52.63%; height: 114px;
+	float: left;
+}
+.video_list .video_box .info {
+	float: right;
+	width: 41%;
+}
+.video_list .video_box .info .tit {
+	font-size: 16px; color: #181818;
+	line-height: 1.4;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	display: -webkit-box;
+	line-clamp: 2; -webkit-line-clamp: 2;
+	box-orient: vertical;
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	height: 44px;
+}
+.video_list .video_box .info .txt {
+	font-size: 14px; color: #666;
+	margin: 10px 0 15px;
+}
+@media (max-width: 768px) {
+	.journal_video {width: 100%; margin-top: 75px;}
+	.journal_video .sec_title {font-size: 11px; letter-spacing: 11px; text-align: center;}
+	.journal_video .video_view {width: 100%; float: inherit;}
+	.journal_video .video_view .video .btn-play {margin: -23px 0 0 -23px; width: 45px; height: 45px; background-size: 45px 45px;}
+	.video_view .video_info {margin-top: 20px;}
+	.video_view .video_info .tit {font-size: 15px; font-weight: 500; line-height: 24px;}
+	.video_view .video_info .tit small {font-size: 11px;}
+	.video_view .video_info .txt {font-size: 12px; line-height: 18px; margin: 20px 0 25px;}
+	.video_view .video_info .etc {font-size: 10px; line-height: 15px;}
+	.journal_video .video_list {display: none;}
+}
+
+
+/**
+Journal Magazine/Travel List
+**/
+.mt_list_wrap {
+	text-align: center;
+}
+.mt_list_wrap .journal_list {
+	font-size: 0;
+	margin: -32px -15px -15px;
+}
+.mt_list_wrap .journal_box {
+	width: 50%;
+	display: inline-block;
+	border: 15px solid #fff;
+	margin: 0;
+}
+.mt_list_wrap .btn_sm {
+	margin-top: 75px;
+}
+@media (max-width: 768px) {
+	.mt_list_wrap .journal_list {margin: 0;}
+	.mt_list_wrap .journal_box {width: 100%; border: none; margin: 0; padding: 0 0 20px 0;}
+}
+
+
+/**
+Journal Pick List
+**/
+.pick_list {
+	margin-top: 60px;
+	text-align: center;
+}
+.pick_list .stay_list {
+	font-size: 0;
+}
+.pick_list .stay_box {
+	width: 33.33%;
+	display: inline-block;
+}
+.pick_list .btn_sm {
+	margin-top: 75px;
+}
+@media (max-width: 768px) {
+	.pick_list {margin-top: 50px;}
+	.pick_list .stay_list {margin-top: -80px;}
+	.pick_list .stay_box {width: 100%; padding: 80px 0 0 0 !important;}
+}
+
+
+/**
+Journal Magazine Detail
+**/
+
+/* Magazine Detail Intro */
+.mdetail_intro {
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+.mdetail_intro .img {
+	width: 100%; height: 790px;
+	position: relative;
+}
+.mdetail_intro .logo {
+	padding-top: 90px;
+}
+.mdetail_intro .txt {
+	font-size: 20px; color: #000;
+	line-height: 1.8;
+	margin-top: 50px;
+}
+@media (max-width: 768px) {
+	.mdetail_intro .img {overflow: hidden; height: 0; padding-bottom: 61%;}
+	.mdetail_intro .logo {padding-top: 45px;}
+	.mdetail_intro .logo img {width: 50%;}
+	.mdetail_intro .txt {font-size: 12px; margin-top: 20px;}
+}
+
+/* Matazine Detail Common Style */
+.mdetail_cont {
+	margin-top: 100px;
+}
+.mdetail_cont:before {content:""; display: block; clear:both;}
+.mdetail_cont > .img {
+	width: 100%;
+	height: 460px;
+	margin-bottom: 40px;
+	position: relative;
+	background: #eee;
+	text-align: center;
+}
+.mdetail_cont > .tit {
+	font-size: 20px;
+	line-height: 34px;
+	color: #000;
+	float: left;
+	width: 24%;
+	margin-top: -5px;
+}
+.mdetail_cont > .tit small {
+	font-size: 12px; color: #181818;
+	line-height: 34px;
+	border-bottom: 1px solid #000;
+	letter-spacing: 6px;
+	font-weight: 500;
+	display: inline-block;
+	font-family: 'Abel';
+	margin-bottom: 40px;
+	text-transform: uppercase;
+}
+.mdetail_cont .cont {
+	font-size: 14px;
+	line-height: 28px;
+	color: #181818;
+	float: right;
+	width: 74.18%;
+}
+.mdetail_cont .tab_btn li {
+	float: left;
+	margin-right: 30px;
+}
+.mdetail_cont .tab_btn li a {
+	display: block;
+	line-height: 40px;
+	text-transform: uppercase;
+	font-family: 'Abel';
+	letter-spacing: 2.5px;
+	font-size: 12px; color: #a6a5a5;
+}
+.mdetail_cont .tab_btn li.active a {
+	color: #181818; font-weight: 700;
+}
+.mdetail_cont .tab_btn li.active a:after {
+	content: "•";
+	display: block; clear: both;
+	font-size: 14px; color: #000;
+	text-align: center;
+	line-height: 1;
+	margin-top: -12px;
+}
+.mdetail_cont .tab_cont {
+	width: 100%;
+	position: relative;
+	padding-top: 30px;
+	clear: both;
+}
+.mdetail_cont .tab_cont .tab_box {
+	width: 100%; height: 100%;
+	z-index: -1;
+	display: none;
+}
+.mdetail_cont .tab_cont .tab_box.active {
+	z-index: 1;
+	display: block;
+}
+.mdetail_cont .tab_cont .tab_box img {
+	width: 100%;
+	margin-top: 35px;
+}
+@media (max-width: 768px) {
+	.mdetail_cont {margin-top: 80px;}
+	.mdetail_cont > .img {width: 100%; height: 0; position: relative; overflow: hidden; padding-bottom: 55%; margin-bottom: 30px;}
+	.mdetail_cont > .tit {font-size: 16px; line-height: 21px; float: inherit; width: 100%;}
+	.mdetail_cont > .tit small {font-size: 9px; line-height: 23px; margin-bottom: 20px; letter-spacing: 4.5px;}
+	.mdetail_cont .cont {font-size: 12px; line-height: 21px; float: inherit; width: 100%; margin-top: 20px;}
+	.mdetail_cont .tab_btn {margin-top: -5px;}
+	.mdetail_cont .tab_btn li a {font-size: 11px;}
+	.mdetail_cont .tab_cont {padding: 20px 0 30px;}
+}
+
+/* Magazine Detail Space Images */
+.space_img {
+	width: 100%;
+	margin-top: 90px;
+}
+
+/* Matazine Detail Interview */
+.mdetail_cont.interview .cont .qna-tit {
+	font-size: 12px; color: #181818;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	font-family: 'Abel';
+	margin-bottom: 40px;
+	text-transform: uppercase;
+}
+.mdetail_cont.interview .cont .qna-cont {
+	font-size: 14px;
+	line-height: 28px;
+	color: #181818;
+	padding-top: 37px;
+}
+.mdetail_cont.interview .cont .qna-cont::after {content:""; display: block; clear:both;}
+.mdetail_cont.interview .cont .qna-cont .question {
+	line-height: 24px;
+}
+.mdetail_cont.interview .cont .question {
+	float: left;
+	width: 31%;
+}
+.mdetail_cont.interview .cont .answer {
+	float: right;
+	width: 66%;
+}
+@media (max-width: 768px) {
+	.mdetail_cont.interview .cont {margin-top: -13px;}
+	.mdetail_cont.interview .cont .qna-tit {font-size: 9px;}
+	.mdetail_cont.interview .cont .qna-cont {font-size: 12px; line-height: 18px;}
+	.mdetail_cont.interview .cont .qna-cont .question {line-height: 17px;}
+	.mdetail_cont.interview .cont .question {width: 30%;}
+	.mdetail_cont.interview .cont .answer {width: 65%;}
+}
+
+/* Matazine Detail Best */
+.mdetail_cont.best {
+	border-top: 1px solid #e6e6e6;
+	margin-top: 60px;
+	padding-top: 60px;
+}
+.mdetail_cont.best .cont .best-cont {
+	margin-top: 40px;
+}
+.mdetail_cont.best .cont .best-cont:first-child {
+	margin-top: 0;
+}
+.mdetail_cont.best .cont .best-cont::after {content:""; display: block; clear:both;}
+.mdetail_cont.best .cont .best-cont .txt {
+	font-size: 14px; color: #181818;
+	line-height: 28px;
+	float: left;
+	width: 31%;
+}
+.mdetail_cont.best .cont .best-cont .txt > .tit {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.mdetail_cont.best .cont .best-cont .img {
+	float: right;
+	width: 66%;
+}
+.mdetail_cont.best .cont .best-cont .img img {
+	width: 100%;
+}
+@media (max-width: 768px) {
+	.mdetail_cont.best {margin-top: 80px; padding-top: 40px;}
+	.mdetail_cont.best > .tit {font-size: 13px;}
+	.mdetail_cont.best .cont .best-cont {margin-top: 50px;}
+	.mdetail_cont.best .cont .best-cont:first-child {margin-top: 30px;}
+	.mdetail_cont.best .cont .best-cont .txt {font-size: 11px; line-height: 18px; float: inherit; width: 100%;}
+	.mdetail_cont.best .cont .best-cont .txt > .tit {font-size: 12px; margin: 0 0 10px 0;}
+	.mdetail_cont.best .cont .best-cont .img {float: inherit; width: 100%; margin-top: 20px;}
+}
+
+
+/* Matazine Detail Stay */
+.mdetail_cont.stay {
+	margin-top: 80px;
+}
+
+
+/* Magazine Detail Gallery Slider */
+.mdetail_gallery {
+	width: 100%;
+}
+.mdetail_gallery .mdg_box {
+	position: relative;
+}
+.mdetail_gallery .img {
+	margin-top: 90px;
+	width: 100%; height: 790px;
+	position: relative;
+}
+.mdetail_gallery .gallery-info {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 604px; height: 265px;
+	background: #fff;
+	padding: 40px 20px 0 50px;
+}
+.mdetail_gallery .gallery-info .time {
+	font-size: 48px; color: #000;
+	line-height: 1;
+	font-family: 'Abel','NanumSquare';
+}
+.mdetail_gallery .gallery-info .tit {
+	font-size: 24px; color: #333;
+	margin: 28px 0 15px;
+	letter-spacing: -1px;
+}
+.mdetail_gallery .gallery-info .txt {
+	font-size: 14px; color: #181818;
+	line-height: 2;
+}
+.mdetail_gallery .slick-dots {
+	bottom: 185px; right: 170px;
+	z-index: 1;
+	width: 200px;
+	text-align: left;
+}
+.mdetail_gallery .slick-dots li {
+	margin: 0 3px;
+	width: 6px; height: 6px;
+}
+.mdetail_gallery .slick-prev {
+	position: absolute;
+	top: inherit; bottom: 197px; right: 80px; left: inherit;
+	z-index: 2;
+	width: 9px; height: 20px;
+	background: url(../img/arw-bk2.png) no-repeat 9px 20px;
+	background-position: 0 0;
+	border-right: 1px solid #e6e6e6;
+	padding-right: 22px;
+}
+.mdetail_gallery .slick-next {
+	position: absolute;
+	top: inherit; bottom: 197px; right: 58px;
+	width: 9px; height: 20px;
+	background: url(../img/arw-bk2.png) no-repeat 9px 20px;
+	background-position: 0 -20px;
+}
+@media (max-width: 768px) {
+	.mdetail_gallery {min-width: inherit;}
+	.mdetail_gallery .img {width: 100%; height: 0; overflow: hidden; padding-bottom: 61%;}
+	.mdetail_gallery .gallery-info {position: relative; right: 0; left: 0; height: inherit; width: 100%; padding: 20px 20px 0 20px;}
+	.mdetail_gallery .gallery-info .time {font-size: 24px;}
+	.mdetail_gallery .gallery-info .tit {font-size: 14px; margin: 10px 0;}
+	.mdetail_gallery .gallery-info .txt {font-size: 12px; line-height: 18px;}
+	.mdetail_gallery .slick-dots {bottom: -40px; left: 0; width: 100%; text-align: center;}
+}
+
+/* Matazine Detail 4 POINT OF VIEW */
+.mdetail_cont.point4 .cont .point-cont {
+	margin-top: 50px;
+}
+.mdetail_cont.point4 .cont .point-cont:first-child {
+	margin-top: 0;
+}
+.mdetail_cont.point4 .cont .point-cont .small {
+	font-size: 12px; color: #181818;
+	letter-spacing: 3.6px;
+	font-weight: 500;
+	font-family: 'Abel';
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+.mdetail_cont.point4 .cont .point-cont .tit {
+	font-size: 30px; color: #000;
+	line-height: 34px;
+	font-weight: 100;
+	margin-bottom: 20px;
+}
+.mdetail_cont.point4 .cont .point-cont .txt {
+	font-size: 14px; color: #000;
+	line-height: 28px;
+}
+@media (max-width: 768px) {
+	.mdetail_cont.point4 {margin-top: 110px;}
+	.mdetail_cont.point4 .cont .point-cont:first-child {margin-top: 10px;}
+	.mdetail_cont.point4 .cont .point-cont .small {font-size: 9px; letter-spacing: 2.7px;}
+	.mdetail_cont.point4 .cont .point-cont .tit {font-size: 15px; line-height: 17px; margin-bottom: 10px;}
+	.mdetail_cont.point4 .cont .point-cont .txt {font-size: 12px; line-height: 19px;}
+}
+
+
+/* Magazine Detail Information */
+.mdetail_cont.information {
+	overflow: hidden;
+}
+.mdetail_cont.information .logo {
+	margin: 80px 0;
+	text-align: center;
+}
+.mdetail_cont.information .info_box {
+	clear: both;
+	margin: 0 auto;
+	position: relative;
+	font-size: 0;
+	margin-left: -30px;
+}
+.mdetail_cont.information .info_box dl {
+	display: inline-block;
+	vertical-align: top;
+	width: 33.333%;
+	padding: 0 0 0 30px;
+	position: relative;
+	overflow: hidden;
+	font-size: 15px;
+}
+.mdetail_cont.information .info_box dl dt {
+	float: left;
+	width: 25%;
+	clear: both;
+	line-height: 43px;
+	border-bottom: 1px solid #e6e6e6;
+	font-size: 12px; color: #666;
+}
+.mdetail_cont.information .info_box dl dd {
+	float: left;
+	width: 75%;
+	line-height: 43px;
+	border-bottom: 1px solid #e6e6e6;
+	font-size: 14px; color: #181818;
+}
+.mdetail_cont.information .info_box dl dt:first-child,
+.mdetail_cont.information .info_box dl dt:first-child+dd {
+	border-top: 2px solid #000;
+}
+.mdetail_cont.information .btn_sm {
+	margin-top: 100px;
+}
+@media (max-width: 768px) {
+	.mdetail_cont.information {padding: 0;}
+	.mdetail_cont.information .logo {margin: 50px 0;}
+	.mdetail_cont.information .logo img {width: 50%;}
+	.mdetail_cont.information .info_box {margin: 0; padding: 0 20px;}
+	.mdetail_cont.information .info_box dl {width: 100%; padding: 0 0 50px 0;}
+	.mdetail_cont.information .info_box dl dt {line-height: 35px; font-size: 12px;}
+	.mdetail_cont.information .info_box dl dd {line-height: 35px; font-size: 12px;}
+	.mdetail_cont.information .info_box dl dt:first-child,
+	.mdetail_cont.information .info_box dl dt:first-child+dd {border-top: 1px solid #000;}
+	.mdetail_cont.information .btn_sm {margin-top: -20px;}
+}
+
+
+/* Magazine Detail Photo By */
+.mdetail_cont.photoby {
+	width: 100%;
+	background: #000;
+	position: relative;
+	margin-bottom: -150px;
+}
+.mdetail_cont.photoby .img {
+	height: 400px;
+	opacity: 0.5;
+}
+.mdetail_cont.photoby .photographer {
+	position: absolute;
+	top: 45%; left: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 13px; color: #fff;
+	z-index: 1;
+}
+.mdetail_cont.photoby .photographer a {
+	display: inline-block;
+}
+@media (max-width: 768px) {
+	.mdetail_cont.photoby {padding: 0; margin: 80px 0 -80px 0;}
+	.mdetail_cont.photoby .img {width: 100%; height: 0; position: relative; overflow: hidden; padding-bottom: 50%;}
+	.mdetail_cont.photoby .photographer {font-size: 12px; letter-spacing: 0.5px;}
+}
+
+
+/**
+Journal Travel Detail
+**/
+.tdetail_cont {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 120px;
+	overflow: hidden;
+}
+.tdetail_cont .tit {
+	font-size: 20px; color: #000;
+	line-height: 1.7;
+	text-align: center;
+}
+.tdetail_cont .cont {
+	font-size: 14px; color: #181818;
+	line-height: 2.2;
+	width: 100%;
+	max-width: 850px;
+	margin: 0 auto;
+	padding: 25px 0 110px;
+}
+.tdetail_cont .img img {
+	width: 100%;
+}
+@media (max-width: 768px) {
+	.tdetail_cont {width: 100%; margin-top: 60px;}
+	.tdetail_cont .tit {font-size: 15px;}
+	.tdetail_cont .cont {font-size: 12px; width: 100%; padding: 25px 0 100px;}
+}
+
+/* Travel Writer Detail */
+.tdetail_writer {
+	margin: 100px auto;
+}
+.tdetail_writer .row {
+	display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.tdetail_writer .writer_photo {
+	width: 113px; height: 113px;
+	border-radius: 50%;
+	background-color: #ccc;
+}
+.tdetail_writer .writer_info {
+	height: 113px;
+	color: #181818;
+	padding-left: 35px;
+	display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+	flex-direction: column;
+	justify-content: center;
+}
+.tdetail_writer .writer_info .writer {
+	font-size: 12px;
+	letter-spacing: 6px;
+	font-weight: 700;
+	font-family: 'Abel';
+}
+.tdetail_writer .writer_info .name {
+	font-size: 18px;
+	margin: 25px 0 10px;
+}
+.tdetail_writer .writer_info .txt {
+	font-size: 14px;
+}
+@media (max-width: 768px) {
+	.tdetail_writer {margin: 50px auto;}
+	.tdetail_writer .writer_photo {width: 70px; height: 70px;}
+	.tdetail_writer .writer_info {height: 70px; padding-left: 25px;}
+	.tdetail_writer .writer_info .writer {font-size: 9px; letter-spacing: 4.5px;}
+	.tdetail_writer .writer_info .name {font-size: 14px; margin: 12px 0 6px;}
+	.tdetail_writer .writer_info .txt {font-size: 12px;}
+}
+
+
+/* Travel Pick list Detail */
+.tdetail_pick {
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.tdetail_pick .t-picklist {
+	margin-left: -30px;
+	font-size: 0;
+}
+.tdetail_pick .pick_tit {
+	position: relative;
+	border-bottom: 1px solid #000;
+	height: 10px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.tdetail_pick .pick_tit span {
+	display: inline-block;
+	padding: 0 20px;
+	background: #fff;
+	font-size: 20px; color: #000;
+}
+.tdetail_pick .pick_list {
+	margin-top: 50px;
+}
+@media (max-width: 768px) {
+	.tdetail_pick {margin-top: 100px;}
+	.tdetail_pick .pick_tit {height: 8px; margin-bottom: 40px;}
+	.tdetail_pick .pick_tit span {padding: 0 10px; font-size: 14px;}
+}
+
+
+/**
+Journal Pick Detail
+**/
+.pdetail_wrap {
+	width: 100%;
+	margin: 0 auto;
+}
+.pdetail_wrap .img {
+	margin-bottom: 55px;
+}
+.pdetail_wrap .img img {
+	width: 100%;
+}
+.pdetail_wrap .pick_info {
+	float: left;
+	width: 23%;
+}
+.pdetail_wrap .pick_info .info {
+	font-size: 14px; line-height: 1.9;
+	color: #181818;
+}
+.pdetail_wrap .pick_info .contact {
+	font-size: 12px;
+	color: #181818;
+	width: 100%;
+	margin-top: 25px;
+}
+.pdetail_wrap .pick_info .contact::after {content:""; display: block; clear:both;}
+.pdetail_wrap .pick_info .contact dt {
+	float: left;
+	clear: both;
+	width: 20%;
+	padding: 4px 0;
+}
+.pdetail_wrap .pick_info .contact dd {
+	float: left;
+	width: 80%;
+	padding: 4px 0;
+}
+.pdetail_wrap .pick_info .tag {
+	font-size: 0;
+	width: 210px;
+	margin-top: 30px;
+}
+.pdetail_wrap .pick_info .tag li {
+	display: inline-block;
+	line-height: 26px;
+	padding: 0 13px;
+	border: 1px solid #aaa;
+	font-size: 13px; color: #181818;
+	margin: 5px -1px 0 0;
+}
+.pdetail_wrap .pick_info .btns {
+	margin-top: 40px;
+}
+.pdetail_wrap .pick_info .btns a {
+	display: block;
+	width: 70%; min-width: 170px;
+	line-height: 44px;
+	background: #999; color: #fff;
+	text-align: center;
+	margin-top: 4px;
+	font-size: 13px;
+	letter-spacing: 1.5px;
+}
+.pdetail_wrap .pick_info .btns a:first-child {
+	background: #000;
+}
+.pdetail_wrap .pick_cont {
+	float: right;
+	width: 74.4%;
+}
+.pdetail_wrap .pick_cont .cont .tit {
+	font-size: 22px; line-height: 1.5;
+	color: #000;
+}
+.pdetail_wrap .pick_cont .cont .txt {
+	font-size: 14px; line-height: 2;
+	color: #181818;
+	margin-top: 25px;
+}
+.pdetail_wrap .pick_cont .cont .design {
+	border-top: 1px solid #e6e6e6;
+	font-size: 0;
+	padding: 15px 0;
+	margin-top: 35px;
+}
+.pdetail_wrap .pick_cont .cont .design small {
+	display: inline-block;
+	padding-right: 20px;
+	font-size: 12px;
+}
+.pdetail_wrap .pick_cont .cont .design span {
+	display: inline-block;
+	font-size: 14px;
+}
+.pdetail_wrap .pick_cont .cont .design span:first-child::after {
+	content: "";
+	display: inline-block;
+	width: 1px; height: 17px;
+	padding: 0;
+	background: #e6e6e6;
+	vertical-align: top;
+	margin: 0 30px;
+	display: inline-block;
+}
+.pdetail_wrap .pick_cont .map {
+	background: #eee;
+	text-align: center;
+	height: 600px;
+	margin-top: 50px;
+}
+@media (max-width: 768px) {
+	.pdetail_wrap {width: 100%;}
+	.pdetail_wrap > .img {margin: 0 -20px;}
+	.pdetail_wrap .pick_info {float: inherit; width: 100%; padding: 20px 0 0;}
+	.pdetail_wrap .pick_info .info {font-size: 12px;}
+	.pdetail_wrap .pick_info .contact {margin-top: 15px;}
+	.pdetail_wrap .pick_info .contact::after {content:""; display: block; clear:both;}
+	.pdetail_wrap .pick_info .contact dt {width: 18%;}
+	.pdetail_wrap .pick_info .tag {width: 100%; margin-top: 15px;}
+	.pdetail_wrap .pick_info .tag li {line-height: 25px; padding: 0 13px; font-size: 12px; margin: 5px -1px 0 0;}
+	.pdetail_wrap .pick_info .btns {margin-top: 35px; text-align: center; font-size: 0;}
+	.pdetail_wrap .pick_info .btns a {display: inline-block; width: 50%; line-height: 35px; font-size: 12px; border-left: 3px solid #fff; min-width: inherit;}
+	.pdetail_wrap .pick_info .btns a:first-child {border-right: 2px solid #fff; border-left: none;}
+	.pdetail_wrap .pick_cont {float: inherit; width: 100%; padding: 90px 0 0;}
+	.pdetail_wrap .pick_cont .cont .tit {font-size: 16px;}
+	.pdetail_wrap .pick_cont .cont .txt {font-size: 12px; margin-top: 25px;}
+	.pdetail_wrap .pick_cont .cont .design {margin-top: 50px;}
+	.pdetail_wrap .pick_cont .cont .design small {width: 48px;}
+	.pdetail_wrap .pick_cont .cont .design span {display: block; font-size: 12px; padding: 0 0 10px;}
+	.pdetail_wrap .pick_cont .cont .design span.line {display: none;}
+	.pdetail_wrap .pick_cont .map {height: 300px; margin: 50px 0 100px;}
+}
+
+

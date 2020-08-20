@@ -1,0 +1,122 @@
+@charset 'utf-8';
+
+
+
+/**
+회원정보수정
+**/
+.myedit_wrap {
+	position: relative;
+}
+.myedit_wrap .profile_photo {
+	position: absolute; top: 63px; right: 12.65%;
+	margin: 0 auto;
+	width: 150px;
+}
+.myedit_wrap .profile_photo .input_box .tit {
+	margin-bottom: 20px;
+}
+.myedit_wrap .profile_photo .photo {
+	width: 150px; height: 150px;
+	border-radius: 50%;
+	border: 1px solid #ddd;
+	display: block;
+	background: #ededed url(../img/img_photo.png) no-repeat center;
+	background-size: 40px 31px;
+	text-indent: -999999px;
+	margin: 0 auto;
+}
+.myedit_wrap .profile_photo .btn_photo {
+	position: absolute; bottom: 0; right: 0;
+	background: url(../img/btn_photo.png) no-repeat center;
+	background-size: cover;
+	width: 35px; height: 35px;
+	text-indent: -999999px;
+	cursor: pointer;
+}
+.myedit_box {
+	width: 55.26%;
+	padding-top: 45px;
+	margin-bottom: -30px;
+}
+@media (max-width: 768px) {
+	.myedit_wrap .profile_photo {position: relative; top: 35px; right: auto;}
+	.myedit_wrap .profile_photo .input_box .tit {display: none;}
+	.myedit_box {width: 100%; padding-top: 20px;}
+}
+
+
+/**
+1:1문의
+**/
+.qna_wrap .board_fold {
+	padding-bottom: 20px;
+	min-width: 790px;
+}
+.qna_wrap .board_fold li {
+	background: #fff;
+	position: relative;
+}
+.qna_wrap .board_fold li > .tit .ellipsis {
+	width: 83%;
+	vertical-align: middle;
+	display: inline-block;
+}
+.qna_wrap .board_fold li > .tit {padding-right: 80px; }
+.qna_wrap .board_fold li > .tit::after {
+	font-size: 14px; color: #999;
+	width: 80px;
+	text-align: right;
+	right: 0;
+	background: #fff;
+}
+.qna_wrap .board_fold li > .tit.wait::after {content:"답변준비중"; background: #fff;}
+.qna_wrap .board_fold li > .tit.end::after {content:"답변완료"; background: #fff;}
+.qna_wrap .board_fold li > .tit .date {
+	font-size: 14px; color: #999;
+	float: right;
+	vertical-align: middle;
+	margin: 3px 30px 0 0;
+}
+
+.qna_wrap .qna_box {
+	overflow: hidden;
+	margin: 0 0 -30px -50px; padding-top: 45px;
+	position: relative;
+}
+.qna_wrap .qna_box .input_box {
+	width: 50%;
+	float: left;
+	padding-left: 50px;
+}
+.qna_wrap .qna_box .input_box.textarea .input {
+	height: 171px;
+}
+.qna_wrap .qna_box .input_box.textarea textarea {
+	height: 170px;
+}
+@media (max-width: 768px) {
+	.qna_wrap .qna_box {padding-bottom: 250px;}
+	.qna_wrap .board_fold {border-top: 3px solid #000; margin-top: 35px; min-width: auto;}
+	.qna_wrap .board_fold li > .tit {padding-right: 60px;}
+	.qna_wrap .board_fold li > .tit::after {display: inline-block; border: 0; width: 60px; font-size: 12px;}
+	.qna_wrap .board_fold li > .tit .ellipsis {width: 100%;}
+	.qna_wrap .board_fold li > .tit .date {display: block; margin-left: 0; float: inherit; font-size: 13px;}
+	.qna_wrap .qna_box .input_box {width: 100%;}
+	.qna_wrap .qna_box .input_box.textarea {position: absolute; bottom: 0;}
+}
+
+
+
+/**
+FAQ
+**/
+.faq_wrap {
+	clear: both;
+	padding: 0 0 50px;
+}
+@media (max-width: 768px) {
+	.faq_wrap .board_fold {border-top: 3px solid #000; margin-top: 35px;}
+}
+
+

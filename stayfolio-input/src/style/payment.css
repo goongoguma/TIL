@@ -1,0 +1,555 @@
+@charset 'utf-8';
+
+.booking_wrap {
+	margin-top: -60px;
+}
+.booking_summary{
+	border-bottom: 2px solid #ddd;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+}
+.booking_summary .name {
+	font-size: 26px; font-weight: 500; color: #000;
+}
+.booking_summary .day {
+	font-size: 16px; color: #000;
+	cursor: pointer;
+}
+.booking_summary .day em {
+	display: inline-block; 
+	margin-left: 7px; padding-left: 7px;
+	border-left: 1px solid #ddd;
+}
+.booking_summary .price {
+	font-size: 26px; font-weight: 500; color: #000;
+}
+.booking_day {
+	position: relative;
+	top: 0; left: 0; right: 0;
+	width: 100%;
+	background: #fff;
+	height: 0;
+	padding-bottom: 30px;
+	z-index: 20;
+	display: none;
+}
+.booking_day.open {
+	top: 0;
+	height: auto;
+	display: block;
+}
+.booking_day .day_del {
+	font-size: 15px; color: #000; font-weight: 500;
+	padding: 20px 0;
+	display: block;
+	margin: 0 auto;
+}
+@media (max-width: 768px) {
+	.booking_wrap {margin-top: -20px; border-top: 1px solid #000;}
+	.booking_summary{border-bottom: 1px solid #ddd; justify-content: center; flex-direction: column;height: 135px;}
+	.booking_summary .name {font-size: 20px;}
+	.booking_summary .day {padding: 17px 0; font-size: 15px;}
+	.booking_summary .price {font-size: 18px;}
+	.booking_day.open {top: 30px;}
+	.booking_day .day_del {font-size: 11px;}
+}
+
+.booking_room {
+	margin-top: 50px;
+	position: relative;
+	height: 540px;
+}
+.booking_room .left {
+	width: 23%;
+}
+.booking_room .room_info .tit {
+	font-size: 12px;
+	letter-spacing: 3.6px;
+	font-family: 'Abel','NanumSquare';
+}
+.booking_room .room_info .name {
+	font-size: 30px; font-weight: 500;
+	margin-top: 20px;
+	line-height: 1.2;
+}
+.booking_room .room_info .price {
+	font-size: 18px; 
+	margin-top: 25px;
+}
+.booking_room .room_img {
+	position: absolute;
+	top: 0; right: 0;
+	width: 74.4%;
+}
+.booking_room .room_img .img {
+	width: 100%; height: 540px;
+}
+.booking_room .room_txt {
+	font-size: 14px; color: #333;
+	line-height: 1.7;
+	margin-top: 30px;
+}
+.booking_room .room_txt .plan {
+	background: url(../img/img_plan.png) no-repeat center;
+	background-size: cover;
+	width: 80px; height: 38px;
+	display: block;
+	margin-top: 35px;
+}
+.booking_room .room_etc {
+	position: absolute;
+	bottom: 0; left: 0;
+}
+.booking_room .room_etc .tag {
+	font-size: 0;
+	margin-bottom: 5px;
+}
+.booking_room .room_etc .tag span {
+	display: inline-block;
+	line-height: 27px;
+	border: 1px solid #ccc;
+	padding: 0 10px;
+	font-size: 13px; color: #333;
+	margin: 0 0 5px -1px;
+}
+.booking_room .room_etc .option p {
+	font-size: 14px; color: #333;
+	line-height: 1.9;
+}
+.room_service {
+	margin-top: 50px;
+	border-top: 1px solid #ddd;
+}
+.room_service .row {
+	display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+	align-items: center;
+	height: 150px;
+	border-bottom: 1px solid #ddd;
+}
+.room_service .tit {	
+	font-size: 12px;
+	letter-spacing: 3.6px;
+	font-family: 'Abel','NanumSquare';
+	width: 24%;
+}
+.room_service .service_list {
+	font-size: 0;
+}
+.room_service .service_list li {
+	display: inline-block;
+	text-align: center;
+	width: 80px;
+	font-size: 13px; color: #777;
+}
+.room_service .service_list i {
+	background: url(../img/temp/ico_service.png) no-repeat;
+	background-size: 150px 33px;
+	width: 50px; height: 33px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 13px;
+}
+.room_service .service_list i.ico_service1 {background-position: 0 0;}
+.room_service .service_list i.ico_service2 {background-position: -50px 0;}
+.room_service .service_list i.ico_service3 {background-position: -100px 0;}
+
+.booking_wrap .bt_btns {
+	padding-top: 40px;
+}
+@media (max-width: 768px) {
+	.booking_room {height: auto; margin-top: 30px;}
+	.booking_room .left {width: 100%;}
+	.booking_room .room_info .name {font-size: 25px; margin-top: 10px;}
+	.booking_room .room_info .price {font-size: 16px; margin-top: 15px;}
+	.booking_room .room_img {position: relative; width: auto; margin: 15px -20px 0 -20px;}
+	.booking_room .room_img .img {width: 100%; height: 0; position: relative; overflow: hidden; padding-bottom: 60%;}
+	.booking_room .room_txt {font-size: 12px; margin-top: 20px;}
+	.booking_room .room_txt .plan {margin-top: 20px;}
+	.booking_room .room_etc {position: relative; bottom: auto; margin-top: 35px;}
+	.booking_room .room_etc .option p {font-size: 13px;}
+	.room_service .row {display: block; height: auto; }
+	.room_service .tit {width: 100%; margin: 25px 0;}
+	.room_service .service_list {overflow-y: hidden; white-space: nowrap; height: 80px; margin: 0 -20px;}
+}
+
+
+
+.booking_wrap .po_payment_box {
+	margin-top: 50px;
+}
+
+
+
+
+
+
+.payment_list > li {
+	border-bottom: 1px solid #e6e6e6;	
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: space-between;
+	-ms-flex-align: center;
+	-ms-flex-pack: justify;
+	padding: 20px 0;
+	line-height: 16px;
+}
+.payment_list > li .tit {
+	font-size: 12px;
+	padding-top: 2px;
+}
+.payment_list > li .cont {
+	width: 62%;
+	font-size: 16px;
+	position: relative;
+}
+.payment_list > li .cont dl {
+	font-size: 12px; color: #999;
+	overflow: hidden;
+}
+.payment_list > li .cont dt {
+	clear: both;
+	float: left;
+	padding: 4px 0;
+}
+.payment_list > li .cont dt .plus_option {
+	color: #000;
+	display: inline-block;
+	margin-left: 10px;
+}
+.payment_list > li .cont dt.total {
+	color: #000;
+	margin-top: 20px;
+}
+.payment_list > li .cont dd {
+	float: right;
+	text-align: right;
+	padding: 4px 0;
+}
+.payment_list > li .cont dd.total {
+	color: #000; font-size: 24px; font-weight: 500;
+	margin-top: 15px;
+}
+
+.po_payment.confirm {
+	text-align: center;
+}
+.po_payment.confirm .txt1 {
+	font-size: 24px; font-weight: 500; color: #000;
+}
+.po_payment.confirm .txt2 {
+	font-size: 14px; line-height: 1.9; color: #555;
+	margin-top: 30px;
+}
+.po_payment.confirm .bt_btns {
+	margin-top: 30px;
+}
+@media (max-width: 768px) {
+	.payment_list > li {padding: 15px 0;}
+	.payment_list > li .cont {width: 75%; font-size: 13px;}
+	.payment_list > li .cont dd.total {font-size: 18px;}
+	.po_payment.confirm .txt1 {font-size: 17px;}
+	.po_payment.confirm .txt2 {font-size: 13px; margin-top: 20px;}
+}
+
+
+
+.payment_list .cont.day em {
+	display: inline-block; 
+	margin-left: 7px; padding-left: 7px;
+	border-left: 1px solid #ddd;
+}
+.payment_list .pay_txt {
+	font-size: 14px; color: #000;
+	line-height: 1.7;
+}
+.payment_list .ridio_btns {
+	margin-top: 15px;
+}
+.payment_list input[type=text],
+.payment_list input[type=email] {
+	height: 40px; 
+	border: 1px solid #e5e5e5;
+	padding: 0 10px;
+	font-size: 14px;
+	width: 220px;
+	margin: -10px 0;
+	border-radius: 5px;
+}
+.payment_list .cont.member {	
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.payment_list .cont.member .select,
+.payment_list .cont.time .select {
+	display: inline-block;
+	margin: -10px 30px -10px 0;
+	font-size: 14px;
+}
+.payment_list .cont.member .select select,
+.payment_list .cont.time .select select {
+	margin-left: 4px;
+}
+.payment_list .member_txt {
+	position: absolute;
+	right: 0; top: -8px;
+	font-size: 12px; color: #999;
+	line-height: 1.5;
+}
+.payment_list .room_img .img {
+	width: 100%; height: 300px;
+}
+.payment_list .option_select .tit {
+	font-size: 16px; color: #000;
+	margin: 20px 0 15px;
+}
+.payment_list .option_select .tit .price {
+	display: inline-block; float: right;
+}
+.payment_list .option_select .txt {
+	font-size: 14px; color: #333;
+	line-height: 1.7;
+}
+.payment_list .btn_coupon {
+	padding: 3px 8px;
+}
+.payment_list textarea {
+	border: 1px solid #e5e5e5;
+	width: 100%; height: 150px;
+	border-radius: 5px;
+}
+.booking_wrap .complete {
+	text-align: center;
+	height: 360px;
+	border-bottom: 1px solid #ddd;
+	display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px; font-weight: 500; color: #181818;
+}
+.po_payment_box .booing_guide {
+	margin-top: 60px;
+	padding: 30px 35px;
+	border: 8px solid #f4f4f4;
+}
+.po_payment_box .booing_guide .tit {
+	font-size: 18px; color: #000; font-weight: 500;
+	margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+	.booking_wrap .po_payment_box {padding: 0; border-top: none;}
+	.payment_list input[type=text],
+	.payment_list input[type=email] {width: 100%; margin: -10px 0;}
+	.payment_list .cont.member,
+	.payment_list .cont.time {display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+		justify-content: space-between;}
+	.payment_list .cont.member {padding-bottom: 35px;}
+	.payment_list .cont.member .select {margin: -10px 0; flex: 1; padding-left: 10px;}
+	.payment_list .cont.member .select:first-child {padding: 0;}
+	.payment_list .cont.member .select select {padding: 0 15px 0 3px; height: 35px; margin: 0; width: 100%;}
+	.payment_list .cont.time .select {margin: -10px 0; flex: 1; font-size: 12px; display: flex; align-items: center;}
+	.payment_list .cont.time .select select {padding: 0 20px 0 3px; background-position: 110% 50%; margin-left: 5px; width: 40%;}
+	.payment_list .cont.time .select select:last-child {width: 30%;} 
+	.payment_list .member_txt {right: auto; left: 0; top: 37px;}
+	.payment_list .room_img .img {width: 100%; height: 0; position: relative; overflow: hidden; padding-bottom: 60%;}
+	.payment_list .option_select .tit {font-size: 14px; margin: 10px 0;}
+	.payment_list .option_select .txt {font-size: 12px; margin-bottom: 10px;}
+	.payment_list .option_select .radio_skin input + span {font-size: 14px;}
+	.booking_wrap .complete {height: 130px; font-size: 18px;}
+	.po_payment_box .booing_guide {margin-top: 30px; padding: 20px; border: 4px solid #f4f4f4;}
+	.po_payment_box .booing_guide .tit {font-size: 14px; margin-bottom: 10px;}
+}
+
+
+
+
+
+/*
+해외 결제
+*/
+
+.booking_step {
+	width: 790px;
+	margin: 110px auto;
+	text-align: center;
+}
+.booking_step .tit {
+	font-size: 18px; color: #000;
+	font-weight: 500;
+}
+.booking_step .tit small {
+	display: block;
+	font-size: 14px; color: #666;
+	margin: 0 auto;
+	font-weight: 300;
+	margin-top: 10px;
+}
+.booking_step .step_list {
+	margin: 30px 0 0 -60px;
+	overflow: hidden;
+	color: #181818;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.booking_step .step_list li {	
+	position: relative;
+	font-size: 24px;
+	height: 90px;
+	flex: 1;
+	margin-left: 60px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+.booking_step .step_list li small {
+	font-family: 'Lato-Bold';
+	display: block;
+	font-size: 12px;
+	margin-bottom: 10px;
+	letter-spacing: 1px;
+}
+.booking_step .step_list li::after {
+	content:"";
+	display: inline-block;
+	background: url(../img/arw_02.png) no-repeat center;
+	background-size: cover;
+	width: 12px; height: 26px;
+	position: absolute; top: 50%; left: -35px;
+	margin-top: -13px;
+}
+.booking_step .step_list li:first-child::after {
+	display: none;
+}
+.booking_step .step_list li.pass {background: #f5f5f5; color: #bbb;}
+.booking_step .step_list li.on {background: #000; color: #fff;}
+.booking_step .step_list li.wait {background: #f5f5f5; color: #000;}
+
+@media (max-width: 768px) {
+	.booking_step {width: 100%; margin: 40px auto; text-align: left;}
+	.booking_step .tit {font-size: 14px; }
+	.booking_step .tit small {display: inline-block; font-size: 12px; margin: 0 0 0 10px;}
+	.booking_step .step_list {margin: 20px 0 0 -13px;}
+	.booking_step .step_list li {margin-left: 13px; font-size: 13px; height: 55px;}
+	.booking_step .step_list li small {font-size: 10px;}
+	.booking_step .step_list li::after {width: 6px; height: 13px; left: -9px; margin-top: -7px;}
+}
+
+
+/* booking - FAQ */
+.booking_faq {
+	background: #000;
+	padding: 100px 0;
+	margin: 100px 0 -110px;
+	color: #fff;
+}
+.booking_faq .left {
+	width: 17%;
+	float: left;
+	clear: both;
+}
+.booking_faq .right {
+	width: 83%;
+	float: right;
+}
+
+.booking_faq .faq_tit .left {
+	font-size: 18px; 
+	font-family: 'Abel','NanumSquare';
+	text-transform: uppercase;
+	letter-spacing: 18px;
+}
+.booking_faq .faq_tit .right {
+	font-size: 16px;
+}
+.booking_faq .faq_cont {
+	padding-top: 60px;
+}
+.booking_faq .faq_cont .tab_btn {
+	color: #666;
+}
+.booking_faq .faq_cont .tab_btn .active {
+	color: #fff;
+}
+.booking_faq .faq_cont .tab_btn li {
+	font-size: 16px; margin-bottom: 30px;
+}
+
+.booking_faq .faq_cont .tab_view {
+	display: none;
+}
+.booking_faq .faq_cont .tab_view.active {
+	display: block;
+}
+.booking_faq .faq_cont .tab_view .tit {
+	font-size: 24px;
+	margin-bottom: 30px;
+}
+.booking_faq .faq_cont .tab_view dl {
+	overflow: hidden;
+}
+.booking_faq .faq_cont .tab_view dl dt {
+	width: 10%;
+	clear: both;
+	float: left;
+	font-size: 16px; color: #ccc;
+	line-height: 28px;
+	padding-bottom: 30px;
+}
+.booking_faq .faq_cont .tab_view dl dd {
+	width: 90%;
+	float: left;
+	font-size: 14px; color: #888;
+	line-height: 28px;
+	padding-bottom: 30px;
+}
+.booking_faq .faq_cont .tab_view .box_list {
+	width: 650px;
+	margin-top: 15px;
+}
+.booking_faq .faq_cont .tab_view .box_list li {
+	float: left;
+	border: 1px solid #444;
+	width: 50%;
+	line-height: 35px;
+	margin: -1px 0 0 -1px;
+}
+.booking_faq .faq_cont .tab_view .box_list li span {
+	display: inline-block;
+	margin-left: 15px;
+	width: 130px;
+}
+@media (max-width: 768px) {
+	.booking_faq {padding: 50px 0; margin: 80px 0 -80px;}
+	.booking_faq .left, .booking_faq .right {width: 100%; float: none;}
+	.booking_faq .faq_tit {text-align: center;}
+	.booking_faq .faq_tit .right {font-size: 11px; margin-top: 20px;}
+	.booking_faq .faq_cont .tab_btn {
+		display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+		justify-content: space-between; letter-spacing: -1px;}
+	.booking_faq .faq_cont .tab_btn li {font-size: 12px; margin-bottom: 60px;}
+	.booking_faq .faq_cont .tab_view .tit {font-size: 14px;}
+	.booking_faq .faq_cont .tab_view dl dt {width: 17%; font-size: 12px; line-height: 17px;}
+	.booking_faq .faq_cont .tab_view dl dd {width: 83%; font-size: 12px; line-height: 17px;}
+	.booking_faq .faq_cont .tab_view .box_list,
+	.booking_faq .faq_cont .tab_view .box_list li {width: 100%; line-height: 25px;}
+	.booking_faq .faq_cont .tab_view .box_list li span {width: 40%;}
+}
+
+
+
+
+
+

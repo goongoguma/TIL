@@ -1,0 +1,410 @@
+@charset 'utf-8';
+@import url('mystay.css');
+@import url('myparticipate.css');
+@import url('myaccount.css');
+@import url('about.css');
+
+/**
+MY PAGE 공통
+**/
+
+/* Layout */
+.mypage_wrap {
+	max-width: 1100px;
+	margin: 0 auto;
+	font-family: 'NanumSquare';
+	overflow: hidden;
+	margin-top: -15px;
+}
+.mypage_myinfo {
+	clear: both;
+	text-align: center;
+	padding: 0 0 80px;  margin: 0 0 60px;
+	border-bottom: 3px solid #000;
+}
+.mypage_myinfo .tit {
+	font-size: 30px; font-weight: 500; font-family: 'NanumSquare';
+}
+.mypage_myinfo .tit .new {
+	background: #ff3333;
+	width: 26px; line-height: 26px;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin: 0 0 3px 8px;
+	display: inline-block;
+	text-align: center;
+	color: #fff; font-size: 14px; font-family: 'Lato-Bold';
+}
+.mypage_myinfo .edit {
+	font-size: 16px; font-weight: 500; font-family: 'NanumSquare';
+	margin-top: 17px;
+}
+.mypage_myinfo .edit a {
+	display: inline-block;
+	font-size: 12px; color: #999;
+	margin-left: 10px;
+}
+.mypage_myinfo .edit a::before {
+	content:"";
+	display: inline-block;
+	width: 1px; height: 14px;
+	background: #d4d4d4;
+	vertical-align: middle;
+	margin-right: 8px;
+}
+
+.mypage_myinfo .mylv_box {
+	display: table;
+	table-layout: fixed;
+	background: #f9f9f9;
+	text-align: center;
+	padding: 50px 0; margin-top: 70px;
+	width: 100%;
+}
+.mypage_myinfo .mylv_box dl {
+	display: table-cell;
+	vertical-align: middle;
+	width: 33.33%;
+	position: relative;
+}
+.mypage_myinfo .mylv_box dl::before {
+	content:"";
+	display: inline-block;
+	width: 1px; height: 47px;
+	background: #d4d4d4;
+	position: absolute; top: 0; left: 0;
+}
+.mypage_myinfo .mylv_box dl:first-child::before {
+	display: none;
+}
+.mypage_myinfo .mylv_box dt {
+	font-size: 14px; color: #666;
+}
+.mypage_myinfo .mylv_box dd {
+	font-size: 24px; color: #181818; font-weight: 500;
+	margin-top: 13px;
+}
+
+.mypage_wrap .mypage_menu {
+	float: left;
+	width: 25.47%;
+}
+.mypage_wrap .mypage_menu > ul {
+	margin-bottom: 50px;
+	font-size: 14px; line-height: 38px; font-family: 'NanumSquare';
+}
+.mypage_wrap .mypage_menu > ul > li.tit {
+	font-size: 18px; font-weight: 500;
+}
+.mypage_wrap .mypage_menu > ul > li a {
+	display: inline-block;
+}
+.mypage_wrap .mypage_menu > ul > li.active::after {
+	content:"";
+	display: inline-block;
+	width: 1px; height: 1px;
+	border: 2px solid #000;
+	margin: 0 0 2px 10px;
+}
+.mypage_wrap .mypage_content {
+	float: right;
+	width: 74.53%;
+	padding: 9px 0 0;
+	position: relative;
+}
+@media (max-width: 768px) {
+	.mypage_wrap {width: 100%; margin: 0;}
+	.mypage_wrap .mypage_content {width: 100%; padding: 0;}
+	.mypage_myinfo {display: none;}	
+	.landing .mypage_myinfo {display: block; padding: 0 0 40px;  margin: 0;}
+	.mypage_myinfo .tit {font-size: 24px;}
+	.mypage_myinfo .edit {margin-top: 10px;}
+	.mypage_myinfo .mylv_box {padding: 20px 0; margin: 35px auto 0; }
+	.mypage_myinfo .mylv_box dl::before {height: 32px;}
+	.mypage_myinfo .mylv_box dl:first-child::before {display: none;}
+	.mypage_myinfo .mylv_box dt {font-size: 12px;}
+	.mypage_myinfo .mylv_box dd {font-size: 15px; margin-top: 7px;}
+}
+
+
+/* 마이페이지 타이틀 */
+h2.my_tit_mo {
+	font-size: 18px; font-weight: 500;
+	margin: 8px 0 20px;
+	position: relative;
+	display: none;
+}
+h3.my_tit {
+	font-size: 18px; font-weight: 500; color: #000;
+}
+h3.my_tit > small {
+	font-size: 14px; color: #666; font-weight: 300;
+	display: inline-block; margin-left: 8px;
+}
+h3.my_tit.lg {
+	font-size: 32px;
+	color: #181818;
+	line-height: 1.2;
+}
+h3.my_tit > em {
+	color: #999;
+	display: inline-block;
+}
+h3.my_tit i.ico_greater {
+	display: inline-block;
+	background: url(../img/arw_tit.png) no-repeat center;
+	background-size: cover;
+	width: 20px; height: 20px;
+	vertical-align: middle;
+	margin: 0 1px 0 5px;
+}
+h4.my_sub {
+	font-size: 16px; font-weight: 500; color: #000;
+}
+@media (max-width: 768px) {
+	h2.my_tit_mo {line-height: 46px; background: #f5f5f5; text-align: center; width: auto; display: block; margin: 0 -20px; font-size: 14px;}
+	h2.my_tit_mo .btn_back {background: url(../img/btn_back.png) no-repeat center; background-size: cover; display: inline-block; width: 40px; height: 40px; text-indent: -999999px; position: absolute; top: 3px; left: 0; }
+	h3.my_tit {font-size: 14px;}
+	h3.my_tit > small {font-size: 12px;}
+	h3.my_tit.lg {font-size: 20px; color: #181818; margin-top: 35px;}
+	h4.my_sub {font-size: 14px;}
+}
+
+
+/* 예약정보 Box*/
+.mystay_box {
+	clear: both;
+	position: relative;
+	font-family: 'NanumSquare';
+	margin: 0 0 80px;
+	height: 250px;
+	min-width: 630px;
+}
+.mystay_box .name {
+	font-size: 32px; line-height: 100%; font-weight: 500; letter-spacing: -0.5px;
+	width: 48%;
+}
+.mystay_box .btn_like {
+	position: absolute;
+	right: 10px; bottom: 7px;
+}
+.mystay_box .name .ellipsis {max-width: 100%; display: inline-block;}
+.mystay_box .name em {
+	display: inline-block;
+	font-size: 13px; color: #fff;
+	line-height: 24px;
+	margin: 3px 0 12px 3px;
+	text-align: center;
+	background: #000;
+	vertical-align: bottom;
+	text-align: center;
+	border-radius: 100px;
+	width: 80px;
+	border: 1px solid #000;
+}
+.mystay_box .name em.badge_bk {
+	color: #fff;
+	background: #000;
+}
+.mystay_box .name em.badge_wh {
+	color: #000;
+	background: #fff;
+}
+.mystay_box .name small {
+	display: block;
+	font-size: 12px; font-family: 'Abel'; text-transform: uppercase; letter-spacing: 3.6px;
+	margin: 4px 0 18px 2px;
+	line-height: 1;
+}
+.mystay_box .stay {
+	clear: both;
+	line-height: 1.5;
+	margin: 8px 0 0;
+}
+.mystay_box .stay .day {
+	font-size: 16px;
+	margin-bottom: 3px;
+}
+.mystay_box .stay .option {
+	font-size: 14px; color: #666;
+}
+.mystay_box .payment {
+	clear: both;
+	padding: 20px 0 0;
+}
+.mystay_box .qna a {
+	font-size: 14px; font-weight: 500; color: #000;
+	padding: 9px 0 0;
+	display: inline-block;
+}
+.mystay_box .qna a::before {
+	content:"";
+	display: inline-block;
+	width: 22px; height: 22px;
+	background: #ddd;
+	margin: 0 4px 2px -2px;
+	vertical-align: middle;
+	background: url(../img/ico_qna.png) no-repeat center;
+	background-size: cover;
+}
+.mystay_box .payment .price {
+	font-size: 21px; font-weight: 500;
+	margin: 0 0 10px;
+	display: inline-block;
+}
+.mystay_box .payment .price.sm {
+	font-size: 14px;
+}
+.mystay_box .payment .price.del {
+	text-decoration: line-through;
+	color: #999;
+}
+.mystay_box .payment .price.sm::after {
+	content:"";
+	display: inline-block;
+	width: 1px; height: 13px;
+	background: #ddd;
+	margin: 0 4px 0 8px;
+	vertical-align: middle;
+}
+.mystay_box .payment .cancel {
+	font-size: 21px; font-weight: 500; color: #000;
+	margin-left: 10px;
+}
+.mystay_box .payment .txt {
+	font-size: 14px; color: #333;
+}
+.mystay_box .btns {
+	display: flex; display: -webkit-box; display: -moz-box; display: -webkit-flex; display: -ms-flexbox;
+	justify-content: space-between;
+	position: absolute; bottom: 0;
+	font-family: 'Abel','NanumSquare';
+	width: 300px;
+}
+.mystay_box .btns button {
+	width: 150px; height: 45px;
+	margin-left: 5px;
+	text-align: center;
+}
+.mystay_box .btns button:first-child {
+	margin-left: 0;
+}
+.mystay_box .photo {
+	width: 52%; height: 250px;
+	position: absolute; top: 0; right: 0;
+}
+.mystay_box .d-day {
+	position: absolute; bottom: 0; right: 0;
+	width: 80px; height: 80px;
+	text-align: center;
+	display: table; table-layout: fixed;
+	background: #000;
+}
+.mystay_box .d-day p {
+	display: table-cell;
+	color: #ccc; font-size: 12px;
+	vertical-align: middle;
+	line-height: 1.2;
+}
+.mystay_box .d-day p strong {
+	display: block;
+	font-size: 18px; color: #fff; font-family: 'Lato-Bold';
+	margin-top: 4px;
+}
+@media (max-width: 768px) {
+	.mystay_box {margin: 0 0 50px; padding: 0 0 50px; height: auto; min-width: 100%; border-bottom: 1px solid #ddd;}
+	.mystay_box .name {font-size: 21px; width: 100%; margin-bottom: 10px;}
+	.mystay_box .name.badge .ellipsis {max-width: 72%;}
+	.mystay_box .name em {font-size: 10px; line-height: 19px; width: 70px; margin: 2px 0 4px 5px;}
+	.mystay_box .name small {font-size: 11px; margin: 4px 0 10px 2px;}
+	.mystay_box .photo {width: 100%; height: 250px; position: relative; margin: 10px 0 20px;}
+	.mystay_box .btns {position: relative; margin-top: 30px; width: 100%;}
+	.mystay_box .btns button {flex: 1;}
+	.mystay_box .btns.btn1 {width: 50%;}
+	.mystay_box .d-day {bottom: auto; top: 205px;}
+	.mystay_box .d-day p {font-size: 11px;}
+	.mystay_box .d-day p strong {font-size: 16px;}
+}
+
+
+/*
+Landing Page
+*/
+.landing .reserv_wrap {
+	margin-top: 0;
+}
+
+.landing .likestay_box_slider {
+	margin-left: -30px;
+}
+.landing .likestay_wrap .mystay_box {
+	padding-left: 30px;
+}
+.landing .likestay_wrap .mystay_box .photo {
+	width: 50%;
+}
+
+.likestay_box_slider > .slick-prev {
+	left: inherit; top: -40px; right: 29px;
+	z-index: 2;
+	width: 30px; height: 30px;
+	background: url(../img/arw-fsdetail02.png) no-repeat;
+	background-size: 30px 60px;
+	background-position: -1px -1px;
+	background-color: #fff;
+	border: 1px solid #6e6e6e;
+}
+.likestay_box_slider > .slick-next {
+	top: -40px; right: 0;
+	z-index: 2;
+	width: 30px; height: 30px;
+	background: url(../img/arw-fsdetail02.png) no-repeat;
+	background-size: 30px 60px;
+	background-position: -1px -31px;
+	background-color: #fff;
+	border: 1px solid #6e6e6e;
+}
+.likestay_box_slider > .slick-prev:hover,
+.likestay_box_slider > .slick-next:hover {
+	opacity: 1;
+}
+
+
+.landing_menu {
+	width: 100%;
+	font-family: 'NanumSquare';
+}
+.landing_menu ul {
+	margin-bottom: 50px;
+}
+.landing_menu ul li.tit {
+	font-size: 12px; color: #333;
+	margin-bottom: 10px;
+}
+.landing_menu ul li a {
+	display: block;
+	line-height: 55px;
+	font-size: 16px; color: 000;
+	border-bottom: 1px solid #d2d2d2;
+	position: relative;
+}
+.landing_menu ul li a::after {
+	content:"";
+	display: inline-block;
+	width: 5px; height: 11px;
+	background: url(../img/arw_02.png) no-repeat center;
+	background-size: cover;
+	position: absolute; top: 50%; right: 0;
+	margin-top: -3px;
+}
+@media (max-width: 768px) {
+	.landing .reserv_wrap {margin: 0;}
+	.landing .mystay_box {margin: 0 0 40px; padding: 0 0 40px;}
+	.landing .mystay_box .payment {display: none;}
+	.landing .mystay_box .btns {margin: 17px 0 0;}
+	.landing .mystay_box .btns a {width: 100%; display: block;}
+	.landing .mystay_box .day,
+	.landing .mystay_box .option {font-size: 13px;}
+	.landing .mystay_box .photo {position: absolute; top: 0; right: 0; width: 130px; height: 72px; margin: 0;}
+}
+

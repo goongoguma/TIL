@@ -8,7 +8,7 @@ function Datepicker() {
     startDate: null,
     endDate: null
   });
-  const [focus, setFocus] = useState(null);
+  const [focus, setFocus] = useState('startDate');
 
   const { startDate, endDate } = dateRange;
 
@@ -26,7 +26,8 @@ function Datepicker() {
         endDateId="endDateMookh"
         displayFormat="MMM D"
         focusedInput={focus}
-        onFocusChange={focus => setFocus(focus)}
+        
+        onFocusChange={(focus) => setFocus(focus)}
       />
   );
 }
