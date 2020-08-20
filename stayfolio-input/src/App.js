@@ -2,13 +2,6 @@ import React, { useCallback, useState } from 'react';
 import './style/common.css';
 import './style/findstay.css';
 
-const useNumberHook = (number = 0) => {
-  const [num, setNum] = useState(number);
-  const increment = () => setNum(num + 1);
-  const decrement = () => setNum(num === 0 ? 0 : num - 1);
-  return [num, increment, decrement];
-}
-
 function App() {
   const [boxState, setBoxState] = useState({
     numberOpen: "",
@@ -16,10 +9,6 @@ function App() {
     typeOpen: "",
     themeOpen: ""
   });
-
-  // const [adultCount, increment, decrement] = useNumberHook(0)
-  // const [childCount, increment, decrement] = useNumberHook(0)
-  // const [babyCount, increment, decrement] = useNumberHook(0)
 
   const [numberState, setNumberState] = useState({
     adultCount: 0,
@@ -45,61 +34,11 @@ function App() {
     }  
   })
 
-    const handleNumberState = useCallback((gen, state) => {
-      if (gen === "adult" && state === "minus" && numberState.adultCount > 0) {
-        setNumberState(prevState => {
-          return {
-            adultCount: prevState.adultCount - 1,
-            childCount: prevState.childCount,
-            babyCount: prevState.babyCount
-          }
-        }) 
-      }
-      if (gen === "adult" && state === "plus") {
-        setNumberState(prevState => {
-          return {
-            adultCount: prevState.adultCount + 1,
-            childCount: prevState.childCount,
-            babyCount: prevState.babyCount
-          }
-        }) 
-      }
-      if (gen === "child" && state === "minus" && numberState.childCount > 0) {
-        setNumberState(prevState => {
-          return {
-            adultCount: prevState.adultCount,
-            childCount: prevState.childCount - 1,
-            babyCount: prevState.babyCount
-          }
-        }) 
-      }
-      if (gen === "child" && state === "plus") {
-        setNumberState(prevState => {
-          return {
-            adultCount: prevState.adultCount,
-            childCount: prevState.childCount + 1,
-            babyCount: prevState.babyCount
-          }
-        }) 
-      }
-      if (gen === "baby" && state === "minus" && numberState.babyCount > 0) {
-        setNumberState(prevState => {
-          return {
-            adultCount: prevState.adultCount,
-            childCount: prevState.childCount,
-            babyCount: prevState.babyCount - 1
-          }
-        }) 
-      }
-      if (gen === "baby" && state === "plus") {
-        setNumberState(prevState => {
-          return {
-            adultCount: prevState.adultCount,
-            childCount: prevState.childCount,
-            babyCount: prevState.babyCount + 1
-          }
-        }) 
-      }
+    const handleNumberState = useCallback((field, value) => {
+      setNumberState(prevState => ({
+        ...prevState,
+        [field]: Math.max(0, prevState[field] + value),
+      }))
     })
 
   const { numberOpen, priceOpen, typeOpen, themeOpen } = boxState;
@@ -177,25 +116,25 @@ function App() {
 						<dt><span>Adult</span></dt>
 						<dd>
 							<div className="number_count">
-								<button type="button" className="btn_minus" onClick={() => handleNumberState("adult", "minus")}>minus</button>
+								<button type="button" className="btn_minus" onClick={() => handleNumberState("adultCount", -1)}>minus</button>
 								<span className="input-num"><input type="number" value={adultCount} /></span>
-								<button type="button" className="btn_plus" onClick={() => handleNumberState("adult", "plus")}>plus</button>
+								<button type="button" className="btn_plus" onClick={() => handleNumberState("adultCount", 1)}>plus</button>
 							</div>
 						</dd>
 						<dt><span>Child<small>24개월~12세</small></span></dt>
 						<dd>
 							<div className="number_count">
-								<button type="button" className="btn_minus" onClick={() => handleNumberState("child", "minus")}>minus</button>
+								<button type="button" className="btn_minus" onClick={() => handleNumberState("childCount", -1)}>minus</button>
 								<span className="input-num"><input type="number" value={childCount} /></span>
-								<button type="button" className="btn_plus" onClick={() => handleNumberState("child", "plus")}>plus</button>
+								<button type="button" className="btn_plus" onClick={() => handleNumberState("childCount", 1)}>plus</button>
 							</div>
 						</dd>
 						<dt><span>Baby<small>24개월 미만</small></span></dt>
 						<dd>
 							<div className="number_count">
-								<button type="button" className="btn_minus" onClick={() => handleNumberState("baby", "minus")}>minus</button>
+								<button type="button" className="btn_minus" onClick={() => handleNumberState("babyCount", -1)}>minus</button>
 								<span className="input-num"><input type="number" value={babyCount} /></span>
-								<button type="button" className="btn_plus" onClick={() => handleNumberState("baby", "plus")}>plus</button>
+								<button type="button" className="btn_plus" onClick={() => handleNumberState("babyCount", 1)}>plus</button>
 							</div>
 						</dd>
 					</dl>
