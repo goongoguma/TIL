@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import InputRange from 'react-input-range';
 import './style/common.css';
 import './style/findstay.css';
 
@@ -15,7 +16,10 @@ function App() {
     childCount: 0,
     babyCount: 0
   });
-  const [priceState, setPriceState] = useState(0);
+  const [price, setPrice] = useState({
+    min: 0,
+    max: 50000
+  });
   const [typeState, setTypeState] = useState('');
   const [themeState,setThemeState] = useState('')
 
@@ -145,19 +149,21 @@ function App() {
 					<div className="tit">가격 범위</div>
 					<div className="price_wrap pc_only">
 						<div className="price_slid">
-							<div className="slid_rail"></div>
-							<div className="slid_track" style={{left: '10%', width: '50%'}}></div>
-							<div className="slid_handle" style={{left: '10%'}}></div>
-							<div className="slid_handle" style={{left: '60%'}}></div>
+               <InputRange
+                maxValue={50000}
+                minValue={0}
+                value={price}
+                onChange={value => setPrice(value)} 
+              />
 						</div>
 						<div className="price_input">
 							<div className="input">
 								<small>최저요금</small>
-								<span><input type="number" value="" />원</span>
+								<span><input type="number" value={price.min} />원</span>
 							</div>
 							<div className="input">
 								<small>최고요금</small>
-								<span><input type="number" value="" />원</span>
+								<span><input type="number" value={price.max} />원</span>
 							</div>
 						</div>
 					</div>

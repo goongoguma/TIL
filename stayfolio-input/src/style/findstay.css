@@ -1,8 +1,32 @@
 @charset 'utf-8';
+@import "../../node_modules/react-input-range/lib/css/index.css";
 
 /**
 List Page
 **/
+
+/* react-input-range */
+.input-range__track,
+.input-range__slider-container {
+  transition: none;
+}
+
+.input-range__track--active {
+	height: 5px;
+	background-color: #000;
+}
+
+.input-range__slider {
+	width: 30px;
+	height: 30px;
+	background: url(../img/img_handle.png) no-repeat center;
+	border: none;
+	top: -7px;
+}
+
+.input-range__slider:active {
+	transform: none;
+}
 
 /* FindStay List */
 .findstay_filter {
