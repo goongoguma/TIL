@@ -45,7 +45,7 @@ a {
 
 .header .menu {
   clear: both;
-  max-height: 0;
+  height: 0;
   /* 메뉴 애니메이션 */
   transition: max-height .2s ease-out;
 }
@@ -93,8 +93,9 @@ a {
 }
 
 /* menu-btn이 체크 되었을때 형제 요소인 menu의 css 속성을 변경시킨다 */
+/* menu-icon과 menu가 형제관계여야함 */
 .header .menu-btn:checked ~ .menu {
-  max-height: 240px;
+  height: 240px;
 }
 
 .header .menu-btn:checked ~ .menu-icon .nav-icon {
