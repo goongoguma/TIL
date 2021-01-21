@@ -29,6 +29,7 @@ function App() {
   useEffect(() => {
     getData();
     window.addEventListener("scroll", infiniteScroll, true);
+    return () => window.removeEventListener("scroll", infiniteScroll);
   }, []);
 
   return (
