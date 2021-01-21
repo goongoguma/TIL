@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-// intersection observer를 사용
-// https://www.youtube.com/watch?v=QOWq3_zpOK4&t=531s
-// https://heropy.blog/2019/10/27/intersection-observer/]
+// addEventListener 사용
+// https://medium.com/@ghur2002/react%EC%97%90%EC%84%9C-infinite-scroll-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-128d64ea24b5
 
 function App() {
   const [passengers, setPassengers] = useState([]);
@@ -10,27 +9,27 @@ function App() {
   const page = useRef(1);
   const isLoading = useRef(false);
 
-  const scrollCallback = async (entries) => {
+  const getData = async () => {
     isLoading.current = !isLoading.current;
-    if (entries[0].isIntersecting) {
-      isLoading.current = !isLoading.current;
-      const { data } = await getMorePassengerInfo(page.current);
-      setPassengers((prev) => [...prev, ...data.data])
+    const { data } = await getMorePassengerInfo(page.current);
+    setPassengers(prev => [...prev, ...data.data]);
       page.current += 1
+  };
+
+  const infiniteScroll = () => {
+    let scrollHeight = Math.max(document.documentElement .scrollHeight, document.body.scrollHeight);
+    let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    let clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight === scrollHeight) {
+      isLoading.current = !isLoading.current;
+      getData();
     };
   };
 
   useEffect(() => {
-    const {current} = bottomRef;
-    const observer = new IntersectionObserver(scrollCallback, {
-      root: null,
-      threshold: 1,
-    });
-    observer.observe(current);
-    return () => {
-      observer.disconnect(current);
-    }
-  }, [bottomRef.current]);
+    getData();
+    window.addEventListener("scroll", infiniteScroll, true);
+  }, []);
 
   return (
     <div className="container" style={{padding: "30px"}}>
