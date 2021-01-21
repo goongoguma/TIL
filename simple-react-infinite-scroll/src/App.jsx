@@ -15,8 +15,8 @@ function App() {
     if (entries[0].isIntersecting) {
       isLoading.current = !isLoading.current;
       const { data } = await getMorePassengerInfo(page.current);
-      setPassengers((prev) => [...prev, ...data.data])
-      page.current += 1
+      setPassengers((prev) => [...prev, ...data.data]);
+      page.current += 1;
     };
   };
 
