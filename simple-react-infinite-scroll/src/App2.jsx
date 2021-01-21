@@ -13,7 +13,7 @@ function App() {
     isLoading.current = !isLoading.current;
     const { data } = await getMorePassengerInfo(page.current);
     setPassengers(prev => [...prev, ...data.data]);
-      page.current += 1;
+    page.current += 1;
   };
 
   const infiniteScroll = () => {
