@@ -1,0 +1,49 @@
+#container {
+  /* background: pink; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #7BA7CC;
+}
+
+.search-container input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.show-graph-container {
+  visibility: visible;
+}
+
+.hide-graph-container {
+  visibility: hidden;
+}
+
+.wrapper {
+  margin-bottom: 30px;
+}
+
+.search-container {
+  padding: 10px;
+}
+
+.date-container {
+  padding: 10px;
+}
+
+.DateRangePickerInput__withBorder {
+  border: none !important;
+}
+
+.DateRangePickerInput_arrow_svg {
+  display: none;
+}
+
+.DateInput.DateInput_1 {
+  /* border-bottom: 1px solid black; */
+}
