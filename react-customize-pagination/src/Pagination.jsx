@@ -25,9 +25,9 @@ function Pagination() {
   };
 
   const renderTodos = () => {
-    const maxPage = itemsPerPage * currentPage;
+    const range = itemsPerPage * currentPage;
     return (
-      todo.slice(maxPage - itemsPerPage, maxPage).map(item => {
+      todo.slice(range - itemsPerPage, range).map(item => {
         return (
           <li key={item.id}>{item.title}</li>
         )
