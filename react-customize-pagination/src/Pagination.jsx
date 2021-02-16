@@ -78,7 +78,7 @@ function Pagination() {
 
   const goToLast = () => {
     setCurrentPage(data.length);
-    setMinPageNumber(data.length - itemsPerPage);
+    setMinPageNumber(data.length - limit);
     setMaxPageNumber(data.length);
   };
 
@@ -89,9 +89,9 @@ function Pagination() {
       </ul>
       <ul className='todo-page'>
         <button className='prev-button' onClick={handlePrev} disabled={currentPage === 1}>Prev</button>
-        { minPageNumber >= 1 && <li className='first-page' onClick={backToFirst}>1&hellip;</li>}
+        { minPageNumber >= 1  && <li className='first-page' onClick={backToFirst}>1&hellip;</li>}
         {renderPages()}
-        { (maxPageNumber < data.length) && <li className='last-page' onClick={goToLast}>&hellip;{data.length}</li>}
+        { maxPageNumber < data.length && <li className='last-page' onClick={goToLast}>&hellip;{data.length}</li>}
         <button className='next-button' onClick={handleNext} disabled={currentPage === data.length}>Next</button>
       </ul>
     </div>
