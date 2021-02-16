@@ -1,0 +1,35 @@
+.todo-page {
+  display: flex;
+  justify-content: center;
+}
+
+.todo-list {
+  list-style: none;
+  color: #181818;
+}
+
+.page {
+  color: #181818;
+  list-style: none;
+  border: 1px solid #181818;
+  width: 50px; 
+}
+
+.page:hover {
+  background: #181818;
+  color: #fff;
+  cursor: pointer;
+}
+
+.selected-page {
+  list-style: none;
+  background: #181818;
+  color: #fff;
+  width: 50px; 
+  border: 1px solid #181818;
+}
+
+.button {
+  font-size: 15px;
+  cursor: pointer;
+}
