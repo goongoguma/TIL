@@ -56,7 +56,7 @@ function Pagination() {
   const handlePrev = () => {
     setCurrentPage(page => page - 1);
 
-    if ((currentPage - 1) % itemsPerPage === 0) {
+    if ((currentPage - 1) % limit === 0) {
       setMinPageNumber(minPageNumber - limit);
       setMaxPageNumber(maxPageNumber - limit);
     }
