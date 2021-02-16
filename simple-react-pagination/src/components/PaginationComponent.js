@@ -15,7 +15,7 @@ function PaginationComponent() {
   const [data, setData] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setitemsPerPage] = useState(5);
+  const [itemsPerPage, setitemsPerPage] = useState(10);
   
   const [pageNumberLimit, setPageNumberLimit] = useState(5);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);

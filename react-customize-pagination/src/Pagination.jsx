@@ -6,7 +6,8 @@ function Pagination() {
   const [currentPage, setCurrentPage] = useState(1);
   const [minPageNumber, setMinPageNumber] = useState(0);
   const [maxPageNumber, setMaxPageNumber] = useState(5);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
+  const limit = 5;
   const data = [];
 
   useEffect(() => {
@@ -56,17 +57,16 @@ function Pagination() {
     setCurrentPage(page => page - 1);
 
     if ((currentPage - 1) % itemsPerPage === 0) {
-      setMinPageNumber(minPageNumber - itemsPerPage);
-      setMaxPageNumber(maxPageNumber - itemsPerPage);
+      setMinPageNumber(minPageNumber - limit);
+      setMaxPageNumber(maxPageNumber - limit);
     }
   };
 
   const handleNext = () => {
     setCurrentPage(page => page + 1);
-
     if (currentPage + 1 > maxPageNumber) {
-      setMinPageNumber(minPageNumber + itemsPerPage);
-      setMaxPageNumber(maxPageNumber + itemsPerPage);
+      setMinPageNumber(minPageNumber + limit);
+      setMaxPageNumber(maxPageNumber + limit);
     }
   };
 
@@ -89,9 +89,9 @@ function Pagination() {
       </ul>
       <ul className='todo-page'>
         <button className='prev-button' onClick={handlePrev} disabled={currentPage === 1}>Prev</button>
-        { currentPage > itemsPerPage && <li className='first-page' onClick={backToFirst}>1&hellip;</li>}
+        { minPageNumber >= 1 && <li className='first-page' onClick={backToFirst}>1&hellip;</li>}
         {renderPages()}
-        { (currentPage < data.length - 4) && <li className='last-page' onClick={goToLast}>&hellip;{data.length}</li>}
+        { (maxPageNumber < data.length) && <li className='last-page' onClick={goToLast}>&hellip;{data.length}</li>}
         <button className='next-button' onClick={handleNext} disabled={currentPage === data.length}>Next</button>
       </ul>
     </div>
