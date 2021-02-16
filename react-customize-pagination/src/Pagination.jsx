@@ -70,17 +70,30 @@ function Pagination() {
     }
   };
 
+  const backToFirst = () => {
+    setCurrentPage(1)
+    setMinPageNumber(0);
+    setMaxPageNumber(5)
+  };
+
+  const goToLast = () => {
+    setCurrentPage(data.length);
+    setMinPageNumber(data.length - itemsPerPage);
+    setMaxPageNumber(data.length);
+  };
+
   return (
     <div>
       <ul className='todo-list'>
         {renderTodos()} 
       </ul>
       <ul className='todo-page'>
-        <button onClick={handlePrev} disabled={currentPage === 1}>Prev</button>
+        <button className='prev-button' onClick={handlePrev} disabled={currentPage === 1}>Prev</button>
+        { currentPage > itemsPerPage && <li className='first-page' onClick={backToFirst}>1&hellip;</li>}
         {renderPages()}
-        <button onClick={handleNext} disabled={currentPage === data.length}>Next</button>
+        { (currentPage < data.length - 4) && <li className='last-page' onClick={goToLast}>&hellip;{data.length}</li>}
+        <button className='next-button' onClick={handleNext} disabled={currentPage === data.length}>Next</button>
       </ul>
-      
     </div>
   )
 }
