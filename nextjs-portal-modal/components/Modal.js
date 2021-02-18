@@ -18,7 +18,7 @@ const OVERLAY_STYLES = {
   right: 0,
   bottom: 0,
   background: 'rgba(0, 0, 0, .7)',
-}
+};
 
 function Modal({ open, onClose }) {
   if (!open) return null;
