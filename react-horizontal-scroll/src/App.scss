@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  padding: 0;
+  .outer-wrapper {
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(-90deg) translateX(-100vh);
+    transform-origin: top left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      width: 400vw;
+      transform: rotate(90deg) translateY(-100vh);
+      transform-origin: top left;
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        .line {
+          width: 100vw;
+          height: 2px;
+          background: #fff;
+          display: flex;
+          input {
+            &:checked + label + .comments-down {
+              opacity: 1;
+              visibility: visible;
+              width: 400px;
+              & .comment-down {
+                width: 100%;
+                margin-bottom: 20px;
+              }
+              & .bubble-down {
+                position: relative;
+                background: #fff;
+                padding: 20px;
+                color: #222;
+                border-radius: 3px;
+                margin-top: 18px;
+                &:after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  left: -7px;
+                  top: -7px;
+                  width: 0;
+                  height: 0;
+                  border-top: 8px solid transparent;
+                  border-bottom: 8px solid transparent;
+                  border-right: 15px solid #fff;
+                  transform: rotate(45deg);
+                }
+              }
+            }
+            &:checked + label + .comments-up {
+              opacity: 1;
+              visibility: visible;
+              width: 400px;
+              & .comment-up {
+                width: 100%;
+                margin-bottom: 20px;
+              }
+              & .bubble-up {
+                position: relative;
+                background: #fff;
+                padding: 20px;
+                color: #222;
+                border-radius: 3px;
+                margin-top: -77px;
+                &:after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  left: -7px;
+                  top: 48px;
+                  width: 0;
+                  height: 0;
+                  border-top: 8px solid transparent;
+                  border-bottom: 8px solid transparent;
+                  border-right: 15px solid #fff;
+                  transform: rotate(-45deg);
+                }
+              }
+            }
+          }
+          .dot-label {
+            position: relative;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+            position: relative;
+            transform: translateY(-6px);
+            margin: 0 20px;
+          }
+          .comments-down {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 200ms;
+            width: 400px;
+          }
+          .comments-up {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 200ms;
+            width: 400px;
+          }
+        }
+      }
+      .one {
+        background: #efdefe;
+      }
+      .two {
+        background: #a3f3d3;
+      }
+      .three {
+        background: #0bbaa0;
+      }
+      .four {
+        background: #00dfdf;
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    display:none;
+  }
+}
+
+
+
+
