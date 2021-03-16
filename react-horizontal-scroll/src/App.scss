@@ -11,12 +11,25 @@ body {
     position: absolute;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    @media (max-width: 425px) {
+      width: 0;
+      height: 0;
+      transform: none;
+      overflow-y: unset;
+      overflow-x: unset;
+      position: static;
+    }
     .wrapper {
       display: flex;
       flex-direction: row;
       width: 400vw;
       transform: rotate(90deg) translateY(-100vh);
       transform-origin: top left;
+      @media (max-width: 425px) {
+        display: block;
+        transform: none;
+        transform-origin: top left;
+      }
       .slide {
         width: 100vw;
         height: 100vh;
