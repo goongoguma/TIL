@@ -11,7 +11,7 @@ function App() {
               <label className='dot-label' htmlFor='dot-btn1' />
               <div className='comments-down'>
                 <div className='comment-down bubble-down'>
-                  this is a speech bubble
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                 </div>
               </div>
             </>
@@ -20,7 +20,7 @@ function App() {
               <label className='dot-label' htmlFor='dot-btn2' />
               <div className='comments-up'>
                 <div className='comment-up bubble-up'>
-                  this is a speech bubble
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                 </div>
               </div>
             </>
@@ -29,7 +29,7 @@ function App() {
               <label className='dot-label' htmlFor='dot-btn3' />
               <div className='comments-down'>
                 <div className='comment-down bubble-down'>
-                  this is a speech bubble
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                 </div>
               </div>
             </>
@@ -38,7 +38,7 @@ function App() {
               <label className='dot-label' htmlFor='dot-btn4' />
               <div className='comments-up'>
                 <div className='comment-up bubble-up'>
-                  this is a speech bubble
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                 </div>
               </div>
             </>
@@ -51,7 +51,7 @@ function App() {
               <label className='dot-label' htmlFor='dot-btn5' />
               <div className='comments-down'>
                 <div className='comment-down bubble-down'>
-                  this is a speech bubble
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                 </div>
               </div>
             </>
