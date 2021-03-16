@@ -1,3 +1,43 @@
+%common-comments {
+  opacity: 1;
+  visibility: visible;
+  width: 400px;
+  @media (max-width: 425px) {
+    width: 0;
+  }
+};
+
+%common-bubble {
+  background: #fff;
+  padding: 20px;
+  color: #222;
+  border-radius: 3px;
+  word-break: break-all;
+};
+
+%common-bubble-pseudo {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 15px solid #fff;
+};
+
+%common-comments-not-clicked {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms;
+  width: 400px;
+  position: relative;
+  @media (max-width: 425px) {
+    width: 2px;
+    height: 180px;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -52,22 +92,13 @@ body {
           }
           input {
             &:checked + label + .comments-down {
-              opacity: 1;
-              visibility: visible;
-              width: 400px;
-              @media (max-width: 425px) {
-                width: 0;
-              }
+              @extend %common-comments;
               & .comment-down {
                 margin-bottom: 20px;
               }
               & .bubble-down {
-                background: #fff;
-                padding: 20px;
-                color: #222;
-                border-radius: 3px;
+                @extend %common-bubble;
                 margin-top: 18px;
-                word-break: break-all;
                 @media (max-width: 425px) {
                   width: 115px;
                   padding: 10px;
@@ -76,16 +107,9 @@ body {
                   top: -15px;
                 }
                 &:after {
-                  content: '';
-                  display: block;
-                  position: absolute;
+                @extend %common-bubble-pseudo;
                   left: -7px;
                   top: 12px;
-                  width: 0;
-                  height: 0;
-                  border-top: 8px solid transparent;
-                  border-bottom: 8px solid transparent;
-                  border-right: 15px solid #fff;
                   transform: rotate(45deg);
                   @media (max-width: 425px) {
                     left: 125px;
@@ -96,22 +120,13 @@ body {
               }
             }
             &:checked + label + .comments-up {
-              opacity: 1;
-              visibility: visible;
-              width: 400px;
-              @media (max-width: 425px) {
-                width: 0;
-              }
+              @extend %common-comments;
               & .comment-up {
                 margin-bottom: 20px;
               }
               & .bubble-up {
-                background: #fff;
-                padding: 20px;
-                color: #222;
-                border-radius: 3px;
+                @extend %common-bubble;
                 margin-top: -61px;
-                word-break: break-all;
                 @media (max-width: 425px) {
                   width: 115px;
                   padding: 10px;
@@ -120,16 +135,9 @@ body {
                   left: 25px;
                 }
                 &:after {
-                  content: '';
-                  display: block;
-                  position: absolute;
+                @extend %common-bubble-pseudo;
                   left: -12px;
                   top: -25px;
-                  width: 0;
-                  height: 0;
-                  border-top: 8px solid transparent;
-                  border-bottom: 8px solid transparent;
-                  border-right: 15px solid #fff;
                   transform: rotate(-20deg);
                   @media (max-width: 425px) {
                     top: -10px;
@@ -158,33 +166,15 @@ body {
             }
           }
           .comments-down {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 200ms;
-            width: 400px;
-            position: relative;
-            @media (max-width: 425px) {
-              width: 2px;
-              height: 180px;
-            }
+            @extend %common-comments-not-clicked;
           }
           .comments-up {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 200ms;
-            width: 400px;
-            position: relative;
-            @media (max-width: 425px) {
-              width: 2px;
-              height: 180px;
-            }
+            @extend %common-comments-not-clicked;
           }
         }
       }
       .one {
         background: #efdefe;
-        @media (max-width: 425px) {
-        }
       }
       .two {
         background: #a3f3d3;
@@ -194,8 +184,6 @@ body {
       }
       .four {
         background: #00dfdf;
-        @media (max-width: 425px) {
-        }
       }
     }
   }
