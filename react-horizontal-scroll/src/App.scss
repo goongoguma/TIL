@@ -33,7 +33,6 @@ body {
               visibility: visible;
               width: 400px;
               & .comment-down {
-                width: 100%;
                 margin-bottom: 20px;
               }
               & .bubble-down {
@@ -43,6 +42,9 @@ body {
                 color: #222;
                 border-radius: 3px;
                 margin-top: 18px;
+                @media (max-width: 425px) {
+                  margin-top: 30px;
+                }
                 &:after {
                   content: '';
                   display: block;
@@ -55,6 +57,11 @@ body {
                   border-bottom: 8px solid transparent;
                   border-right: 15px solid #fff;
                   transform: rotate(45deg);
+                  @media (max-width: 425px) {
+                    left: -3px;
+                    top: -12px;
+                    transform: rotate(66deg);
+                  }
                 }
               }
             }
@@ -63,7 +70,6 @@ body {
               visibility: visible;
               width: 400px;
               & .comment-up {
-                width: 100%;
                 margin-bottom: 20px;
               }
               & .bubble-up {
@@ -73,6 +79,9 @@ body {
                 color: #222;
                 border-radius: 3px;
                 margin-top: -77px;
+                @media (max-width: 425px) {
+                  margin-top: -110px;
+                }
                 &:after {
                   content: '';
                   display: block;
@@ -85,6 +94,9 @@ body {
                   border-bottom: 8px solid transparent;
                   border-right: 15px solid #fff;
                   transform: rotate(-45deg);
+                  @media (max-width: 425px) {
+                    top: 86px;
+                  }
                 }
               }
             }
@@ -99,6 +111,9 @@ body {
             position: relative;
             transform: translateY(-6px);
             margin: 0 20px;
+            @media (max-width: 425px) {
+              margin: 0;
+            }
           }
           .comments-down {
             opacity: 0;
@@ -116,6 +131,9 @@ body {
       }
       .one {
         background: #efdefe;
+        @media (max-width: 425px) {
+          padding-left: 10px;
+        }
       }
       .two {
         background: #a3f3d3;
@@ -125,6 +143,9 @@ body {
       }
       .four {
         background: #00dfdf;
+        @media (max-width: 425px) {
+          padding-right: 10px;
+        }
       }
     }
   }
