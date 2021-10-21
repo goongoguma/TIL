@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>start a timer</button>
+
+  <script>
+    const parentNode = document.getElementById("parent");
+    const cnt = 10;
+
+    const fragNode = document.createDocumentFragment();
+
+    for (let i = 0; i < cnt; i++) {
+      const newNode = document.createElement('li');
+      newNode.innterText = `this is ${i}-content`;
+
+      fragNode.appendChild(newNode);
+    }
+
+    parentNode.appendChild(fragNode);
+  </script>
+</body>
+</html>

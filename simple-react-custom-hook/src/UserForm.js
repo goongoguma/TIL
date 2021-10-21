@@ -12,8 +12,8 @@ function UserForm() {
     resetLastName();
   };
 
-  console.log(useInput('hello'))
-  console.log(bindFirstName)
+  // console.log(useInput('hello'))
+  // console.log(bindFirstName)
   return (
     <div>
       <form onSubmit={submitHandler}>
