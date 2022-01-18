@@ -21,40 +21,42 @@ const App = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const bottomRef = useRef(null);
-  const [page, setPage] = useState(1);
-  const intersectionLoading = useRef(false);
+  const queryPage = searchParams.get("queryPage");
 
-  const { data, isSuccess, isFetching, fetchNextPage, hasNextPage } =
-    useInfiniteQuery("posts", getData, {
+  const { data, isSuccess, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    "posts",
+    getData,
+    {
       getNextPageParam: (lastPage, pages) => {
-        if (lastPage.page < lastPage.total_pages) return lastPage.page + 1;
-        return false;
+        if (lastPage.page < lastPage.total_pages) {
+          return lastPage.page + 1;
+        }
+        return;
       },
-    });
+    }
+  );
 
-  // const options = {
-  //   root: null,
-  //   rootMargin: "0px",
-  //   threshold: 1.0,
-  // };
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 1.0,
+  };
 
-  // const callbackFunction = (entries) => {
-  //   intersectionLoading.current = !intersectionLoading.current;
-  //   const [entry] = entries;
-  //   if (entry.isIntersecting) {
-  //     intersectionLoading.current = !intersectionLoading.current;
-  //   }
-  // };
+  const callbackFunction = async (entries) => {
+    const [entry] = entries;
+    if (entry.isIntersecting) {
+      fetchNextPage();
+    }
+  };
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(callbackFunction, options);
-  //   observer.observe(bottomRef.current);
-  //   return () => {
-  //     observer.unobserve(bottomRef.current);
-  //   };
-  // }, [bottomRef.current]);
-
-  console.log(data);
+  useEffect(() => {
+    // queryPage ?? navigate(`/?queryPage=1`);
+    const observer = new IntersectionObserver(callbackFunction, options);
+    observer.observe(bottomRef.current);
+    return () => {
+      observer.unobserve(bottomRef.current);
+    };
+  }, [bottomRef.current]);
 
   return (
     <div className="App">
@@ -74,8 +76,10 @@ const App = () => {
                   );
                 })
               )}
-            {isFetching && <p>Loading...</p>}
-            {hasNextPage && <button onClick={fetchNextPage}>Load More</button>}
+            {/* <p ref={bottomRef}>Loading...</p> */}
+            <div ref={bottomRef} />
+            {hasNextPage && <p>Loading...</p>}
+            {/* {hasNextPage && <button onClick={fetchNextPage}>Load More</button>} */}
           </ul>
         </div>
       </header>
