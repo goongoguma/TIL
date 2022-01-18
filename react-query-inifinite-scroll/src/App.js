@@ -1,10 +1,10 @@
 import "./App.css";
 import { useInfiniteQuery } from "react-query";
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 // useInfiniteQuery를 제대로 사용하기 위해서는 page, totalPage, perPage와 같이 페이지네이션 속성이 들어있는 데이터를 사용하는것이 좋음
 // https://www.youtube.com/watch?v=4jMAnIIEI3M
+// https://www.youtube.com/watch?v=Hcuk3KbLAKo (참고)
 
 const getData = async ({ pageParam = 1 }) => {
   const response = await await fetch(
@@ -17,11 +17,7 @@ const getData = async ({ pageParam = 1 }) => {
 };
 
 const App = () => {
-  const limit = 10;
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   const bottomRef = useRef(null);
-  const queryPage = searchParams.get("queryPage");
 
   const { data, isSuccess, fetchNextPage, hasNextPage } = useInfiniteQuery(
     "posts",
@@ -50,7 +46,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    // queryPage ?? navigate(`/?queryPage=1`);
     const observer = new IntersectionObserver(callbackFunction, options);
     observer.observe(bottomRef.current);
     return () => {
