@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-item {
+  border: 1px solid #fff;
+  height: 700px;
+  overflow: auto;
+}
+
+.App-item ul {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.App-item ul li {
+  list-style: none;
+  padding: 20px 30px;
+  border: 1px solid #fff;
+  font-size: 13px;
+}
