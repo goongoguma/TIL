@@ -6,7 +6,8 @@ import { useEffect, useRef } from "react";
 // https://www.youtube.com/watch?v=4jMAnIIEI3M
 // https://www.youtube.com/watch?v=Hcuk3KbLAKo (참고)
 
-const getData = async ({ pageParam = 1 }) => {
+const getData = async ({ pageParam = 1, queryKey }) => {
+  console.log(queryKey); // ["posts"] // 필터가 필요할때 사용하면 될듯
   const response = await await fetch(
     `https://reqres.in/api/users?page=${pageParam}`
   );
@@ -20,7 +21,7 @@ const App = () => {
   const bottomRef = useRef(null);
 
   const { data, isSuccess, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    "posts",
+    ["posts"],
     getData,
     {
       getNextPageParam: (lastPage, pages) => {
