@@ -72,10 +72,8 @@ const App = () => {
                   );
                 })
               )}
-            {/* <p ref={bottomRef}>Loading...</p> */}
             <div ref={bottomRef} />
             {hasNextPage && <p>Loading...</p>}
-            {/* {hasNextPage && <button onClick={fetchNextPage}>Load More</button>} */}
           </ul>
         </div>
       </header>
