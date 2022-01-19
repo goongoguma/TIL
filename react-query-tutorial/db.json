@@ -29,5 +29,17 @@
       "id": 3,
       "name": "Rachel Green"
     }
+  ],
+  "users": [
+    {
+      "id": "hello@gmail.com",
+      "channelId": "jaehyun"
+    }
+  ],
+  "channels": [
+    {
+      "id": "jaehyun",
+      "courses": ["react", "vue", "angular"]
+    }
   ]
 }
