@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useQUery } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
 
 const fetchSuperHeroes = () => {
