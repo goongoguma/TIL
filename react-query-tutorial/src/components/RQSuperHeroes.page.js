@@ -8,7 +8,7 @@ const fetchSuperHeroes = () => {
 
 const RQSuperHeroesPage = () => {
   // 백그라운드에서 더 fetch 할 데이터가 있는지 -> isFetching
-  const { isLoading, data, isError, error, isFetching } = useQuery(
+  const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
     fetchSuperHeroes,
     // cacheTime을 사용해서 캐시 데이터 유효시간 설정 가능 (default는 5분)
@@ -17,15 +17,16 @@ const RQSuperHeroesPage = () => {
 
     {
       // cacheTime: 5000,
-      staleTime: 3000,
+      // staleTime: 3000,
       // polling
-      refetchInterval: 2000,
+      // refetchInterval: 2000,
       // refetchIntervalInBackground를 사용해서 백그라운드에서 데이터 polling 가능
-      refetchIntervalInBackground: true,
+      // refetchIntervalInBackground: true,
+      enabled: false,
     }
   );
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <h2>Loading...</h2>;
   }
 
@@ -36,6 +37,7 @@ const RQSuperHeroesPage = () => {
   return (
     <>
       <h2>RQSuperHeroes</h2>
+      <button onClick={refetch}>Fetch heroes</button>
       {data?.data.map((hero) => {
         return <div key={hero.name}>{hero.name}</div>;
       })}
