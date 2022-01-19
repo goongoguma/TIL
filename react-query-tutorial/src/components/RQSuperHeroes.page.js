@@ -7,6 +7,14 @@ const fetchSuperHeroes = () => {
 };
 
 const RQSuperHeroesPage = () => {
+  const onSuccess = (data) => {
+    console.log("Perfome side effect after data fetching", data);
+  };
+
+  const onError = (error) => {
+    console.log("Perform side effect after encountering error", error);
+  };
+
   // 백그라운드에서 더 fetch 할 데이터가 있는지 -> isFetching
   const { isLoading, data, isError, error, isFetching, refetch } = useQuery(
     "super-heroes",
@@ -23,6 +31,8 @@ const RQSuperHeroesPage = () => {
       // refetchIntervalInBackground를 사용해서 백그라운드에서 데이터 polling 가능
       // refetchIntervalInBackground: true,
       enabled: false,
+      onSuccess,
+      onError,
     }
   );
 
