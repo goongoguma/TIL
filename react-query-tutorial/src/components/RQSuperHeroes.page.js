@@ -12,8 +12,16 @@ const RQSuperHeroesPage = () => {
     "super-heroes",
     fetchSuperHeroes,
     // cacheTime을 사용해서 캐시 데이터 유효시간 설정 가능 (default는 5분)
+    // cacheTime vs staleTime, isLoading vs isFetching
+    // https://velog.io/@yrnana/React-Query%EC%97%90%EC%84%9C-staleTime%EA%B3%BC-cacheTime%EC%9D%98-%EC%B0%A8%EC%9D%B4
+
     {
-      cacheTime: 5000,
+      // cacheTime: 5000,
+      staleTime: 3000,
+      // polling
+      refetchInterval: 2000,
+      // refetchIntervalInBackground를 사용해서 백그라운드에서 데이터 polling 가능
+      refetchIntervalInBackground: true,
     }
   );
 
