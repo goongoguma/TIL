@@ -7,9 +7,14 @@ const fetchSuperHeroes = () => {
 };
 
 const RQSuperHeroesPage = () => {
-  const { isLoading, data, isError, error } = useQuery(
+  // 백그라운드에서 더 fetch 할 데이터가 있는지 -> isFetching
+  const { isLoading, data, isError, error, isFetching } = useQuery(
     "super-heroes",
-    fetchSuperHeroes
+    fetchSuperHeroes,
+    // cacheTime을 사용해서 캐시 데이터 유효시간 설정 가능 (default는 5분)
+    {
+      cacheTime: 5000,
+    }
   );
 
   if (isLoading) {
