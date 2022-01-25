@@ -38,6 +38,15 @@ export const useSuperHeroesData = (onSuccess, onError) => {
 export const useAddSuperHeroData = () => {
   const queryClient = useQueryClient();
   return useMutation(addSuperHero, {
-    onSuccess: () => queryClient.invalidateQueries("super-heroes"),
+    onSuccess: (data) => {
+      // queryClient.invalidateQueries("super-heroes")
+      // post 요청이후에 받아오는 response를 이용해 데이터를 업데이트 시킴으로써 invalidateQueries를 사용한 네트워크 요청을 하지 않아도 된다
+      queryClient.setQueriesData("super-heroes", (oldQueryData) => {
+        return {
+          ...oldQueryData,
+          data: [...oldQueryData.data, data.data],
+        };
+      });
+    },
   });
 };
