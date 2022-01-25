@@ -38,15 +38,42 @@ export const useSuperHeroesData = (onSuccess, onError) => {
 export const useAddSuperHeroData = () => {
   const queryClient = useQueryClient();
   return useMutation(addSuperHero, {
-    onSuccess: (data) => {
-      // queryClient.invalidateQueries("super-heroes")
-      // post 요청이후에 받아오는 response를 이용해 데이터를 업데이트 시킴으로써 invalidateQueries를 사용한 네트워크 요청을 하지 않아도 된다
+    // onSuccess: (data) => {
+    //   // queryClient.invalidateQueries("super-heroes")
+    //   // post 요청이후에 받아오는 response를 이용해 데이터를 업데이트 시킴으로써 invalidateQueries를 사용한 네트워크 요청을 하지 않아도 된다
+    //   queryClient.setQueriesData("super-heroes", (oldQueryData) => {
+    //     return {
+    //       ...oldQueryData,
+    //       data: [...oldQueryData.data, data.data],
+    //     };
+    //   });
+    // },
+    // optimistic update란 에러가 발생하지 않는다는 전제하에 mutuate가 발생하기전 상태를 업데이트하는것을 말한다. 앱의 속도를 향상시킨다
+    // onMutate는 mutate 함수가 실행되기 전에 실행되며 mutate 함수에서 받는 변수들을 받을 수 있다
+    onMutate: async (newHero) => {
+      // super-heroes refetch를 cancel
+      await queryClient.cancelQueries("super-heroes");
+      const previousHeroData = queryClient.getQueriesData("super-heroes");
       queryClient.setQueriesData("super-heroes", (oldQueryData) => {
         return {
           ...oldQueryData,
-          data: [...oldQueryData.data, data.data],
+          data: [
+            ...oldQueryData.data,
+            { id: oldQueryData?.data?.length + 1, ...newHero },
+          ],
         };
       });
+      return {
+        previousHeroData,
+      };
+    },
+    // optimistic update에서 에러가 발생시
+    onError: (_error, _hero, context) => {
+      queryClient.setQueryData("super-heroes", context.previousHeroData);
+    },
+    // mutation이 성공적인지 에러인지 알면 refetch
+    onSettled: () => {
+      queryClient.invalidateQueries("super-heroes");
     },
   });
 };
