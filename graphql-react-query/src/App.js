@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Posts from "./Posts";
 import Post from "./Post";
+import Albums from "./Albums";
+import Album from "./Album";
 
 const queryClient = new QueryClient();
 
@@ -21,11 +23,13 @@ function App() {
           loading sequences)
         </strong>
       </p>
-      {postId > -1 ? (
+      {/* {postId > -1 ? (
         <Post postId={postId} setPostId={setPostId} />
       ) : (
         <Posts setPostId={setPostId} />
-      )}
+      )} */}
+      {/* <Albums /> */}
+      <Album />
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );
