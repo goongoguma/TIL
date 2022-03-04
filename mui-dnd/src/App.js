@@ -1,4 +1,3 @@
-// https://codesandbox.io/s/react-material-ui-and-react-beautiful-dnd-uofv4?file=/src/MaterialTable.tsx:3318-3484
 import {
   Paper,
   Table,
@@ -10,26 +9,30 @@ import {
 } from '@material-ui/core';
 import { Component, useState, useRef, useLayoutEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Reorder } from '@material-ui/icons'
 
-const padding = 16
+const padding = 16 * 2
 
 const DraggableTableCell = ({ name, calories, fat, provided, snapshot }) => {
   const { isDragging } = snapshot;
   const [tableCellWidth, setTableCellWidth] = useState({
+    iconwidth: 0,
     namewidth: 0,
     calwidth: 0,
     fatwidth: 0
   })
+  const iconref = useRef(null);
   const nameref = useRef(null);
   const calref = useRef(null);
   const fatref = useRef(null);
 
   useLayoutEffect(() => {
-    if (nameref.current && calref.current && fatref.current) {
+    if (iconref.current && nameref.current && calref.current && fatref.current) {
       setTableCellWidth({
-        namewidth: nameref.current.clientWidth - (padding * 2),
-        calwidth: calref.current.clientWidth - (padding * 2),
-        fatref: fatref.current.clientWidth - (padding * 2)
+        iconwidth: iconref.current.clientWidth - padding,
+        namewidth: nameref.current.clientWidth - padding,
+        calwidth: calref.current.clientWidth - padding,
+        fatref: fatref.current.clientWidth - padding
       })
     }
   }, []);
@@ -37,14 +40,16 @@ const DraggableTableCell = ({ name, calories, fat, provided, snapshot }) => {
   return (
     <TableRow
       key={name}
-      ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+      ref={provided.innerRef} 
       style={getItemStyle(isDragging, provided.draggableProps.style)}
+      {...provided.draggableProps}
     >
-        <TableCell component="th" scope="row" style={{ width: isDragging && tableCellWidth.namewidth }} ref={nameref}>
+        <TableCell scope="row" {...provided.draggableProps} {...provided.dragHandleProps} style={{ width: isDragging && tableCellWidth.iconwidth, background: 'pink' }}  ref={iconref}><Reorder /></TableCell>
+        <TableCell component="th" style={{ width: isDragging && tableCellWidth.namewidth, background: 'skyblue' }} ref={nameref}>
           {name}
         </TableCell>
-        <TableCell align="right" style={{ width: isDragging && tableCellWidth.calwidth }} ref={calref}>{calories}</TableCell>
-        <TableCell align="right" style={{ width: isDragging  && tableCellWidth.fatref }} ref={fatref}>{fat}</TableCell>
+        <TableCell align="right" style={{ width: isDragging && tableCellWidth.calwidth, background: 'steelblue' }} ref={calref}>{calories}</TableCell>
+        <TableCell align="right" style={{ width: isDragging  && tableCellWidth.fatref, background: 'yellowgreen' }} ref={fatref}>{fat}</TableCell>
     </TableRow>
   )
 }
@@ -76,9 +81,11 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle
 })
 
-const getListstyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue":"lightgrey",
-})
+const getListstyle = isDraggingOver => {
+  return {
+    background: isDraggingOver ? "lightblue":"lightgrey",
+  }
+}
 
 class App extends Component {
   constructor(props) {
@@ -105,6 +112,7 @@ class App extends Component {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
+                <TableCell align="right">&nbsp;</TableCell>
                 <TableCell>Dessert (100g serving)</TableCell>
                 <TableCell align="right">Calories</TableCell>
                 <TableCell align="right">Fat&nbsp;(g)</TableCell>
