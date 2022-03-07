@@ -7,13 +7,13 @@ import {
   TableCell,
   TableBody,
 } from '@material-ui/core';
-import { Component, useState, useRef, useLayoutEffect } from 'react';
+import { Component, useState, useRef, useLayoutEffect, Fragment } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Reorder } from '@material-ui/icons'
 
 const padding = 16 * 2
 
-const DraggableTableCell = ({ name, calories, fat, provided, snapshot }) => {
+const DraggableTableCell = ({ cellitems, provided, snapshot }) => {
   const { isDragging } = snapshot;
   const [tableCellWidth, setTableCellWidth] = useState({
     iconwidth: 0,
@@ -21,35 +21,38 @@ const DraggableTableCell = ({ name, calories, fat, provided, snapshot }) => {
     calwidth: 0,
     fatwidth: 0
   })
-  const iconref = useRef(null);
-  const nameref = useRef(null);
-  const calref = useRef(null);
-  const fatref = useRef(null);
+  const refs = useRef({});
 
   useLayoutEffect(() => {
-    if (iconref.current && nameref.current && calref.current && fatref.current) {
-      setTableCellWidth({
-        iconwidth: iconref.current.clientWidth - padding,
-        namewidth: nameref.current.clientWidth - padding,
-        calwidth: calref.current.clientWidth - padding,
-        fatref: fatref.current.clientWidth - padding
-      })
-    }
+    Object.keys(tableCellWidth).forEach(item => setTableCellWidth(prevState => ({
+      ...prevState,
+      [item]: refs.current[item].clientWidth - padding
+    })));
   }, []);
   
   return (
     <TableRow
-      key={name}
       ref={provided.innerRef} 
       style={getItemStyle(isDragging, provided.draggableProps.style)}
       {...provided.draggableProps}
     >
-        <TableCell scope="row" {...provided.draggableProps} {...provided.dragHandleProps} style={{ width: isDragging && tableCellWidth.iconwidth, background: 'pink' }}  ref={iconref}><Reorder /></TableCell>
-        <TableCell component="th" style={{ width: isDragging && tableCellWidth.namewidth, background: 'skyblue' }} ref={nameref}>
-          {name}
+        <TableCell scope="row" {...provided.draggableProps} {...provided.dragHandleProps} style={{ width: isDragging && tableCellWidth.iconwidth, background: 'pink' }}  ref={el => refs.current.iconwidth = el}>
+          <Reorder />
         </TableCell>
-        <TableCell align="right" style={{ width: isDragging && tableCellWidth.calwidth, background: 'steelblue' }} ref={calref}>{calories}</TableCell>
-        <TableCell align="right" style={{ width: isDragging  && tableCellWidth.fatref, background: 'yellowgreen' }} ref={fatref}>{fat}</TableCell>
+          {
+            cellitems.map((item) => {
+              return (
+                <TableCell 
+                  key={item.title} 
+                  align="left" 
+                  style={{ width: isDragging && tableCellWidth[item.title], background: 'skyblue' }} 
+                  ref={el => refs.current[item.title] = el}
+                >
+                  {item.cellitem}
+                </TableCell>
+              )
+            })
+          }
     </TableRow>
   )
 }
@@ -106,7 +109,9 @@ class App extends Component {
     });
   };
 
+  
   render() {
+    console.log(this.state.items)
     return (
       <TableContainer component={Paper} style={{ margin: '30px', width: '400px' }}>
           <Table aria-label="simple table">
@@ -130,9 +135,13 @@ class App extends Component {
                                 (provided, snapshot) => {
                                   return (
                                     <DraggableTableCell 
-                                      name={item.name} 
-                                      calories={item.calories} 
-                                      fat={item.fat} 
+                                      cellitems={
+                                        [
+                                          {title: "namewidth", cellitem: item.name}, 
+                                          {title: "calwidth", cellitem: item.calories}, 
+                                          {title: "fatwidth", cellitem: item.fat}
+                                        ]
+                                      }
                                       provided={provided} 
                                       snapshot={snapshot} 
                                     />
