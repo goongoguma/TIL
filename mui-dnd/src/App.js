@@ -111,9 +111,8 @@ class App extends Component {
 
   
   render() {
-    console.log(this.state.items)
     return (
-      <TableContainer component={Paper} style={{ margin: '30px', width: '400px' }}>
+      <TableContainer>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
